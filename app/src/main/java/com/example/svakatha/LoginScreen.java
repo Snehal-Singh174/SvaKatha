@@ -35,17 +35,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-//        View decorView = getWindow().getDecorView();
-//        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
-//            decorView.setSystemUiVisibility(
-//                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-//                            |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-//                            |View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-//                            |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-//                            |View.SYSTEM_UI_FLAG_FULLSCREEN
-//                            |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
-//        }
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getSupportActionBar().hide();
 
@@ -94,6 +83,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(LoginScreen.this,Profile.class);
+                            startActivity(i);
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Registration Error", Toast.LENGTH_LONG).show();
@@ -106,9 +97,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        //registerUser();
-        Intent i = new Intent(LoginScreen.this,Profile.class);
-        startActivity(i);
+        registerUser();
+
 
     }
 }
