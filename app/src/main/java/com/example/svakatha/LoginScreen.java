@@ -83,6 +83,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            Intent i = new Intent(LoginScreen.this,Profile.class);
+                            startActivity(i);
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Registration Error", Toast.LENGTH_LONG).show();
@@ -95,9 +97,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        //registerUser();
-        Intent i = new Intent(LoginScreen.this,Profile.class);
-        startActivity(i);
+        registerUser();
+
 
     }
 }
