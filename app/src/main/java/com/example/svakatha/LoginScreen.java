@@ -58,7 +58,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         firebaseAuth=FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
-        Hello;
+        
         signupButton.setOnClickListener(this);
     }
 
