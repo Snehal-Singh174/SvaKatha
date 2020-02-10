@@ -95,7 +95,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                            db.collection("Info").document("All Details").set(userData)
+                            db.document("InFo/Details").set(userData)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
