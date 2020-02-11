@@ -6,7 +6,6 @@
         android:title="Shop" />
     <item
         android:id="@+id/community"
-        android:icon="@drawable/shop"
         android:checkable="true"
         android:title="Community"/>
 </menu>
