@@ -192,6 +192,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:itemIconTint="@color/colorPrimary"
         app:itemTextColor="#000"
+        app:labelVisibilityMode="labeled"
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation_menu" />
 </RelativeLayout>

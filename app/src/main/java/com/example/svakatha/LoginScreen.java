@@ -122,8 +122,8 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                             Toast.makeText(LoginScreen.this, "Not Saved", Toast.LENGTH_SHORT).show();
                                         }
                                     });*/
-                            Intent i = new Intent(LoginScreen.this,Profile.class);
-                            startActivity(i);
+//                            Intent i = new Intent(LoginScreen.this,Profile.class);
+//                            startActivity(i);
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Registration Error", Toast.LENGTH_LONG).show();
@@ -136,8 +136,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        registerUser();
-
+        //registerUser();
+        Intent i = new Intent(LoginScreen.this,Profile.class);
+        startActivity(i);
 
     }
 }
