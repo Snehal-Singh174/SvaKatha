@@ -9,26 +9,25 @@
 
     <TextView
         android:id="@+id/logintext"
-        android:layout_width="736dp"
-        android:layout_height="143dp"
-        android:layout_marginTop="120dp"
+        android:layout_width="345dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/segoe"
         android:lines="2"
         android:maxLines="2"
         android:text="Sva-Katha\nYour Personal Fashion Assistance"
         android:textAlignment="center"
-        android:textSize="50sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.595"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.007" />
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="758dp"
-        android:layout_height="134.96dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Email"
@@ -37,15 +36,15 @@
         android:textSize="47px"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.40" />
+        app:layout_constraintVertical_bias="0.381" />
 
     <EditText
         android:id="@+id/pass"
-        android:layout_width="758dp"
-        android:layout_height="134.96dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Password"
@@ -60,8 +59,8 @@
 
     <EditText
         android:id="@+id/confirmpass"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Confirm Password"
