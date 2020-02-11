@@ -30,17 +30,16 @@
             android:id="@+id/profilephoto"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:background="@drawable/shape_profilephoto"
-            android:layout_gravity="center_horizontal"
-            android:/>
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="140dp"
+            android:layout_marginTop="135dp"
             android:fontFamily="@font/segoe"
             android:text="@string/profile"
             android:textFontWeight="700"
@@ -60,12 +59,100 @@
             android:layout_width="match_parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
             tools:layout_editor_absoluteX="175dp"
             tools:layout_editor_absoluteY="221dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="200dp"/>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:background="#707070"
+            android:layout_marginTop="260dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/editprofile"
+            android:layout_width="120dp"
+            android:layout_height="42dp"
+            android:background="@drawable/editprofilbutton"
+            android:text="Edit Profile"
+            android:textAllCaps="false"
+            android:fontFamily="@font/segoe"
+            android:textColor="#ffffff"
+            android:textSize="16dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="295dp"/>
+
+        <TextView
+            android:id="@+id/notification"
+            android:layout_width="80dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="285dp"
+            android:layout_marginStart="300dp"
+            android:drawableTop="@drawable/ic_notification_icon"
+            android:lines="2"
+            android:maxLines="2"
+            android:text="Notification"
+            android:fontFamily="@font/segoe"
+            android:textColor="#000"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:id="@+id/connection"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="@string/eightynine"
+            android:lines="3"
+            android:maxLines="3"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:layout_marginStart="18dp"
+            android:fontFamily="@font/segoe"
+            android:layout_marginTop="285dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.8dp"
+            android:background="#707070"
+            android:layout_marginTop="360dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="380dp"
+            android:background="@drawable/dropdown_background"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="432dp"
+            android:background="@drawable/dropdown_background"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="484dp"
+            android:background="@drawable/dropdown_background"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginTop="536dp"
+            android:background="@drawable/dropdown_background"/>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
