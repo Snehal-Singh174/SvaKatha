@@ -14,6 +14,6 @@
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
-    <string name="profile"><u>Mr.Dipansh</u></string>
-    <string name="prof"><u>Profession</u></string>
+    <string name="profile"><u><b>Mr.Dipansh</b></u></string>
+    <string name="prof"><u><b>Profession</b></u></string>
 </resources>
