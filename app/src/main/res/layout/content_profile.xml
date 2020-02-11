@@ -126,9 +126,15 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
             android:layout_marginTop="380dp"
-            android:background="@drawable/dropdown_background"/>
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/dropdown_background"
+            android:gravity="center_vertical"
+            android:text="Body Shape"
+            android:fontFamily="@font/segoe"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:textSize="18sp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -136,7 +142,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="432dp"
-            android:background="@drawable/dropdown_background"/>
+            android:background="@drawable/dropdown_background"
+            android:gravity="center_vertical"
+            android:text="Occupation"
+            android:fontFamily="@font/segoe"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -144,7 +156,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="484dp"
-            android:background="@drawable/dropdown_background"/>
+            android:background="@drawable/dropdown_background"
+            android:gravity="center_vertical"
+            android:text="Size"
+            android:fontFamily="@font/segoe"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -152,7 +170,13 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginTop="536dp"
-            android:background="@drawable/dropdown_background"/>
+            android:background="@drawable/dropdown_background"
+            android:gravity="center_vertical"
+            android:text="Price Range"
+            android:fontFamily="@font/segoe"
+            android:paddingLeft="10dp"
+            android:textColor="#000"
+            android:textSize="18sp"/>
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
