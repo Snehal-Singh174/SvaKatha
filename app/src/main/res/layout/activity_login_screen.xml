@@ -9,15 +9,15 @@
 
     <TextView
         android:id="@+id/logintext"
-        android:layout_width="736px"
-        android:layout_height="143px"
+        android:layout_width="736dp"
+        android:layout_height="143dp"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/segoe"
         android:lines="2"
         android:maxLines="2"
         android:text="Sva-Katha\nYour Personal Fashion Assistance"
         android:textAlignment="center"
-        android:textSize="50px"
+        android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.595"
@@ -27,8 +27,8 @@
 
     <EditText
         android:id="@+id/email"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
+        android:layout_width="758dp"
+        android:layout_height="134.96dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Email"
@@ -44,8 +44,8 @@
 
     <EditText
         android:id="@+id/pass"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
+        android:layout_width="758dp"
+        android:layout_height="134.96dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Password"
