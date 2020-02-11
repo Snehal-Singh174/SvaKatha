@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -33,10 +34,12 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     EditText pass;
     EditText confirmpass;
     Button signupButton;
-    private static final String KEY_EMAIL= "email";
+    String userId;
+    /*private static final String KEY_EMAIL= "email";
     private static final String KEY_PASSWORD= "password";
-    private static final String TAG = "LoginScreen";
-    private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private static final String TAG = "LoginScreen";*/
+    //private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
 
@@ -64,11 +67,11 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     private void registerUser(){
 
         //getting email and password from edit texts
-        String email =editTextMail.getText().toString().trim();
-        String password  = pass.getText().toString().trim();
-        final Map<String,Object> userData=new HashMap<>();
+        final String email =editTextMail.getText().toString().trim();
+        final String password  = pass.getText().toString().trim();
+        /*final Map<String,Object> userData=new HashMap<>();
         userData.put(KEY_EMAIL,email);
-        userData.put(KEY_PASSWORD,password);
+        userData.put(KEY_PASSWORD,password);*/
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -95,7 +98,18 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
-                            db.document("InFo/Details").set(userData)
+                            userId = firebaseAuth.getCurrentUser().getUid();
+                            DocumentReference documentReference = db.collection("users").document(userId);
+                            Map<String,Object> user = new HashMap<>();
+                            user.put("Email",email);
+                            user.put("Password",password);
+                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(LoginScreen.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                            /*db.document("InFo/Details").set(userData)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
@@ -107,7 +121,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                         public void onFailure(@NonNull Exception e) {
                                             Toast.makeText(LoginScreen.this, "Not Saved", Toast.LENGTH_SHORT).show();
                                         }
-                                    });
+                                    });*/
                             Intent i = new Intent(LoginScreen.this,Profile.class);
                             startActivity(i);
                         }else{
@@ -127,3 +141,26 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
