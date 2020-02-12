@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="#ffffff"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/app_bar_profile">
+    tools:showIn="@layout/app_bar_profile"
+    tools:context=".Profile">
 
     <FrameLayout
         android:id="@+id/frameLayout"
@@ -136,6 +137,18 @@
             android:paddingLeft="10dp"
             android:textColor="#000"
             android:textSize="18sp"/>
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="135dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="385dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/spinnerbackground"
+            android:textAlignment="center"
+            android:fontFamily="@font/segoe"
+            android:textColor="@color/colorPrimary" />
+
 
         <TextView
             android:id="@+id/occupation"
@@ -152,6 +165,17 @@
             android:textColor="#000"
             android:textSize="18sp"/>
 
+        <Spinner
+            android:id="@+id/spinner2"
+            android:layout_width="135dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="437dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/spinnerbackground"
+            android:textAlignment="center"
+            android:fontFamily="@font/segoe"
+            android:textColor="@color/colorPrimary" />
         <TextView
             android:id="@+id/size"
             android:layout_width="match_parent"
@@ -166,6 +190,18 @@
             android:paddingLeft="10dp"
             android:textColor="#000"
             android:textSize="18sp"/>
+        <Spinner
+            android:id="@+id/spinner3"
+            android:layout_width="135dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="489dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/spinnerbackground"
+            android:textAlignment="center"
+            android:fontFamily="@font/segoe"
+            android:textColor="@color/colorPrimary" />
+
 
         <TextView
             android:id="@+id/pricerange"
@@ -181,6 +217,19 @@
             android:paddingLeft="10dp"
             android:textColor="#000"
             android:textSize="18sp"/>
+        <Spinner
+            android:id="@+id/spinner4"
+            android:layout_width="135dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="250dp"
+            android:layout_marginTop="539dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/spinnerbackground"
+            android:textAlignment="center"
+            android:fontFamily="@font/segoe"
+            android:textColor="@color/colorPrimary" />
+
+
 
     </FrameLayout>
 
