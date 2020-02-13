@@ -31,7 +31,7 @@
             android:id="@+id/profilephoto"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/shape_profilephoto"
             android:layout_gravity="center_horizontal"/>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="135dp"
+            android:layout_marginTop="134dp"
             android:fontFamily="@font/segoe"
             android:text="@string/profile"
             android:textFontWeight="700"
@@ -50,7 +50,7 @@
             android:id="@+id/profession"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="170dp"
+            android:layout_marginTop="165dp"
             android:text="@string/prof"
             android:layout_gravity="center_horizontal" />
 
@@ -64,13 +64,13 @@
             tools:layout_editor_absoluteX="175dp"
             tools:layout_editor_absoluteY="221dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="200dp"/>
+            android:layout_marginTop="180dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:background="#707070"
-            android:layout_marginTop="260dp"
+            android:layout_marginTop="220dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"/>
 
@@ -85,14 +85,15 @@
             android:textColor="#ffffff"
             android:textSize="16dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="295dp"/>
+            android:layout_marginTop="233dp"/>
 
         <TextView
             android:id="@+id/notification"
             android:layout_width="80dp"
             android:layout_height="60dp"
-            android:layout_marginTop="285dp"
-            android:layout_marginStart="300dp"
+            android:layout_marginTop="235dp"
+            android:layout_marginStart="280dp"
+            android:layout_marginEnd="20dp"
             android:drawableTop="@drawable/ic_notification_icon"
             android:lines="2"
             android:maxLines="2"
@@ -111,15 +112,15 @@
             android:textAlignment="center"
             android:textColor="#000"
             android:textSize="15dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="16dp"
             android:fontFamily="@font/segoe"
-            android:layout_marginTop="285dp"/>
+            android:layout_marginTop="240dp"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.8dp"
             android:background="#707070"
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="300dp"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"/>
 
@@ -128,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="380dp"
+            android:layout_marginTop="313dp"
             android:layout_marginEnd="20dp"
             android:background="@drawable/dropdown_background"
             android:gravity="center_vertical"
@@ -139,11 +140,11 @@
             android:textSize="18sp"/>
         <Spinner
             android:id="@+id/spinner1"
-            android:layout_width="135dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="385dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="246dp"
+            android:layout_marginTop="318dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/spinnerbackground"
             android:textAlignment="center"
             android:fontFamily="@font/segoe"
@@ -156,7 +157,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="432dp"
+            android:layout_marginTop="358dp"
             android:background="@drawable/dropdown_background"
             android:gravity="center_vertical"
             android:text="Occupation"
@@ -167,11 +168,11 @@
 
         <Spinner
             android:id="@+id/spinner2"
-            android:layout_width="135dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="437dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="246dp"
+            android:layout_marginTop="363dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/spinnerbackground"
             android:textAlignment="center"
             android:fontFamily="@font/segoe"
@@ -182,7 +183,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="484dp"
+            android:layout_marginTop="403dp"
             android:background="@drawable/dropdown_background"
             android:gravity="center_vertical"
             android:text="Size"
@@ -192,11 +193,11 @@
             android:textSize="18sp"/>
         <Spinner
             android:id="@+id/spinner3"
-            android:layout_width="135dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="489dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="246dp"
+            android:layout_marginTop="408dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/spinnerbackground"
             android:textAlignment="center"
             android:fontFamily="@font/segoe"
@@ -209,7 +210,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="536dp"
+            android:layout_marginTop="448dp"
             android:background="@drawable/dropdown_background"
             android:gravity="center_vertical"
             android:text="Price Range"
@@ -219,11 +220,11 @@
             android:textSize="18sp"/>
         <Spinner
             android:id="@+id/spinner4"
-            android:layout_width="135dp"
+            android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:layout_marginStart="250dp"
-            android:layout_marginTop="539dp"
-            android:layout_marginEnd="20dp"
+            android:layout_marginStart="246dp"
+            android:layout_marginTop="453dp"
+            android:layout_marginEnd="23dp"
             android:background="@drawable/spinnerbackground"
             android:textAlignment="center"
             android:fontFamily="@font/segoe"
