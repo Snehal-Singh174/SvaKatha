@@ -24,7 +24,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Profile extends AppCompatActivity {
 
@@ -34,8 +41,35 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+//        final Spinner spinner = (Spinner)findViewById(R.id.test_spinner);
+//        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) this);
+//
+//        List<String> categories = new ArrayList<>();
+//        categories.add(0,"Choose Shape");
+//        categories.add("A");
+//        categories.add("B");
+//        categories.add("C");
+//
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spinner.setAdapter(dataAdapter);
+//
+//        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//                Toast.makeText(Profile.this,spinner.getSelectedItem().toString(),Toast.LENGTH_LONG);
+//
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> adapterView) {
+//
+//            }
+//        });
+
 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
