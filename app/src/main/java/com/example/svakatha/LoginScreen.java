@@ -35,10 +35,6 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
     EditText confirmpass;
     Button signupButton;
     String userId;
-    private static final String KEY_EMAIL= "email";
-    private static final String KEY_PASSWORD= "password";
-    private static final String TAG = "LoginScreen";
-    //private FirebaseFirestore db=FirebaseFirestore.getInstance();
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -69,9 +65,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         //getting email and password from edit texts
         final String email =editTextMail.getText().toString().trim();
         final String password  = pass.getText().toString().trim();
-        final Map<String,Object> userData=new HashMap<>();
-        userData.put(KEY_EMAIL,email);
-        userData.put(KEY_PASSWORD,password);
+
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -109,21 +103,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                                     Toast.makeText(LoginScreen.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                            db.document("InFo/Details").set(userData)
-                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                        @Override
-                                        public void onSuccess(Void aVoid) {
-                                            Toast.makeText(LoginScreen.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Toast.makeText(LoginScreen.this, "Not Saved", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-//                            Intent i = new Intent(LoginScreen.this,Profile.class);
-//                            startActivity(i);
+
+                            Intent i = new Intent(LoginScreen.this,Profile.class);
+                            startActivity(i);
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Registration Error", Toast.LENGTH_LONG).show();
@@ -136,9 +118,9 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        //registerUser();
-        Intent i = new Intent(LoginScreen.this,Profile.class);
-        startActivity(i);
+        registerUser();
+        /*Intent i = new Intent(LoginScreen.this,Profile.class);
+        startActivity(i);*/
 
     }
 }
