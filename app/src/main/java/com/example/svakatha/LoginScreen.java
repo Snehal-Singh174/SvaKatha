@@ -91,6 +91,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         if(task.isSuccessful()){
                             //display some message here
                             Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            //Database connection
                             userId = firebaseAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = db.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
