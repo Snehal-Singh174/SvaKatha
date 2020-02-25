@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginScreen_Signup extends AppCompatActivity implements View.OnClickListener{
+public class LoginScreen_Signup extends AppCompatActivity {
 
     TextView logintext;
     EditText editTextMail;
@@ -65,11 +65,15 @@ public class LoginScreen_Signup extends AppCompatActivity implements View.OnClic
 
         progressDialog = new ProgressDialog(this);
 
-        signupButton.setOnClickListener(this);
+        signupButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
     }
 
     private void registerUser(){
-
         //getting email and password from edit texts
         final String email =editTextMail.getText().toString().trim();
         final String password  = pass.getText().toString().trim();
@@ -123,10 +127,7 @@ public class LoginScreen_Signup extends AppCompatActivity implements View.OnClic
 
     }
 
-    @Override
-    public void onClick(View v) {
-        registerUser();
-    }
+
 }
 
 
