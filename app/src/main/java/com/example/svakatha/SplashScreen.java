@@ -3,10 +3,8 @@ package com.example.svakatha;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -31,14 +29,14 @@ public class SplashScreen extends AppCompatActivity {
         splash3 = (TextView)findViewById(R.id.splash3);
 
         YoYo.with(Techniques.ZoomIn)
-                .duration(700)
+                .duration(900)
                 .playOn(splash1);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(SplashScreen.this,LoginScreen.class);
+                Intent i = new Intent(SplashScreen.this, LoginScreen_Signup.class);
                 startActivity(i);
             }
         },1000);

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border"
-    tools:context=".LoginScreen">
+    tools:context=".LoginScreen_Signup">
 
     <TextView
         android:id="@+id/logintext"

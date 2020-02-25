@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -27,13 +25,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginScreen extends AppCompatActivity implements View.OnClickListener{
+public class LoginScreen_Signup extends AppCompatActivity implements View.OnClickListener{
 
     TextView logintext;
     EditText editTextMail;
     EditText pass;
     EditText confirmpass;
     Button signupButton;
+    TextView register;
     String userId;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
@@ -52,6 +51,15 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
         pass = (EditText)findViewById(R.id.pass);
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
+        register = (TextView)findViewById(R.id.register);
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(LoginScreen_Signup.this,Login.class);
+                startActivity(intent1);
+            }
+        });
         //Getting Firebase Auth Object
         firebaseAuth=FirebaseAuth.getInstance();
 
@@ -90,7 +98,7 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                         //checking if success
                         if(task.isSuccessful()){
                             //display some message here
-                            Toast.makeText(LoginScreen.this,"Successfully registered",Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreen_Signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             //Database connection
                             userId = firebaseAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = db.collection("users").document(userId);
@@ -100,14 +108,14 @@ public class LoginScreen extends AppCompatActivity implements View.OnClickListen
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(LoginScreen.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginScreen_Signup.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                              Intent i = new Intent(LoginScreen.this,Profile.class);
+                              Intent i = new Intent(LoginScreen_Signup.this,Profile.class);
                                startActivity(i);
                         }else{
                             //display some message here
-                            Toast.makeText(LoginScreen.this,"Registration Error", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginScreen_Signup.this,"Registration Error", Toast.LENGTH_LONG).show();
                         }
                         progressDialog.dismiss();
                     }
