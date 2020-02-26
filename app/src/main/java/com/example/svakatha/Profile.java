@@ -111,6 +111,10 @@ public class Profile extends AppCompatActivity {
                 DocumentReference documentReference = db.collection("users").document(currentID);
                 Map<String,Object> user = new HashMap<>();
                 user.put("BodyShape",bodyShapeData);
+                user.put("Occupation",Occupation);
+                user.put("Size",Size);
+                user.put("PriceRange",PriceRange);
+
                 documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
