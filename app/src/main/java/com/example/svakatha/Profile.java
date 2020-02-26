@@ -18,6 +18,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -104,7 +105,7 @@ public class Profile extends AppCompatActivity {
                 DocumentReference documentReference = db.collection("users").document(currentID);
                 Map<String,Object> user = new HashMap<>();
                 user.put("BodyShape",bodyShapeData);
-                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(Profile.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
