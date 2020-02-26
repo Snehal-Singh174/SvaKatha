@@ -1,10 +1,9 @@
 package com.example.svakatha;
 
-import android.os.Build;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -17,6 +16,8 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -25,20 +26,21 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Profile extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
-    private FirebaseAuth db;
-
+    private FirebaseAuth auth;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private Button addButton;
+    Spinner spinner1;
 
 
     @Override
@@ -46,23 +48,27 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        db= FirebaseAuth.getInstance();
-        String currentID=db.getCurrentUser().getUid();
-
-        Spinner spinner1 = findViewById(R.id.spinner1);
+        addButton=(Button)findViewById(R.id.button2);
+        auth = FirebaseAuth.getInstance();
+        String currentID= auth.getCurrentUser().getUid();
+        spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.body,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
+
+
 
         Spinner spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.occupation,android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
+
         Spinner spinner3 = findViewById(R.id.spinner3);
         ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.size,android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner3.setAdapter(adapter3);
+
 
         Spinner spinner4 = findViewById(R.id.spinner4);
         ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.price,android.R.layout.simple_spinner_item);
@@ -73,6 +79,8 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+//      bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(),0,content.length(),0);
@@ -88,6 +96,24 @@ public class Profile extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String bodyShapeData = spinner1.getSelectedItem().toString();
+                String currentID= auth.getCurrentUser().getUid();
+                DocumentReference documentReference = db.collection("users").document(currentID);
+                Map<String,Object> user = new HashMap<>();
+                user.put("BodyShape",bodyShapeData);
+                documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Profile.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+            }
+        });
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
