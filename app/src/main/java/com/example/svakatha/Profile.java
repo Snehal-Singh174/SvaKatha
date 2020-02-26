@@ -7,8 +7,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -83,7 +87,7 @@ public class Profile extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//      bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(),0,content.length(),0);
@@ -125,6 +129,29 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+    //Bottom Navigation Menu Selector
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
+
+            switch(item.getItemId()){
+                case R.id.shop:
+                    selectedFragment = new ShopFragment();
+                    break;
+                case R.id.community:
+                    selectedFragment = new CommunityFragment();
+                    break;
+                case R.id.today_pick:
+                    selectedFragment = new PickFragment();
+                    break;
+            }
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selectedFragment).commit();
+            return true;
+        }
+    };
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
