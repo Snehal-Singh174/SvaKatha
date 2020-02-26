@@ -3,18 +3,13 @@ package com.example.svakatha;
 import android.os.Build;
 import android.os.Bundle;
 
-import com.example.svakatha.ui.home.HomeFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.view.MenuItem;
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -85,8 +80,6 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//      bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(),0,content.length(),0);
@@ -102,14 +95,6 @@ public class Profile extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-
-        spinner1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                v.get
-            }
-        });
-    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
