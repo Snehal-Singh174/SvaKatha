@@ -118,7 +118,7 @@ public class Profile extends AppCompatActivity {
                 documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Toast.makeText(Profile.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
                     }
                 });
 
