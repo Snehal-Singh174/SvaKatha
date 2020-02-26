@@ -10,7 +10,7 @@
             android:title="Find your Today's Pick"/>
         <item
             android:id="@+id/shop"
-            android:title="Shop your Design" />
+            android:title="Shop your Design"/>
         <item
             android:id="@+id/report"
             android:title="Your Analysis Report"/>
