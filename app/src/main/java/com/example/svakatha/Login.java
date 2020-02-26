@@ -21,58 +21,55 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Login extends AppCompatActivity {
 
-    TextView login_text;
-    EditText login_email;
-    EditText login_pass;
-    Button login;
-    private ProgressBar progressBar;
+    EditText nemail1,npassword1;
+    Button nloginbtn;
+    TextView nsignip;
+    FirebaseAuth fAuth;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+        nemail1 = findViewById(R.id.login_email);
+        npassword1 = findViewById(R.id.login_pass);
+        nloginbtn = findViewById(R.id.login_button);
 
+        fAuth = FirebaseAuth.getInstance();
 
-         login_email = (EditText)findViewById(R.id.login_email);
-        login_pass = (EditText)findViewById(R.id.login_pass);
-        login = (Button)findViewById(R.id.login_button);
-
-        login.setOnClickListener(new View.OnClickListener() {
+        nloginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SignWithEmailAndPassword();
-            }
-        });
-    }
-    void SignWithEmailAndPassword() {
-        progressBar.setVisibility(View.VISIBLE);
-        String email=login_email.getText().toString();
-        String password=login_pass.getText().toString();
-        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-        if (TextUtils.isEmpty(email)) {
-            Toast.makeText(getApplicationContext(), "Please enter email...", Toast.LENGTH_LONG).show();
-            return;
-        }
-        if (TextUtils.isEmpty(password)) {
-            Toast.makeText(getApplicationContext(), "Please enter password!", Toast.LENGTH_LONG).show();
-            return;
-        }
-        firebaseAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                String email2 = nemail1.getText().toString().trim();
+                String password1 = npassword1.getText().toString().trim();
+
+                if(TextUtils.isEmpty(email2)){
+                    nemail1.setError("Email is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(password1)){
+                    npassword1.setError("Password is required");
+                    return;
+                }
+                if(password1.length()<6){
+                    npassword1.setError("Password Must be more than 6 character");
+                    return;
+                }
+
+                fAuth.signInWithEmailAndPassword(email2,password1).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getApplicationContext(), "Login successful!", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
-                            Intent intent = new Intent(Login.this,Profile.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Login failed! Please try again later", Toast.LENGTH_LONG).show();
-                            progressBar.setVisibility(View.GONE);
+                        if(task.isSuccessful()){
+                            Toast.makeText(Login.this,"Login Successful",Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(getApplicationContext(),Profile.class));
+                        }else{
+                            Toast.makeText(Login.this,"Error! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+            }
+        });
+
     }
 }
