@@ -26,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginScreen_Signup extends AppCompatActivity {
-
     TextView logintext;
     EditText editTextMail;
     EditText pass;
@@ -52,7 +51,6 @@ public class LoginScreen_Signup extends AppCompatActivity {
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
         register = (TextView)findViewById(R.id.register);
-
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -124,10 +122,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
                         progressDialog.dismiss();
                     }
                 });
-
     }
-
-
 }
 
 
