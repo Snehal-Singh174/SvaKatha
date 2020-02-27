@@ -7,21 +7,16 @@
     android:background="#ffffff"
     tools:context=".SplashScreen">
 
-    <TextView
-        android:id="@+id/splash1"
-        android:layout_width="wrap_content"
-        android:layout_height="90dp"
-        android:fontFamily="@font/segoe_bold"
-        android:letterSpacing="0.07"
-        android:text="SvaKatha"
-        android:textAlignment="center"
-        android:textSize="70dp"
-        app:autoSizeTextType="none"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/_250sdp"
+        android:layout_height="@dimen/_50sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52"
+        app:srcCompat="@drawable/svakatha_logo" />
 
     <TextView
         android:id="@+id/splash2"
@@ -31,10 +26,11 @@
         android:letterSpacing="0.2"
         android:text="Let's Design Together"
         android:textSize="22dp"
+        android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splash1" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <TextView
         android:id="@+id/splash3"
@@ -48,4 +44,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

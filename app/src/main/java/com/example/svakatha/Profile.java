@@ -7,8 +7,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -54,14 +58,10 @@ public class Profile extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         addButton=(Button)findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
-        String currentID= auth.getCurrentUser().getUid();
         spinner1 = findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.body,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
-
-
-
         spinner2 = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.occupation,android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -83,7 +83,7 @@ public class Profile extends AppCompatActivity {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-//      bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
+        bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
 
         SpannableString content = new SpannableString("Shop your Design");
@@ -98,7 +98,7 @@ public class Profile extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupWithNavController(navigationView,navController);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +126,29 @@ public class Profile extends AppCompatActivity {
             }
         });
     }
+
+    //Bottom Navigation Menu Selector
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment selectedFragment = null;
+
+            switch(item.getItemId()){
+                case R.id.shop:
+                    selectedFragment = new ShopFragment();
+                    break;
+                case R.id.community:
+                    selectedFragment = new CommunityFragment();
+                    break;
+                case R.id.today_pick:
+                    selectedFragment = new PickFragment();
+                    break;
+            }
+
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selectedFragment).commit();
+            return true;
+        }
+    };
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
