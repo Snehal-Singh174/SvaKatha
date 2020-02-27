@@ -85,6 +85,7 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 //      bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
+
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(),0,content.length(),0);
 
