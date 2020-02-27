@@ -75,6 +75,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
         //getting email and password from edit texts
         final String email =editTextMail.getText().toString().trim();
         final String password  = pass.getText().toString().trim();
+        final String confirmpassword=confirmpass.getText().toString().trim();
+
         //checking if email and passwords are empty
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
@@ -83,6 +85,15 @@ public class LoginScreen_Signup extends AppCompatActivity {
 
         if(TextUtils.isEmpty(password)){
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(confirmpassword)){
+            Toast.makeText(this,"Please enter confirm password",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(!password.equals(confirmpassword)){
+            Toast.makeText(this, "Please Match The Password", Toast.LENGTH_SHORT).show();
             return;
         }
 
