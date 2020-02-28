@@ -3,6 +3,7 @@
     package="com.example.svakatha">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -27,7 +28,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_rSaX1vh5ek4HLn"
+            android:value="rzp_test_v79bHfg0Dq9cYo"
             />
     </application>
 

@@ -37,11 +37,13 @@ public class Razorpay extends Activity implements PaymentResultListener {
 
 
     public void startPayment() {
-       // checkout.setKeyID("<YOUR_KEY_ID>");
+        //checkout.setKeyID("<rzp_test_v79bHfg0Dq9cYo>");
         /**
          * Instantiate Checkout
          */
         Checkout checkout = new Checkout();
+        checkout.setKeyID("rzp_test_v79bHfg0Dq9cYo");
+
 
         /**
          * Set your logo here
@@ -73,7 +75,7 @@ public class Razorpay extends Activity implements PaymentResultListener {
              */
             options.put("description", "Test Order");
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-            options.put("order_id", "order_9A33XWu170gUtm");
+           // options.put("order_id", "order_9A33XWu170gUtm");
             options.put("currency", "INR");
 
             /**
