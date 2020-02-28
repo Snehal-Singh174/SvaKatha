@@ -7,6 +7,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -27,6 +28,7 @@ import java.util.Map;
 
 public class LoginScreen_Signup extends AppCompatActivity {
     TextView logintext;
+    private static final String TAG = "LoginScreen_Signup";
     EditText editTextMail;
     EditText pass;
     EditText confirmpass;
@@ -114,6 +116,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             Toast.makeText(LoginScreen_Signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             //Database connection
                             userId = firebaseAuth.getCurrentUser().getUid();
+                            String Uname= firebaseAuth.getCurrentUser().getDisplayName();
+                            Log.d(TAG, "onComplete: "+Uname);
                             DocumentReference documentReference = db.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
                             user.put("Email",email);

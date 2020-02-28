@@ -55,6 +55,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        String currentID= auth.getCurrentUser().getUid();
+        final DocumentReference documentReference = db.collection("users").document(currentID);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         addButton=(Button)findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
@@ -108,8 +110,7 @@ public class Profile extends AppCompatActivity {
                 String Size = spinner3.getSelectedItem().toString();
                 String PriceRange = spinner4.getSelectedItem().toString();
 
-                String currentID= auth.getCurrentUser().getUid();
-                DocumentReference documentReference = db.collection("users").document(currentID);
+
                 Map<String,Object> user = new HashMap<>();
                 user.put("BodyShape",bodyShapeData);
                 user.put("Occupation",Occupation);
@@ -161,5 +162,13 @@ public class Profile extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void initalState(){
+        Map<String,Object> user = new HashMap<>();
+        user.put("BodyShape","");
+        user.put("Occupation","");
+        user.put("Size","");
+        user.put("PriceRange","");
     }
 }
