@@ -45,7 +45,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+
 
         logintext = (TextView)findViewById(R.id.logintext);
         editTextMail = (EditText)findViewById(R.id.email);

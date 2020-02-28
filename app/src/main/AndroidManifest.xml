@@ -12,13 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RazorPay"></activity>
-        <activity android:name=".Login" />
+        <activity android:name=".RazorPay"/>
+        <activity
+            android:name=".Login"
+            android:label="Login" />
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginScreen_Signup" />
+        <activity
+            android:name=".LoginScreen_Signup"
+            android:label="Sign-Up"/>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

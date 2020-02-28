@@ -31,7 +31,23 @@ public class SplashScreen extends AppCompatActivity {
         logo = (ImageView)findViewById(R.id.logo);
 
         YoYo.with(Techniques.ZoomIn)
-                .duration(1100)
+                .duration(1000)
+                .playOn(logo);
+        YoYo.with(Techniques.ZoomOut)
+                .delay(1000)
+                .duration(1000)
+                .playOn(logo);
+        YoYo.with(Techniques.ZoomIn)
+                .delay(2000)
+                .duration(1000)
+                .playOn(logo);
+        YoYo.with(Techniques.ZoomOut)
+                .delay(3000)
+                .duration(1000)
+                .playOn(logo);
+        YoYo.with(Techniques.ZoomIn)
+                .delay(4000)
+                .duration(1000)
                 .playOn(logo);
 
         Handler handler = new Handler();
@@ -41,6 +57,6 @@ public class SplashScreen extends AppCompatActivity {
                 Intent i = new Intent(SplashScreen.this, LoginScreen_Signup.class);
                 startActivity(i);
             }
-        },1300);
+        },5000);
     }
 }
