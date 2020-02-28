@@ -7,7 +7,7 @@
         <item
             android:id="@+id/pick"
             android:checkable="true"
-            android:title="Find your Today's Pick"/>
+            android:title="Today's Suggestion"/>
         <item
             android:id="@+id/shop"
             android:title="Shop your Design"/>
@@ -20,5 +20,8 @@
         <item
             android:id="@+id/community"
             android:title="My Community"/>
+        <item
+            android:id="@+id/closet"
+            android:title="My Closet"/>
     
 </menu>
