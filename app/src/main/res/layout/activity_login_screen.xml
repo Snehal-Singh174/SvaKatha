@@ -10,91 +10,113 @@
 
     <TextView
         android:id="@+id/logintext"
-        android:layout_width="736px"
-        android:layout_height="143px"
+        android:layout_width="@dimen/_245sdp"
+        android:layout_height="@dimen/_45sdp"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/segoe"
         android:lines="2"
         android:maxLines="2"
         android:text="Sva-Katha\nYour Personal Fashion Assistance"
         android:textAlignment="center"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.595"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <EditText
-        android:id="@+id/email"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
-        android:background="@drawable/inputfield"
-        android:fontFamily="@font/segoe"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:padding="44px"
-        android:textSize="47px"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.40" />
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/firstname"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@drawable/inputfield"
+        android:fontFamily="@font/segoe"
+        android:hint="First Name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <EditText
+        android:id="@+id/lastname"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/inputfield"
+        android:fontFamily="@font/segoe"
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/firstname" />
+
+    <EditText
+        android:id="@+id/email"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/inputfield"
+        android:fontFamily="@font/segoe"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
     <EditText
         android:id="@+id/pass"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Password"
         android:inputType="textPassword"
-        android:padding="44px"
-        android:textSize="47px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
         android:id="@+id/confirmpass"
-        android:layout_width="758px"
-        android:layout_height="134.96px"
+        android:layout_width="@dimen/_220sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:hint="Confirm Password"
         android:inputType="textPassword"
-        android:padding="44px"
-        android:textSize="47px"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="@dimen/_10sdp"
+        android:textSize="@dimen/_14ssp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pass"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintTop_toBottomOf="@+id/pass" />
 
-<!--    <com.google.android.gms.common.SignInButton-->
-<!--        android:id="@+id/sign_in_button"-->
-<!--        android:layout_width="70dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.498"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/confirmpass"-->
-<!--        app:layout_constraintVertical_bias="0.201" />-->
 
     <Button
         android:id="@+id/signupbutton"
-        android:layout_width="273.96px"
-        android:layout_height="123.92px"
+        android:layout_width="@dimen/_91sdp"
+        android:layout_height="@dimen/_41sdp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
         android:text="NEXT"
         android:textAlignment="center"
-        android:textSize="53px"
+        android:textSize="@dimen/_17ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
@@ -108,7 +130,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/segoe"
         android:text="Login"
-        android:textSize="53px"
+        android:textSize="@dimen/_17ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
