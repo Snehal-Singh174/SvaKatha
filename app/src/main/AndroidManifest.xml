@@ -3,7 +3,7 @@
     package="com.example.svakatha">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Login"></activity>
+        <activity android:name=".RazorPay"></activity>
+        <activity android:name=".Login" />
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
@@ -28,8 +29,7 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_test_v79bHfg0Dq9cYo"
-            />
+            android:value="rzp_test_v79bHfg0Dq9cYo" />
     </application>
 
 </manifest>

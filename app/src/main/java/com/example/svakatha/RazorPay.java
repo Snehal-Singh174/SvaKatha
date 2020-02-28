@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -12,14 +14,15 @@ import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
-public class Razorpay extends Activity implements PaymentResultListener {
+public class RazorPay extends Activity implements PaymentResultListener {
 
-    String TAG="Payment Error";
+    private static final String TAG = RazorPay.class.getSimpleName();
     Button pay;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_razorpay);
+        setContentView(R.layout.activity_razor_pay);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Checkout.preload(getApplicationContext());
 
 
@@ -37,13 +40,11 @@ public class Razorpay extends Activity implements PaymentResultListener {
 
 
     public void startPayment() {
-        //checkout.setKeyID("<rzp_test_v79bHfg0Dq9cYo>");
         /**
          * Instantiate Checkout
          */
         Checkout checkout = new Checkout();
         checkout.setKeyID("rzp_test_v79bHfg0Dq9cYo");
-
 
         /**
          * Set your logo here
@@ -54,6 +55,7 @@ public class Razorpay extends Activity implements PaymentResultListener {
          * Reference to current activity
          */
         final Activity activity = this;
+
 
         /**
          * Pass your payment options to the Razorpay Checkout as a JSONObject
@@ -73,9 +75,10 @@ public class Razorpay extends Activity implements PaymentResultListener {
              *     Invoice Payment
              *     etc.
              */
+
             options.put("description", "Test Order");
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
-           // options.put("order_id", "order_9A33XWu170gUtm");
+            //  options.put("order_id", "");
             options.put("currency", "INR");
 
             /**
