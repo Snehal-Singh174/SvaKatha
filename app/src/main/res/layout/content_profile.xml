@@ -54,20 +54,28 @@ tools:context=".Profile">
         android:text="@string/prof"
         android:layout_gravity="center_horizontal" />
 
+    <!--custom progress drawable for progress mode--><![CDATA[
+    />
+
+
+
+    ]]>
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="20dp"
         android:max="100"
         android:progress="50"
+        android:progressDrawable="@drawable/custom_progress"
         android:scaleY="4"
-        android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_height="40dp"
         tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="221dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="180dp"/>
+        tools:layout_editor_absoluteY="221dp" />
 
     <View
         android:layout_width="match_parent"
