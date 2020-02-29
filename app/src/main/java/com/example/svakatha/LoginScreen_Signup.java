@@ -35,6 +35,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
     Button signupButton;
     TextView register;
     String userId;
+    private EditText fname_edittext;
+    private EditText lname_edittext;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -53,6 +55,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
         register = (TextView)findViewById(R.id.register);
+        fname_edittext=(EditText)findViewById(R.id.firstname);
+        lname_edittext=(EditText)findViewById(R.id.lastname);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,8 +82,18 @@ public class LoginScreen_Signup extends AppCompatActivity {
         final String email =editTextMail.getText().toString().trim();
         final String password  = pass.getText().toString().trim();
         final String confirmpassword=confirmpass.getText().toString().trim();
+        final String fname=fname_edittext.getText().toString().trim();
+        final String lname=lname_edittext.getText().toString().trim();
 
         //checking if email and passwords are empty
+        if(TextUtils.isEmpty(fname)){
+            Toast.makeText(this,"Please enter First Name",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(lname)){
+            Toast.makeText(this,"Please enter Last Name",Toast.LENGTH_LONG).show();
+            return;
+        }
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
             return;
@@ -116,12 +130,12 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             Toast.makeText(LoginScreen_Signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             //Database connection
                             userId = firebaseAuth.getCurrentUser().getUid();
-                            String Uname= firebaseAuth.getCurrentUser().getDisplayName();
-                            Log.d(TAG, "onComplete: "+Uname);
                             DocumentReference documentReference = db.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
                             user.put("Email",email);
                             user.put("Password",password);
+                            user.put("FirstName",fname);
+                            user.put("LastName",lname);
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
