@@ -109,25 +109,11 @@ public class Profile extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView,navController);
-
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
         updateProgressBar();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 bodyShapeData = spinner1.getSelectedItem().toString();
-
-
                 String Occupation;
                 Occupation = spinner2.getSelectedItem().toString();
                 String Size;
@@ -206,16 +192,16 @@ public class Profile extends AppCompatActivity {
                             String PriceRange=documentSnapshot.getString("PriceRange");
                             String Size=documentSnapshot.getString("Size");
                             int progressStatus=100;
-                            if(BodyShape==""){
+                            if((BodyShape=="")|| (BodyShape.equals("Null"))  ){
                                 progressStatus=progressStatus-25;
                             }
-                            if(Occupation==""){
+                            if((Occupation=="")  || (Occupation.equals("Null"))){
                                 progressStatus=progressStatus-25;
                             }
-                            if(PriceRange==""){
+                            if((PriceRange=="") || (PriceRange.equals("Null"))){
                                 progressStatus=progressStatus-25;
                             }
-                            if(Size==""){
+                            if((Size=="") || (Size.equals("Null"))){
                                 progressStatus=progressStatus-25;
                             }
                             progressBar.setProgress(progressStatus);
@@ -223,9 +209,9 @@ public class Profile extends AppCompatActivity {
 
                             spinner2.setSelection(adapter2.getPosition(Occupation));
 
-                            spinner3.setSelection(adapter3.getPosition(PriceRange));
+                            spinner3.setSelection(adapter3.getPosition(Size));
 
-                            spinner4.setSelection(adapter4.getPosition(Size));
+                            spinner4.setSelection(adapter4.getPosition(PriceRange));
                         }
                     }
                 });
