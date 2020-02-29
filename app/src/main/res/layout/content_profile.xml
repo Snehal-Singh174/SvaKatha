@@ -27,13 +27,25 @@ tools:context=".Profile">
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/profilephoto"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_profilephoto"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"/>-->
+
+    <TextView
+        android:id="@+id/profilephoto"
+        android:layout_width="@dimen/_102sdp"
+        android:layout_height="@dimen/_95sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_profilephoto"
+        android:layout_gravity="center_horizontal"
+        android:text="DP"
+        android:textAlignment="center"
+        android:textSize="@dimen/_65ssp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/name"
