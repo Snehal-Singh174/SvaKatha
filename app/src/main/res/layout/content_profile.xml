@@ -103,7 +103,7 @@ tools:context=".Profile">
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="235dp"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="295dp"
         android:layout_marginEnd="20dp"
         android:drawableTop="@drawable/ic_notification_icon"
         android:lines="2"
@@ -123,7 +123,7 @@ tools:context=".Profile">
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="15dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/segoe"
         android:layout_marginTop="238dp"/>
 
