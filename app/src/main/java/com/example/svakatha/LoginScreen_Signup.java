@@ -92,6 +92,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
         }
         if(TextUtils.isEmpty(lname)){
             Toast.makeText(this,"Please enter Last Name",Toast.LENGTH_LONG).show();
+
             return;
         }
         if(TextUtils.isEmpty(email)){
@@ -129,6 +130,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             //display some message here
                             Toast.makeText(LoginScreen_Signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             //Database connection
+
                             userId = firebaseAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = db.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
@@ -142,8 +144,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
                                     Toast.makeText(LoginScreen_Signup.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                              Intent i = new Intent(LoginScreen_Signup.this,Profile.class);
-                               startActivity(i);
+                            startActivity(new Intent(getApplicationContext(),Profile.class));
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen_Signup.this,"Registration Error", Toast.LENGTH_LONG).show();
