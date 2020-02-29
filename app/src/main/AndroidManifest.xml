@@ -5,13 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
-    <supports-screens
-        android:largeScreens="true"
-        android:smallScreens="true"
-        android:normalScreens="true"
-        android:xlargeScreens="true"
-        />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,18 +12,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@xml/actions" />
-
-        <activity android:name=".Swipecard" />
-        <activity android:name=".RazorPay" />
-        <activity android:name=".Login" />
+        <activity android:name=".RazorPay"/>
+        <activity
+            android:name=".Login"
+            android:label="Login" />
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".LoginScreen_Signup" />
+        <activity
+            android:name=".LoginScreen_Signup"
+            android:label="Sign-Up"/>
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

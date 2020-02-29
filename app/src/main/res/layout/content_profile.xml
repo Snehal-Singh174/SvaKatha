@@ -27,13 +27,25 @@ tools:context=".Profile">
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <ImageView
+    <!--<ImageView
         android:id="@+id/profilephoto"
         android:layout_width="110dp"
         android:layout_height="110dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shape_profilephoto"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"/>-->
+
+    <TextView
+        android:id="@+id/profilephoto"
+        android:layout_width="@dimen/_102sdp"
+        android:layout_height="@dimen/_95sdp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shape_profilephoto"
+        android:layout_gravity="center_horizontal"
+        android:text="DP"
+        android:textAlignment="center"
+        android:textSize="@dimen/_65ssp"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/name"
@@ -54,17 +66,28 @@ tools:context=".Profile">
         android:text="@string/prof"
         android:layout_gravity="center_horizontal" />
 
+    <!--custom progress drawable for progress mode--><![CDATA[
+    />
+
+
+
+    ]]>
+
     <ProgressBar
         android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleHorizontal"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="match_parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_height="40dp"
-        tools:layout_editor_absoluteX="175dp"
-        tools:layout_editor_absoluteY="221dp"
+        android:layout_height="5dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="180dp"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginEnd="20dp"
+        android:max="100"
+        android:progress="25"
+
+        android:scaleY="4"
+        tools:layout_editor_absoluteX="175dp"
+        tools:layout_editor_absoluteY="221dp" />
 
     <View
         android:layout_width="match_parent"
@@ -92,7 +115,7 @@ tools:context=".Profile">
         android:layout_width="80dp"
         android:layout_height="60dp"
         android:layout_marginTop="235dp"
-        android:layout_marginStart="280dp"
+        android:layout_marginStart="295dp"
         android:layout_marginEnd="20dp"
         android:drawableTop="@drawable/ic_notification_icon"
         android:lines="2"
@@ -112,7 +135,7 @@ tools:context=".Profile">
         android:textAlignment="center"
         android:textColor="#000"
         android:textSize="15dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="30dp"
         android:fontFamily="@font/segoe"
         android:layout_marginTop="238dp"/>
 
@@ -234,7 +257,7 @@ tools:context=".Profile">
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Update"
         android:layout_marginStart="@dimen/_125sdp"
         android:layout_marginTop="@dimen/_400sdp"
         />

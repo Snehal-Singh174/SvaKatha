@@ -21,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
 
@@ -31,50 +32,70 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.text.TextUtils.concat;
 
 public class Profile extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private Button addButton;
     Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
+    ProgressBar progressBar, progressBar_drawer;
+    ArrayAdapter<CharSequence> adapter1;
+    ArrayAdapter<CharSequence> adapter2;
+    ArrayAdapter<CharSequence> adapter3;
+    ArrayAdapter<CharSequence> adapter4;
+    String bodyShapeData;
+    TextView profile_textView;
+    TextView name ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        addButton=(Button)findViewById(R.id.button2);
+        profile_textView = (TextView) findViewById(R.id.profilephoto);
+        name=(TextView)findViewById(R.id.name);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        addButton = (Button) findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar);
+        progressBar_drawer = findViewById(R.id.progressBar_drawer);
         spinner1 = findViewById(R.id.spinner1);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,R.array.body,android.R.layout.simple_spinner_item);
+        adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
+
         spinner2 = findViewById(R.id.spinner2);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,R.array.occupation,android.R.layout.simple_spinner_item);
+        adapter2 = ArrayAdapter.createFromResource(this, R.array.occupation, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
 
         spinner3 = findViewById(R.id.spinner3);
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,R.array.size,android.R.layout.simple_spinner_item);
+        adapter3 = ArrayAdapter.createFromResource(this, R.array.size, android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner3.setAdapter(adapter3);
 
         spinner4 = findViewById(R.id.spinner4);
-        ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,R.array.price,android.R.layout.simple_spinner_item);
+        adapter4 = ArrayAdapter.createFromResource(this, R.array.price, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner4.setAdapter(adapter4);
 
@@ -87,7 +108,7 @@ public class Profile extends AppCompatActivity {
 
 
         SpannableString content = new SpannableString("Shop your Design");
-        content.setSpan(new UnderlineSpan(),0,content.length(),0);
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -98,31 +119,37 @@ public class Profile extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView,navController);
-
+        NavigationUI.setupWithNavController(navigationView, navController);
+        updateProfileText();
+        updateProgressBar();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String bodyShapeData = spinner1.getSelectedItem().toString();
-                String Occupation = spinner2.getSelectedItem().toString();
-                String Size = spinner3.getSelectedItem().toString();
-                String PriceRange = spinner4.getSelectedItem().toString();
-
-                String currentID= auth.getCurrentUser().getUid();
+                bodyShapeData = spinner1.getSelectedItem().toString();
+                String Occupation;
+                Occupation = spinner2.getSelectedItem().toString();
+                String Size;
+                Size = spinner3.getSelectedItem().toString();
+                String PriceRange;
+                PriceRange = spinner4.getSelectedItem().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-                Map<String,Object> user = new HashMap<>();
-                user.put("BodyShape",bodyShapeData);
-                user.put("Occupation",Occupation);
-                user.put("Size",Size);
-                user.put("PriceRange",PriceRange);
 
-                documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
-                    }
-                });
 
+                Map<String, Object> user = new HashMap<>();
+                user.put("BodyShape", bodyShapeData);
+                user.put("Occupation", Occupation);
+                user.put("Size", Size);
+                user.put("PriceRange", PriceRange);
+                documentReference.update(user);
+                //documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                //  @Override
+                // public void onSuccess(Void aVoid) {
+                //   Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
+                // }
+                //});
+                updateProgressBar();
             }
         });
     }
@@ -132,8 +159,7 @@ public class Profile extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-
-            switch(item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.shop:
                     selectedFragment = new ShopFragment();
                     break;
@@ -144,11 +170,11 @@ public class Profile extends AppCompatActivity {
                     selectedFragment = new PickFragment();
                     break;
             }
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, selectedFragment).commit();
             return true;
         }
     };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -161,5 +187,61 @@ public class Profile extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+
+    public void updateProgressBar() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String currentID = auth.getCurrentUser().getUid();
+        final DocumentReference documentReference = db.collection("users").document(currentID);
+        documentReference.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        if (documentSnapshot.exists()) {
+                            String BodyShape = documentSnapshot.getString("BodyShape");
+                            String Occupation = documentSnapshot.getString("Occupation");
+                            String PriceRange = documentSnapshot.getString("PriceRange");
+                            String Size = documentSnapshot.getString("Size");
+                            int progressStatus = 100;
+                            if ((BodyShape == "") || (BodyShape.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
+                            }
+                            if ((Occupation == "") || (Occupation.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
+                            }
+                            if ((PriceRange == "") || (PriceRange.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
+                            }
+                            if ((Size == "") || (Size.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
+                            }
+                            progressBar.setProgress(progressStatus);
+                            //progressBar_drawer.setProgress(progressStatus);
+                            spinner1.setSelection(adapter1.getPosition(BodyShape));
+                            spinner2.setSelection(adapter2.getPosition(Occupation));
+                            spinner3.setSelection(adapter3.getPosition(Size));
+                            spinner4.setSelection(adapter4.getPosition(PriceRange));
+                        }
+                    }
+                });
+    }
+
+    public void updateProfileText() {
+        String currentID = auth.getCurrentUser().getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference documentReference = db.collection("users").document(currentID);
+        documentReference.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String firstname = documentSnapshot.getString("FirstName");
+                        String lastname = documentSnapshot.getString("LastName");
+                        String firstletter = String.valueOf(firstname.charAt(0));
+                        String lastletter = String.valueOf(lastname.charAt(0));
+                        String finalProfileText = firstletter.concat(lastletter).toUpperCase();
+                        profile_textView.setText(finalProfileText);
+                        name.setText(firstname);
+                    }
+                } );
     }
 }

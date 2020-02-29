@@ -7,10 +7,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +29,15 @@ import java.util.Map;
 
 public class LoginScreen_Signup extends AppCompatActivity {
     TextView logintext;
+    private static final String TAG = "LoginScreen_Signup";
     EditText editTextMail;
     EditText pass;
     EditText confirmpass;
     Button signupButton;
     TextView register;
     String userId;
+    private EditText fname_edittext;
+    private EditText lname_edittext;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -43,7 +48,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
         setContentView(R.layout.activity_login_screen);
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        getSupportActionBar().hide();
+
 
         logintext = (TextView)findViewById(R.id.logintext);
         editTextMail = (EditText)findViewById(R.id.email);
@@ -51,6 +56,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
         register = (TextView)findViewById(R.id.register);
+        fname_edittext=(EditText)findViewById(R.id.firstname);
+        lname_edittext=(EditText)findViewById(R.id.lastname);
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -76,8 +83,19 @@ public class LoginScreen_Signup extends AppCompatActivity {
         final String email =editTextMail.getText().toString().trim();
         final String password  = pass.getText().toString().trim();
         final String confirmpassword=confirmpass.getText().toString().trim();
+        final String fname=fname_edittext.getText().toString().trim();
+        final String lname=lname_edittext.getText().toString().trim();
 
         //checking if email and passwords are empty
+        if(TextUtils.isEmpty(fname)){
+            Toast.makeText(this,"Please enter First Name",Toast.LENGTH_LONG).show();
+            return;
+        }
+        if(TextUtils.isEmpty(lname)){
+            Toast.makeText(this,"Please enter Last Name",Toast.LENGTH_LONG).show();
+
+            return;
+        }
         if(TextUtils.isEmpty(email)){
             Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
             return;
@@ -113,19 +131,25 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             //display some message here
                             Toast.makeText(LoginScreen_Signup.this,"Successfully registered",Toast.LENGTH_LONG).show();
                             //Database connection
+
                             userId = firebaseAuth.getCurrentUser().getUid();
                             DocumentReference documentReference = db.collection("users").document(userId);
                             Map<String,Object> user = new HashMap<>();
                             user.put("Email",email);
                             user.put("Password",password);
+                            user.put("FirstName",fname);
+                            user.put("LastName",lname);
+                            user.put("BodyShape","");
+                            user.put("Size","");
+                            user.put("PriceRange","");
+                            user.put("Occupation","");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(LoginScreen_Signup.this, "Database Me Aapka Password Save HO GAYA", Toast.LENGTH_SHORT).show();
                                 }
                             });
-                              Intent i = new Intent(LoginScreen_Signup.this,Profile.class);
-                               startActivity(i);
+                            startActivity(new Intent(getApplicationContext(),Profile.class));
                         }else{
                             //display some message here
                             Toast.makeText(LoginScreen_Signup.this,"Registration Error", Toast.LENGTH_LONG).show();
