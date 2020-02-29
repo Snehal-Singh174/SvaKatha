@@ -148,7 +148,6 @@ public class Profile extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-
             switch(item.getItemId()){
                 case R.id.shop:
                     selectedFragment = new ShopFragment();
@@ -160,7 +159,6 @@ public class Profile extends AppCompatActivity {
                     selectedFragment = new PickFragment();
                     break;
             }
-
             getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selectedFragment).commit();
             return true;
         }
@@ -206,16 +204,13 @@ public class Profile extends AppCompatActivity {
                                 progressStatus=progressStatus-25;
                             }
                             progressBar.setProgress(progressStatus);
+                            //progressBar_drawer.setProgress(progressStatus);
                             spinner1.setSelection(adapter1.getPosition(BodyShape));
-
                             spinner2.setSelection(adapter2.getPosition(Occupation));
-
                             spinner3.setSelection(adapter3.getPosition(Size));
-
                             spinner4.setSelection(adapter4.getPosition(PriceRange));
                         }
                     }
                 });
-
     }
 }
