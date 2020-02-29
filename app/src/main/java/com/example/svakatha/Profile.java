@@ -55,8 +55,6 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        String currentID= auth.getCurrentUser().getUid();
-        final DocumentReference documentReference = db.collection("users").document(currentID);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         addButton=(Button)findViewById(R.id.button2);
 
@@ -111,6 +109,8 @@ public class Profile extends AppCompatActivity {
                 String Size = spinner3.getSelectedItem().toString();
                 String PriceRange = spinner4.getSelectedItem().toString();
 
+                String currentID= auth.getCurrentUser().getUid();
+                final DocumentReference documentReference = db.collection("users").document(currentID);
 
                 Map<String,Object> user = new HashMap<>();
                 user.put("BodyShape",bodyShapeData);
