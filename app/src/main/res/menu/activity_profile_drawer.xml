@@ -7,21 +7,21 @@
         <item
             android:id="@+id/pick"
             android:checkable="true"
-            android:title="Today's Suggestion"/>
+            android:title="@string/menu_suggestion"/>
         <item
             android:id="@+id/shop"
-            android:title="Shop your Design"/>
+            android:title="@string/menu_shopyourdesign"/>
         <item
             android:id="@+id/report"
-            android:title="Your Analysis Report"/>
+            android:title="@string/menu_analysisreport"/>
         <item
             android:id="@+id/style_suggestion"
-            android:title="Styling Suggestion"/>
+            android:title="@string/menu_stylingsuggestion"/>
         <item
             android:id="@+id/community"
-            android:title="My Community"/>
+            android:title="@string/menu_mycommunity"/>
         <item
             android:id="@+id/closet"
-            android:title="My Closet"/>
+            android:title="@string/menu_mycloset"/>
     
 </menu>

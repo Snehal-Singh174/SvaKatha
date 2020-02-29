@@ -51,7 +51,7 @@ public class Profile extends AppCompatActivity {
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    ProgressBar progressBar;
+    ProgressBar progressBar,progressBar_drawer;
     ArrayAdapter<CharSequence> adapter1;
     ArrayAdapter<CharSequence> adapter2;
     ArrayAdapter<CharSequence> adapter3;
@@ -67,6 +67,7 @@ public class Profile extends AppCompatActivity {
         addButton=(Button)findViewById(R.id.button2);
         auth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
+        progressBar_drawer=findViewById(R.id.progressBar_drawer);
         spinner1 = findViewById(R.id.spinner1);
         adapter1 = ArrayAdapter.createFromResource(this,R.array.body,android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

@@ -18,6 +18,14 @@
     <string name="prof"><u><b>Profession</b></u></string>
     <string name="eightynine"><b>89</b>\nConnection</string>
 
+    <!-- Navigation Drawer Menu Items-->
+    <string name="menu_suggestion"><u>Today\'s Suggestion</u></string>
+    <string name="menu_shopyourdesign"><u>Shop Your Design</u></string>
+    <string name="menu_analysisreport"><u>Your Analysis Report</u></string>
+    <string name="menu_stylingsuggestion"><u>Styling Suggestion</u></string>
+    <string name="menu_mycommunity"><u>My Community</u></string>
+    <string name="menu_mycloset"><u>My Closet</u></string>
+
     <string-array name="body">
         <item>Hourglass</item>
         <item>Professor</item>
