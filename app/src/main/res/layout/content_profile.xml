@@ -84,7 +84,7 @@ tools:context=".Profile">
         android:layout_marginEnd="20dp"
         android:max="100"
         android:progress="25"
-
+        android:progressTint="#808080"
         android:scaleY="4"
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="221dp" />
