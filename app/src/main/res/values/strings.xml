@@ -19,22 +19,26 @@
     <string name="eightynine"><b>89</b>\nConnection</string>
 
     <string-array name="body">
+        <item value="-1">Null</item>
         <item>Hourglass</item>
         <item>Professor</item>
         <item>Artist</item>
     </string-array>
     <string-array name="occupation">
+        <item value="-1">Null</item>
         <item>Student</item>
         <item>Business Casual</item>
         <item>Artist</item>
     </string-array>
     <string-array name="size">
+        <item value="-1">Null</item>
         <item>S</item>
         <item>M</item>
         <item>XL</item>
         <item>XXL</item>
     </string-array>
     <string-array name="price">
+        <item value="-1">Null</item>
         <item>Below 5000</item>
         <item>5000-9000</item>
         <item>Above 9000</item>
