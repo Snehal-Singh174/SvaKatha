@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -138,6 +139,10 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             user.put("Password",password);
                             user.put("FirstName",fname);
                             user.put("LastName",lname);
+                            user.put("BodyShape","");
+                            user.put("Size","");
+                            user.put("PriceRange","");
+                            user.put("Occupation","");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
