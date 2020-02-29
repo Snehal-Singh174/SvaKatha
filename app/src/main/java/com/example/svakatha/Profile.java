@@ -35,12 +35,18 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static android.text.TextUtils.concat;
 
 public class Profile extends AppCompatActivity {
 
@@ -51,41 +57,45 @@ public class Profile extends AppCompatActivity {
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    ProgressBar progressBar,progressBar_drawer;
+    ProgressBar progressBar, progressBar_drawer;
     ArrayAdapter<CharSequence> adapter1;
     ArrayAdapter<CharSequence> adapter2;
     ArrayAdapter<CharSequence> adapter3;
     ArrayAdapter<CharSequence> adapter4;
     String bodyShapeData;
+    TextView profile_textView;
+    TextView name ;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        addButton=(Button)findViewById(R.id.button2);
-        auth=FirebaseAuth.getInstance();
-        progressBar=findViewById(R.id.progressBar);
-        progressBar_drawer=findViewById(R.id.progressBar_drawer);
+        profile_textView = (TextView) findViewById(R.id.profilephoto);
+        name=(TextView)findViewById(R.id.name);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        addButton = (Button) findViewById(R.id.button2);
+        auth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progressBar);
+        progressBar_drawer = findViewById(R.id.progressBar_drawer);
         spinner1 = findViewById(R.id.spinner1);
-        adapter1 = ArrayAdapter.createFromResource(this,R.array.body,android.R.layout.simple_spinner_item);
+        adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
 
         spinner2 = findViewById(R.id.spinner2);
-        adapter2 = ArrayAdapter.createFromResource(this,R.array.occupation,android.R.layout.simple_spinner_item);
+        adapter2 = ArrayAdapter.createFromResource(this, R.array.occupation, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
 
         spinner3 = findViewById(R.id.spinner3);
-        adapter3 = ArrayAdapter.createFromResource(this,R.array.size,android.R.layout.simple_spinner_item);
+        adapter3 = ArrayAdapter.createFromResource(this, R.array.size, android.R.layout.simple_spinner_item);
         adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner3.setAdapter(adapter3);
 
         spinner4 = findViewById(R.id.spinner4);
-        adapter4 = ArrayAdapter.createFromResource(this,R.array.price,android.R.layout.simple_spinner_item);
+        adapter4 = ArrayAdapter.createFromResource(this, R.array.price, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner4.setAdapter(adapter4);
 
@@ -98,7 +108,7 @@ public class Profile extends AppCompatActivity {
 
 
         SpannableString content = new SpannableString("Shop your Design");
-        content.setSpan(new UnderlineSpan(),0,content.length(),0);
+        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -109,7 +119,8 @@ public class Profile extends AppCompatActivity {
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView,navController);
+        NavigationUI.setupWithNavController(navigationView, navController);
+        updateProfileText();
         updateProgressBar();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,23 +133,23 @@ public class Profile extends AppCompatActivity {
                 String PriceRange;
                 PriceRange = spinner4.getSelectedItem().toString();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String currentID= auth.getCurrentUser().getUid();
+                String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
 
 
-                Map<String,Object> user = new HashMap<>();
-                user.put("BodyShape",bodyShapeData);
-                user.put("Occupation",Occupation);
-                user.put("Size",Size);
-                user.put("PriceRange",PriceRange);
+                Map<String, Object> user = new HashMap<>();
+                user.put("BodyShape", bodyShapeData);
+                user.put("Occupation", Occupation);
+                user.put("Size", Size);
+                user.put("PriceRange", PriceRange);
                 documentReference.update(user);
                 //documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                  //  @Override
-                   // public void onSuccess(Void aVoid) {
-                     //   Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
-                   // }
+                //  @Override
+                // public void onSuccess(Void aVoid) {
+                //   Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
+                // }
                 //});
-                    updateProgressBar();
+                updateProgressBar();
             }
         });
     }
@@ -148,7 +159,7 @@ public class Profile extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment selectedFragment = null;
-            switch(item.getItemId()){
+            switch (item.getItemId()) {
                 case R.id.shop:
                     selectedFragment = new ShopFragment();
                     break;
@@ -159,10 +170,11 @@ public class Profile extends AppCompatActivity {
                     selectedFragment = new PickFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selectedFragment).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, selectedFragment).commit();
             return true;
         }
     };
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -177,31 +189,31 @@ public class Profile extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public void updateProgressBar(){
+    public void updateProgressBar() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String currentID= auth.getCurrentUser().getUid();
+        String currentID = auth.getCurrentUser().getUid();
         final DocumentReference documentReference = db.collection("users").document(currentID);
         documentReference.get()
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        if(documentSnapshot.exists()){
-                            String BodyShape=documentSnapshot.getString("BodyShape");
-                            String Occupation=documentSnapshot.getString("Occupation");
-                            String PriceRange=documentSnapshot.getString("PriceRange");
-                            String Size=documentSnapshot.getString("Size");
-                            int progressStatus=100;
-                            if((BodyShape=="")|| (BodyShape.equals("Null"))  ){
-                                progressStatus=progressStatus-25;
+                        if (documentSnapshot.exists()) {
+                            String BodyShape = documentSnapshot.getString("BodyShape");
+                            String Occupation = documentSnapshot.getString("Occupation");
+                            String PriceRange = documentSnapshot.getString("PriceRange");
+                            String Size = documentSnapshot.getString("Size");
+                            int progressStatus = 100;
+                            if ((BodyShape == "") || (BodyShape.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
                             }
-                            if((Occupation=="")  || (Occupation.equals("Null"))){
-                                progressStatus=progressStatus-25;
+                            if ((Occupation == "") || (Occupation.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
                             }
-                            if((PriceRange=="") || (PriceRange.equals("Null"))){
-                                progressStatus=progressStatus-25;
+                            if ((PriceRange == "") || (PriceRange.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
                             }
-                            if((Size=="") || (Size.equals("Null"))){
-                                progressStatus=progressStatus-25;
+                            if ((Size == "") || (Size.equals("Null"))) {
+                                progressStatus = progressStatus - 25;
                             }
                             progressBar.setProgress(progressStatus);
                             //progressBar_drawer.setProgress(progressStatus);
@@ -212,5 +224,24 @@ public class Profile extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void updateProfileText() {
+        String currentID = auth.getCurrentUser().getUid();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        final DocumentReference documentReference = db.collection("users").document(currentID);
+        documentReference.get()
+                .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                    @Override
+                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String firstname = documentSnapshot.getString("FirstName");
+                        String lastname = documentSnapshot.getString("LastName");
+                        String firstletter = String.valueOf(firstname.charAt(0));
+                        String lastletter = String.valueOf(lastname.charAt(0));
+                        String finalProfileText = firstletter.concat(lastletter).toUpperCase();
+                        profile_textView.setText(finalProfileText);
+                        name.setText(firstname);
+                    }
+                } );
     }
 }
