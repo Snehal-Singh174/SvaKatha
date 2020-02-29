@@ -71,8 +71,8 @@ tools:context=".Profile">
         android:layout_marginTop="200dp"
         android:layout_marginEnd="20dp"
         android:max="100"
-        android:progress="50"
-        android:progressDrawable="@drawable/custom_progress"
+        android:progress="25"
+
         android:scaleY="4"
         tools:layout_editor_absoluteX="175dp"
         tools:layout_editor_absoluteY="221dp" />
@@ -245,7 +245,7 @@ tools:context=".Profile">
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="Update"
         android:layout_marginStart="@dimen/_125sdp"
         android:layout_marginTop="@dimen/_400sdp"
         />

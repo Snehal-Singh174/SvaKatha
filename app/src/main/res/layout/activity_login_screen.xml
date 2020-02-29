@@ -114,7 +114,7 @@
         android:layout_height="@dimen/_41sdp"
         android:background="@drawable/inputfield"
         android:fontFamily="@font/segoe"
-        android:text="NEXT"
+        android:text="Sign Up"
         android:textAlignment="center"
         android:textSize="@dimen/_17ssp"
         app:layout_constraintBottom_toBottomOf="parent"
