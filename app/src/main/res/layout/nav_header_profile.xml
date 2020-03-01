@@ -13,7 +13,7 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <EditText
+    <TextView
         android:id="@+id/photo_drawer"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
@@ -29,6 +29,8 @@
         android:gravity="center_horizontal"
         android:textAlignment="center"
         android:text="S.N"
+        android:fontFamily="@font/segoe"
+        android:textColor="#000"
         />
 
     <ProgressBar
