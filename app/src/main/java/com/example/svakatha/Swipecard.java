@@ -32,7 +32,7 @@ public class Swipecard extends AppCompatActivity {
     ArrayList<UserDataModel> userDataModelArrayList;
     private static int index = 0;
     @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
