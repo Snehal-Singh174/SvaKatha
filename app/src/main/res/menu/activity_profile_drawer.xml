@@ -5,7 +5,7 @@
 
 
         <item
-            android:id="@+id/pick"
+            android:id="@id/pick"
             android:checkable="true"
             android:title="@string/menu_suggestion"/>
         <item

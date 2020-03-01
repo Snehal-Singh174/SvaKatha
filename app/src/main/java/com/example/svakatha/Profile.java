@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -40,7 +39,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Profile extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
@@ -62,7 +61,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     TextView navUsername;
     TextView navProfileName;
     ProgressBar progressBar_drawer1;
-    DrawerLayout drawer = findViewById(R.id.drawer_layout);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,11 +104,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-        navigationView.setNavigationItemSelectedListener(this);
+
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 
@@ -156,19 +156,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 updateProgressBar();
             }
         });
-
     }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.shop:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Swipecard1()).commit();
-                break;
-        }
-        //drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 
     //Bottom Navigation Menu Selector
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -242,7 +230,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     }
                 });
     }
-
 
     public void updateProfileText() {
         String currentID = auth.getCurrentUser().getUid();
