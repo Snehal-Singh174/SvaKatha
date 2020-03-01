@@ -12,7 +12,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -23,7 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -32,21 +30,14 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.text.TextUtils.concat;
 
 public class Profile extends AppCompatActivity {
 
@@ -57,14 +48,19 @@ public class Profile extends AppCompatActivity {
     Spinner spinner2;
     Spinner spinner3;
     Spinner spinner4;
-    ProgressBar progressBar, progressBar_drawer;
+    ProgressBar progressBar;
     ArrayAdapter<CharSequence> adapter1;
     ArrayAdapter<CharSequence> adapter2;
     ArrayAdapter<CharSequence> adapter3;
     ArrayAdapter<CharSequence> adapter4;
     String bodyShapeData;
     TextView profile_textView;
-    TextView name ;
+    TextView name;
+    NavigationView navigationView;
+    View headerView;
+    TextView navUsername;
+    TextView navProfileName;
+    ProgressBar progressBar_drawer1;
 
 
     @Override
@@ -72,12 +68,19 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profile_textView = (TextView) findViewById(R.id.profilephoto);
-        name=(TextView)findViewById(R.id.name);
+
+        navigationView = findViewById(R.id.nav_view);
+        headerView = navigationView.getHeaderView(0);
+        navUsername = (TextView) headerView.findViewById(R.id.name);
+        navProfileName = (TextView) headerView.findViewById(R.id.photo_drawer);
+        progressBar_drawer1 =(ProgressBar)headerView.findViewById(R.id.progressBar_drawer);
+
+        name = (TextView) findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         addButton = (Button) findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
-        progressBar_drawer = findViewById(R.id.progressBar_drawer);
+
         spinner1 = findViewById(R.id.spinner1);
         adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -122,6 +125,7 @@ public class Profile extends AppCompatActivity {
         NavigationUI.setupWithNavController(navigationView, navController);
         updateProfileText();
         updateProgressBar();
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -202,7 +206,7 @@ public class Profile extends AppCompatActivity {
                             String Occupation = documentSnapshot.getString("Occupation");
                             String PriceRange = documentSnapshot.getString("PriceRange");
                             String Size = documentSnapshot.getString("Size");
-                            int progressStatus = 100;
+                            int progressStatus=100;
                             if ((BodyShape == "") || (BodyShape.equals("Null"))) {
                                 progressStatus = progressStatus - 25;
                             }
@@ -216,7 +220,8 @@ public class Profile extends AppCompatActivity {
                                 progressStatus = progressStatus - 25;
                             }
                             progressBar.setProgress(progressStatus);
-                            //progressBar_drawer.setProgress(progressStatus);
+                            progressBar_drawer1.setProgress(progressStatus);
+
                             spinner1.setSelection(adapter1.getPosition(BodyShape));
                             spinner2.setSelection(adapter2.getPosition(Occupation));
                             spinner3.setSelection(adapter3.getPosition(Size));
@@ -241,7 +246,10 @@ public class Profile extends AppCompatActivity {
                         String finalProfileText = firstletter.concat(lastletter).toUpperCase();
                         profile_textView.setText(finalProfileText);
                         name.setText(firstname);
+                        navUsername.setText(firstname);
+                        navProfileName.setText(finalProfileText);
+
                     }
-                } );
+                });
     }
 }
