@@ -29,7 +29,7 @@ public class Swipecard1 extends Fragment {
     ArrayList<UserDataModel> userDataModelArrayList;
     private static int index = 0;
     @SuppressWarnings("deprecation")
-    @SuppressLint("NewApi")
+    @SuppressLint({"NewApi", "ClickableViewAccessibility"})
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
