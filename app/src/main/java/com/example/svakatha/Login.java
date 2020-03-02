@@ -24,7 +24,7 @@ public class Login extends AppCompatActivity {
     EditText nemail1,npassword1;
     Button nloginbtn;
     TextView nsignip;
-    FirebaseAuth
+    FirebaseAuth fAuth;
 
 
     @Override
