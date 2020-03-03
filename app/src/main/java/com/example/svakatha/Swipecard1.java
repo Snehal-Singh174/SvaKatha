@@ -1,6 +1,5 @@
 package com.example.svakatha;
 
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
@@ -10,17 +9,15 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
-import android.widget.LinearLayout.LayoutParams;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-public class Swipecard extends AppCompatActivity {
-
-
+public class Swipecard1 extends Fragment {
     private float originalX = 0;
     private float originalY = 0;
     private float startMoveX = 0;
@@ -34,16 +31,16 @@ public class Swipecard extends AppCompatActivity {
     @SuppressWarnings("deprecation")
     @SuppressLint({"NewApi", "ClickableViewAccessibility"})
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_swipecard);
+        getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getActivity().setContentView(R.layout.activity_swipecard);
 
-        context = Swipecard.this;
+        context =getActivity().getApplicationContext();
 
-        parentView = (RelativeLayout) findViewById(R.id.main_layoutview);
+        parentView = (RelativeLayout) getActivity().findViewById(R.id.main_layoutview);
 
-        windowwidth = getWindowManager().getDefaultDisplay().getWidth();
+        windowwidth = getActivity().getWindowManager().getDefaultDisplay().getWidth();
 
         screenCenter = windowwidth / 2;
 
@@ -51,11 +48,11 @@ public class Swipecard extends AppCompatActivity {
 
         getArrayData();
 
-        LayoutInflater inflate = (LayoutInflater) Swipecard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflate = (LayoutInflater) Swipecard1.this.getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         final View containerView = inflate.inflate(R.layout.custom_layout, null);
         //RelativeLayout relativeLayoutContainer = (RelativeLayout) containerView.findViewById(R.id.relative_container);
 
-        LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         containerView.setLayoutParams(layoutParams);
         addParentView(containerView, index);
 

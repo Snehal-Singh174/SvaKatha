@@ -19,6 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MyCloset"></activity>
+        <activity android:name=".Shoppingpage"></activity>
         <activity android:name=".UserDataModel" />
         <activity android:name=".Swipecard" />
         <activity android:name=".RazorPay" />

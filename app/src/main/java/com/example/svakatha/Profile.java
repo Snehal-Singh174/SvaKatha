@@ -42,7 +42,7 @@ import android.widget.Toast;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Profile extends AppCompatActivity {
+public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
@@ -109,6 +109,7 @@ public class Profile extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -125,7 +126,7 @@ public class Profile extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
-
+        navigationView.setNavigationItemSelectedListener(this);
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
 
@@ -172,7 +173,19 @@ public class Profile extends AppCompatActivity {
                 updateProgressBar();
             }
         });
+
     }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.shop:
+                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Swipecard1()).commit();
+                break;
+        }
+        //drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 
     //Bottom Navigation Menu Selector
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -263,6 +276,7 @@ public class Profile extends AppCompatActivity {
                     }
                 });
     }
+
 
     public void updateProfileText() {
         String currentID = auth.getCurrentUser().getUid();
