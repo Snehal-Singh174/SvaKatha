@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MyCloset">
-    
+    tools:context=".MyCloset"
+    tools:visibility="visible">
+
     <TextView
         android:id="@+id/closet_title"
         android:layout_width="@dimen/_81sdp"
         android:layout_height="@dimen/_23sdp"
-        android:text="@string/closet_title"
+        android:layout_marginTop="@dimen/_40sdp"
         android:fontFamily="@font/segoe"
+        android:text="@string/closet_title"
+        android:textAlignment="center"
         android:textColor="#000"
         android:textSize="@dimen/_16ssp"
-        android:textAlignment="center"
-        android:layout_marginTop="@dimen/_40sdp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/bottom_wear"
@@ -58,64 +59,151 @@
         app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/other_wear" />
-    
+
     <Button
         android:id="@+id/upload_button"
         android:layout_width="@dimen/_109sdp"
         android:layout_height="@dimen/_24sdp"
-        android:text="Upload your design"
-        android:textSize="@dimen/_9ssp"
-        android:fontFamily="@font/segoe"
-        android:textAllCaps="false"
-        android:textAlignment="center"
-        android:textColor="#ffffff"
-        android:background="@drawable/editprofilbutton"
         android:layout_marginTop="@dimen/_30sdp"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_wear"
+        android:background="@drawable/editprofilbutton"
+        android:fontFamily="@font/segoe"
+        android:text="Upload your design"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/bottom_wear" />
 
     <view
         android:id="@+id/separator"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
-        android:background="#707070"
-        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_5sdp"
-        app:layout_constraintTop_toBottomOf="@+id/upload_button"
+        android:background="#707070"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/upload_button" />
 
 
     <ImageView
         android:id="@+id/top_wear_1"
         android:layout_width="@dimen/_46sdp"
         android:layout_height="@dimen/_46sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_15sdp"
-        app:layout_constraintTop_toBottomOf="@+id/separator"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
     <ImageView
         android:id="@+id/foot_wear_1"
         android:layout_width="@dimen/_44sdp"
         android:layout_height="@dimen/_30sdp"
-        android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginStart="@dimen/_18sdp"
-        app:layout_constraintTop_toBottomOf="@+id/top_wear_1"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear_1" />
 
     <ImageView
         android:id="@+id/bottom_wear_1"
         android:layout_width="@dimen/_55sdp"
         android:layout_height="@dimen/_90sdp"
-        android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toEndOf="@+id/top_wear_1"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
+
+    <ImageView
+        android:id="@+id/top_wear2"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="@dimen/_46sdp"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="130dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="168dp"
+        android:layout_marginTop="6dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear2" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="130dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/top_wear2"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
+
+    <ImageView
+        android:id="@+id/imageView13"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="@dimen/_46sdp"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
         app:layout_constraintTop_toBottomOf="@+id/separator"
-        app:layout_constraintStart_toEndOf="@+id/top_wear_1"/>
+        tools:layout_editor_absoluteX="262dp" />
 
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/imageView13"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
+    <ImageView
+        android:id="@+id/imageView15"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="6dp"
+        android:visibility="visible"
+        app:layout_constraintTop_toBottomOf="@+id/imageView13"
+        tools:layout_editor_absoluteX="265dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        constraint app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="@dimen/_5sdp">
 
+    <TextView
+        android:id="@+id/occupation"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="358dp"
+        android:background="@drawable/dropdown_background"
+        android:gravity="center_vertical"
+        android:text="Occupation"
+        android:fontFamily="@font/segoe"
+        android:paddingLeft="10dp"
+        android:textColor="#000"
+        android:textSize="18sp"/>
+
+    <Spinner
+        android:id="@+id/spinner2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginStart="246dp"
+        android:layout_marginTop="363dp"
+        android:layout_marginEnd="23dp"
+        android:background="@drawable/spinnerbackground"
+        android:textAlignment="center"
+        android:fontFamily="@font/segoe"
+        android:textColor="@color/colorPrimary" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
