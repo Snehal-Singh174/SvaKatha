@@ -51,4 +51,6 @@
         <item>5000-9000</item>
         <item>Above 9000</item>
     </string-array>
+
+    <string name="closet_title"><u>My Closet</u></string>
 </resources>

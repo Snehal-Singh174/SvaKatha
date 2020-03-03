@@ -37,6 +37,7 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -109,7 +110,18 @@ public class Profile extends AppCompatActivity {
         setSupportActionBar(toolbar);
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(slideListener);
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int id = item.getItemId();
+                if(id == R.id.pick){
+                    Intent i = new Intent(Profile.this,Swipecard.class);
+                    startActivity(i);
+                }
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
 
@@ -120,8 +132,8 @@ public class Profile extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.pick, R.id.shop, R.id.report,
+                R.id.style_suggestion, R.id.community, R.id.closet)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
@@ -184,20 +196,21 @@ public class Profile extends AppCompatActivity {
     };
 
     //Navigation Menu Selector
-    private NavigationView.OnNavigationItemSelectedListener slideListener = new NavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selFrag=null;
-            switch (item.getItemId()){
-                case R.id.pick:
-                    selFrag = new ShopFragment();
-                    break;
-            }
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,selFrag).commit();
-            drawer.closeDrawer(GravityCompat.START);
-            return true;
-        }
-    };
+//    private NavigationView.OnNavigationItemSelectedListener slideListener = new NavigationView.OnNavigationItemSelectedListener() {
+//        @Override
+//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//            Fragment selfrag = null;
+//            int id = item.getItemId();
+//            if(id == R.id.pick){
+//                Toast.makeText(Profile.this, "Today's Suggestion selected", Toast.LENGTH_SHORT).show();
+//            }
+//            else{
+//                Toast.makeText(Profile.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
+//            }
+//            drawer.closeDrawer(GravityCompat.START);
+//            return true;
+//        }
+//    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
