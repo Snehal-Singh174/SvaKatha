@@ -3,25 +3,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-
+    <group android:checkableBehavior="single">
         <item
             android:id="@+id/pick"
-            android:checkable="true"
-            android:title="@string/menu_suggestion"/>
+            android:title="Today's Suggestions" />
         <item
             android:id="@+id/shop"
-            android:title="@string/menu_shopyourdesign"/>
+            android:title="Shop Your Design" />
         <item
             android:id="@+id/report"
-            android:title="@string/menu_analysisreport"/>
+            android:title="Your Analysis Report" />
         <item
             android:id="@+id/style_suggestion"
-            android:title="@string/menu_stylingsuggestion"/>
+            android:title="Styling Suggesstion" />
         <item
             android:id="@+id/community"
-            android:title="@string/menu_mycommunity"/>
+            android:title="My Community" />
         <item
             android:id="@+id/closet"
-            android:title="@string/menu_mycloset"/>
-    
+            android:title="My Closet" />
+    </group>
+
 </menu>

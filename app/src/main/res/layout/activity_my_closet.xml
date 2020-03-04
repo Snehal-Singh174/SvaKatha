@@ -175,7 +175,7 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        constraint app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="@dimen/_5sdp">
 
     <TextView

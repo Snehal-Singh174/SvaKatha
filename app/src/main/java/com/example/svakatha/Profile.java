@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -37,7 +38,6 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,10 +74,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         profile_textView = (TextView) findViewById(R.id.profilephoto);
 
         navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
         navUsername = (TextView) headerView.findViewById(R.id.name);
         navProfileName = (TextView) headerView.findViewById(R.id.photo_drawer);
-        progressBar_drawer1 =(ProgressBar)headerView.findViewById(R.id.progressBar_drawer);
+        progressBar_drawer1 = (ProgressBar) headerView.findViewById(R.id.progressBar_drawer);
 
         name = (TextView) findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -108,44 +109,46 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id = item.getItemId();
-                if(id == R.id.pick){
-                    Intent i = new Intent(Profile.this,Swipecard.class);
-                    startActivity(i);
-                }
-                drawer.closeDrawer(GravityCompat.START);
-                return true;
-            }
-        });
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnNavigationItemSelectedListener(navListener);
-
-        navigationView.setNavigationItemSelectedListener(this);
+//        navigationView.setNavigationItemSelectedListener(this);
         SpannableString content = new SpannableString("Shop your Design");
-        content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+        content.setSpan(new
+
+                UnderlineSpan(), 0,content.length(),0);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.pick, R.id.shop, R.id.report,
-                R.id.style_suggestion, R.id.community, R.id.closet)
-                .setDrawerLayout(drawer)
-                .build();
+        mAppBarConfiguration =new AppBarConfiguration.Builder(
+                R.id.pick,R.id.shop,R.id.report,
+                R.id.style_suggestion,R.id.community,R.id.closet)
+                .
+
+                        setDrawerLayout(drawer)
+                .
+
+                        build();
+
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
+        NavigationUI.setupActionBarWithNavController(this,navController,mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView,navController);
+
         updateProfileText();
+
         updateProgressBar();
 
-        addButton.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener()
+
+        {
             @Override
-            public void onClick(View v) {
+            public void onClick (View v){
                 bodyShapeData = spinner1.getSelectedItem().toString();
                 String Occupation;
                 Occupation = spinner2.getSelectedItem().toString();
@@ -175,16 +178,57 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         });
 
     }
+
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+
+        switch (item.getItemId()) {
+            case R.id.pick:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new PickFragment()).commit();
+                break;
+
             case R.id.shop:
-                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Swipecard1()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ShopFragment()).commit();
+                break;
+
+            case R.id.report:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new ReportFragment()).commit();
+                break;
+
+            case R.id.style_suggestion:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new Swipecard1()).commit();
+                break;
+
+            case R.id.community:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CommunityFragment()).commit();
+                break;
+
+            case R.id.closet:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new MyCloset()).commit();
                 break;
         }
-        //drawer.closeDrawer(GravityCompat.START);
+
+        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+//    @Override
+////    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+////        switch (item.getItemId()){
+////            case R.id.shop:
+////                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Swipecard1()).commit();
+////                break;
+////        }
+////        //drawer.closeDrawer(GravityCompat.START);
+////        return true;
+////    }
 
 
     //Bottom Navigation Menu Selector
@@ -252,7 +296,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             String Occupation = documentSnapshot.getString("Occupation");
                             String PriceRange = documentSnapshot.getString("PriceRange");
                             String Size = documentSnapshot.getString("Size");
-                            int progressStatus=100;
+                            int progressStatus = 100;
                             if ((BodyShape == "") || (BodyShape.equals("Null"))) {
                                 progressStatus = progressStatus - 25;
                             }
