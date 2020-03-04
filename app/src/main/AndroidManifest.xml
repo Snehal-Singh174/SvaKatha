@@ -18,9 +18,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Shoppingpage"></activity>
+        <activity android:name=".MyCloset"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Shoppingpage" />
         <activity android:name=".UserDataModel" />
-        <activity android:name=".Swipecard" />
+        <activity
+            android:name=".Swipecard"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RazorPay" />
         <activity
             android:name=".Login"

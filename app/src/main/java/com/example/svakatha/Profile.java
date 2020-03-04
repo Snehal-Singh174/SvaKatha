@@ -1,6 +1,7 @@
 package com.example.svakatha;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -8,6 +9,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -129,12 +131,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         mAppBarConfiguration =new AppBarConfiguration.Builder(
                 R.id.pick,R.id.shop,R.id.report,
                 R.id.style_suggestion,R.id.community,R.id.closet)
-                .
-
-                        setDrawerLayout(drawer)
-                .
-
-                        build();
+                .setDrawerLayout(drawer)
+                .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this,navController,mAppBarConfiguration);
@@ -208,46 +206,32 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CommunityFragment()).commit();
                 break;
-
-            case R.id.closet:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new MyCloset()).commit();
-                break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-//    @Override
-////    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-////        switch (item.getItemId()){
-////            case R.id.shop:
-////                getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, new Swipecard1()).commit();
-////                break;
-////        }
-////        //drawer.closeDrawer(GravityCompat.START);
-////        return true;
-////    }
-
 
     //Bottom Navigation Menu Selector
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
             switch (item.getItemId()) {
                 case R.id.shop:
-                    selectedFragment = new ShopFragment();
+                    Intent intent = new Intent(Profile.this,Shoppingpage.class);
+                    startActivity(intent);
                     break;
                 case R.id.community:
-                    selectedFragment = new CommunityFragment();
+                    Intent intent1 = new Intent(Profile.this,Swipecard.class);
+                    startActivity(intent1);
                     break;
                 case R.id.today_pick:
-                    selectedFragment = new PickFragment();
+                    Intent intent2 = new Intent(Profile.this,MyCloset.class);
+                    startActivity(intent2);
                     break;
+                case R.id.profile:
+                    Intent intent3 = new Intent(Profile.this,Profile.class);
+                    startActivity(intent3);
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout, selectedFragment).commit();
             return true;
         }
     };

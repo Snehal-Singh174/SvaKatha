@@ -5,11 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.svakatha.Swipecard">
 
-    <fragment
-        android:id="@+id/pick"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
     <RelativeLayout
         android:id="@+id/main_layoutview"
         android:layout_width="match_parent"

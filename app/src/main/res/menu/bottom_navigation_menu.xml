@@ -7,11 +7,11 @@
     <item
         android:id="@+id/community"
         android:checkable="true"
-        android:title="Community"/>
+        android:title="Select Style"/>
     <item
         android:id="@+id/today_pick"
         android:checkable="true"
-        android:title="Today's Pick" />
+        android:title="My Closet" />
     <item
         android:id="@+id/profile"
         android:checkable="true"

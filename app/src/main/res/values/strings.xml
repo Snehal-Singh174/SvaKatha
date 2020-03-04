@@ -52,5 +52,12 @@
         <item>Above 9000</item>
     </string-array>
 
+    <string-array name="closet">
+        <item value="-1">Null</item>
+        <item>Business Casual</item>
+        <item>Function</item>
+        <item>Sports</item>
+    </string-array>
+
     <string name="closet_title"><u>My Closet</u></string>
 </resources>
