@@ -24,6 +24,14 @@ import java.io.InputStream;
 
 public class Shoppingpage extends Activity implements View.OnClickListener{
     ImageView imageView1;
+    ImageView imageView2;
+    ImageView imageView3;
+    ImageView imageView4;
+    ImageView imageView5;
+    ImageView imageView6;
+    ImageView imageView7;
+
+
     Button button;
     int tophone;
     FirebaseFirestore db=FirebaseFirestore.getInstance();
@@ -34,13 +42,18 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_shoppingpage);
         imageView1=(ImageView)findViewById(R.id.imageView1);
         tophone=R.drawable.ic_launcher;
-        ImageView imageView2=(ImageView)findViewById(R.id.imageView2);
-        ImageView imageView3=(ImageView)findViewById(R.id.imageView3);
-        ImageView imageView4=(ImageView)findViewById(R.id.imageView4);
-        ImageView imageView5=(ImageView)findViewById(R.id.imageView5);
-        ImageView imageView6=(ImageView)findViewById(R.id.imageView6);
-        ImageView imageView7=(ImageView)findViewById(R.id.imageView7);
-
+        imageView2 =(ImageView)findViewById(R.id.imageView2);
+        imageView3=(ImageView)findViewById(R.id.imageView3);
+        imageView4=(ImageView)findViewById(R.id.imageView4);
+        imageView5=(ImageView)findViewById(R.id.imageView5);
+        imageView6=(ImageView)findViewById(R.id.imageView6);
+        imageView7=(ImageView)findViewById(R.id.imageView7);
+        getDownloadURL(1,imageView2);
+        getDownloadURL(2,imageView3);
+        getDownloadURL(3,imageView4);
+        getDownloadURL(4,imageView5);
+        getDownloadURL(5,imageView6);
+        getDownloadURL(6,imageView7);
         button=(Button)findViewById(R.id.button);
         imageView2.setOnClickListener(this);
         imageView3.setOnClickListener(this);
@@ -52,15 +65,19 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
         button.setOnClickListener(this);
     }
 
-    public void getDownloadURL(final int index){
+    public void getDownloadURL(final int index, final ImageView imageView){
 
             db.collection("ShoppingImages").document("ShoppingImageURLs").get()
                     .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             String downloadlink=documentSnapshot.getString("url"+index);
-                            Picasso.get().load(downloadlink).into(imageView1);
-                            Toast.makeText(Shoppingpage.this, "Got URl Success", Toast.LENGTH_SHORT).show();
+                            if(imageView == imageView1) {
+                                Picasso.get().load(downloadlink).placeholder(R.drawable.progress_image).into(imageView1);
+                                Toast.makeText(Shoppingpage.this, "Got URl Success", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Picasso.get().load(downloadlink).placeholder(R.drawable.progress_image).into(imageView);
+                            }
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -70,79 +87,33 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
                             Log.i("failure","nahi hoga");
                         }
                     });
-
-
     }
     public void onClick(View v)
     {
-
-
         switch(v.getId())
         {
             case R.id.imageView2:
-                getDownloadURL(1);
-               //Picasso.get().load(downloadlink).into(imageView1);
+                getDownloadURL(1,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView3:
-                db.collection("ShoppingImages").document("ShoppingImageURLs").get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Picasso.get().load(documentSnapshot.getString("url"+2)).into(imageView1);
-                            }
-                        });
-                //imageView1.setImageResource(R.drawable.image3);
-
-               // Picasso.get().load(getDownloadURL(2)).into(imageView1);
+                getDownloadURL(2,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView4:
-                db.collection("ShoppingImages").document("ShoppingImageURLs").get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Picasso.get().load(documentSnapshot.getString("url"+3)).into(imageView1);
-                            }
-                        });
-            //    Picasso.get().load(getDownloadURL(3)).into(imageView1);
-                //imageView1.setImageResource(R.drawable.image4);
+                getDownloadURL(3,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView5:
-                db.collection("ShoppingImages").document("ShoppingImageURLs").get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Picasso.get().load(documentSnapshot.getString("url"+4)).into(imageView1);
-                            }
-                        });
-            //    Picasso.get().load(getDownloadURL(4)).into(imageView1);
-                //imageView1.setImageResource(R.drawable.image2);
+                getDownloadURL(4,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView6:
-                db.collection("ShoppingImages").document("ShoppingImageURLs").get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Picasso.get().load(documentSnapshot.getString("url"+5)).into(imageView1);
-                            }
-                        });
-             //   Picasso.get().load(getDownloadURL(5)).into(imageView1);
-                //imageView1.setImageResource(R.drawable.image6);
+               getDownloadURL(5,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView7:
-                db.collection("ShoppingImages").document("ShoppingImageURLs").get()
-                        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                            @Override
-                            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                Picasso.get().load(documentSnapshot.getString("url"+6)).into(imageView1);
-                            }
-                        });
-             //   Picasso.get().load(getDownloadURL(6)).into(imageView1);
-                //imageView1.setImageResource(R.drawable.image7);
+            getDownloadURL(6,imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.button:
