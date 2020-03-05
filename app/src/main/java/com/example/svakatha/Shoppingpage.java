@@ -59,7 +59,7 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
                             String downloadlink=documentSnapshot.getString("url"+index);
-                           // Picasso.get().load(downloadlink).into(imageView1);
+                            Picasso.get().load(downloadlink).into(imageView1);
                             Toast.makeText(Shoppingpage.this, "Got URl Success", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -81,7 +81,7 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
         {
             case R.id.imageView2:
                 getDownloadURL(1);
-               Picasso.get().load(downloadlink).into(imageView1);
+               //Picasso.get().load(downloadlink).into(imageView1);
                 tophone=R.drawable.ic_launcher;
                 break;
             case R.id.imageView3:
