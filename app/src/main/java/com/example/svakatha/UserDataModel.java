@@ -1,12 +1,26 @@
 package com.example.svakatha;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-
 public class UserDataModel {
     String name, totalLikes;
     int photo;
+    String url;
+    String imageCode;
+
+    public String getImageCode() {
+        return imageCode;
+    }
+
+    public void setImageCode(String imageCode) {
+        this.imageCode = imageCode;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getName() {
         return name;
