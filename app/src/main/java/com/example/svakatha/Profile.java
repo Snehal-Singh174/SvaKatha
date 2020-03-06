@@ -1,7 +1,6 @@
 package com.example.svakatha;
 
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -9,14 +8,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -78,13 +75,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
-        navUsername = (TextView) headerView.findViewById(R.id.name);
-        navProfileName = (TextView) headerView.findViewById(R.id.photo_drawer);
-        progressBar_drawer1 = (ProgressBar) headerView.findViewById(R.id.progressBar_drawer);
+        navUsername =  headerView.findViewById(R.id.name);
+        navProfileName =  headerView.findViewById(R.id.photo_drawer);
+        progressBar_drawer1 =headerView.findViewById(R.id.progressBar_drawer);
 
-        name = (TextView) findViewById(R.id.name);
+        name =  findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        addButton = (Button) findViewById(R.id.button2);
+        addButton =findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
@@ -217,7 +214,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.shop:
-                    Intent intent = new Intent(Profile.this,Shoppingpage.class);
+                    Intent intent = new Intent(Profile.this, MainActivity.class);
                     startActivity(intent);
                     break;
                 case R.id.community:

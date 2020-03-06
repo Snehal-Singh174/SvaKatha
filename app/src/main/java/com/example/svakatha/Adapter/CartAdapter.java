@@ -1,5 +1,6 @@
 package com.example.svakatha.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -18,9 +20,9 @@ import com.example.svakatha.R;
 
 import java.util.ArrayList;
 
-import static com.example.svakatha.View.CartActivity.grandTotal;
-import static com.example.svakatha.View.CartActivity.grandTotalplus;
-import static com.example.svakatha.View.CartActivity.temparraylist;
+import static com.example.svakatha.view.CartActivity.grandTotal;
+import static com.example.svakatha.view.CartActivity.grandTotalplus;
+import static com.example.svakatha.view.CartActivity.temparraylist;
 
 /**
  * Created by Deependra Singh Patel on 8/5/19.
@@ -35,6 +37,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     }
 
 
+    @NonNull
     @Override
     public CartAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext())
@@ -42,6 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
         return new CartAdapter.ViewHolder(v);
     }
 
+    @SuppressLint("CheckResult")
     @Override
     public void onBindViewHolder(final CartAdapter.ViewHolder holder, final int position) {
         // holder.productCartImage.setImageResource(R.drawable.burger);

@@ -22,6 +22,9 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Shoppingpage" />
         <activity android:name=".UserDataModel" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".view.CartActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Swipecard"
             android:theme="@style/AppTheme.NoActionBar" />

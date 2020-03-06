@@ -1,6 +1,7 @@
-package com.example.svakatha.View;
+package com.example.svakatha.view;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -31,6 +32,7 @@ import static com.example.svakatha.Adapter.ProductAdapter.cartModels;
  * Created by Deependra Singh Patel on 8/5/19.
  */
 
+@SuppressLint("Registered")
 public class CartActivity extends AppCompatActivity {
 
     public static TextView grandTotal;
@@ -53,7 +55,7 @@ public class CartActivity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         proceedToBook = findViewById(R.id.proceed_to_book);
         grandTotal = findViewById(R.id.grand_total_cart);
-        setSupportActionBar(mToolbar);
+      setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Cart");

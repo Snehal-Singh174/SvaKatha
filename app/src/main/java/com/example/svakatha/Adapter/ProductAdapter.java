@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.svakatha.MainActivity;
 import com.example.svakatha.Model.ProductImage;
 import com.example.svakatha.Model.ProductModel;
-import com.example.svakatha.View.CartActivity;
+import com.example.svakatha.view.CartActivity;
 import com.example.svakatha.R;
 
 import java.util.ArrayList;
@@ -117,7 +117,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                         cartModel.setTotalCash(cartCounter[0] *
                                 Integer.parseInt(arrayList.get(i).getPrice()));
                         Log.d("pos", String.valueOf(i));
-
                         cartModels.add(cartModel);
 
 //

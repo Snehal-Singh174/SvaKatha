@@ -1,5 +1,6 @@
 package com.example.svakatha;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,10 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.svakatha.Adapter.ProductAdapter;
 import com.example.svakatha.Model.ProductModel;
-import com.example.svakatha.View.CartActivity;
+import com.example.svakatha.view.CartActivity;
 
 import java.util.ArrayList;
 
+@SuppressLint("Registered")
 public class MainActivity extends AppCompatActivity implements ProductAdapter.CallBackUs, ProductAdapter.HomeCallBack {
 
     public static ArrayList<ProductModel> arrayList = new ArrayList<>();
@@ -95,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.Ca
                 if (cart_count < 1) {
                     Toast.makeText(this, "there is no item in cart", Toast.LENGTH_SHORT).show();
                 } else {
-                    startActivity(new Intent(this, CartActivity.class));
+                    startActivity(new Intent(this,CartActivity.class));
                 }
                 break;
             default:
