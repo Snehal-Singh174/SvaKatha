@@ -63,7 +63,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     View headerView;
     TextView navUsername;
     TextView navProfileName;
-    TextView progresstext;
     ProgressBar progressBar_drawer1;
 
 
@@ -79,7 +78,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navUsername =  headerView.findViewById(R.id.name);
         navProfileName =  headerView.findViewById(R.id.photo_drawer);
         progressBar_drawer1 =headerView.findViewById(R.id.progressBar_drawer);
-        progresstext = (TextView)findViewById(R.id.progres_text);
 
         name =  findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
