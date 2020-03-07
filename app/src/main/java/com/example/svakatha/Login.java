@@ -23,7 +23,7 @@ public class Login extends AppCompatActivity {
 
     EditText nemail1,npassword1;
     Button nloginbtn;
-    TextView nsignip;
+    TextView nsignup;
     FirebaseAuth fAuth;
 
 
@@ -36,6 +36,7 @@ public class Login extends AppCompatActivity {
         nemail1 = findViewById(R.id.login_email);
         npassword1 = findViewById(R.id.login_pass);
         nloginbtn = findViewById(R.id.login_button);
+        nsignup = findViewById(R.id.signup);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -70,6 +71,13 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        nsignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this,LoginScreen_Signup.class);
+                startActivity(intent);
             }
         });
 

@@ -10,21 +10,32 @@
 
     <TextView
         android:id="@+id/logintext"
-        android:layout_width="@dimen/_245sdp"
-        android:layout_height="@dimen/_45sdp"
-        android:layout_marginTop="120dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_75sdp"
         android:fontFamily="@font/segoe"
-        android:lines="2"
-        android:maxLines="2"
-        android:text="Sva-Katha\nYour Personal Fashion Assistance"
+        android:text="@string/SvaKatha_signup"
         android:textAlignment="center"
-        android:textSize="@dimen/_16ssp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/logintext2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/segoe"
+        android:text="Your Personal Fashion Assistance"
+        android:textAlignment="center"
+        android:textSize="@dimen/_16ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logintext" />
 
     <EditText
         android:id="@+id/firstname"
@@ -41,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.50"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.38" />
+        app:layout_constraintVertical_bias="0.32999998" />
 
     <EditText
         android:id="@+id/lastname"
@@ -116,7 +127,8 @@
         android:fontFamily="@font/segoe"
         android:text="Sign Up"
         android:textAlignment="center"
-        android:textSize="@dimen/_17ssp"
+        android:textSize="@dimen/_14ssp"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.50"
@@ -124,18 +136,7 @@
         app:layout_constraintTop_toBottomOf="@+id/confirmpass"
         app:layout_constraintVertical_bias="0.301" />
 
-    <TextView
-        android:id="@+id/register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/segoe"
-        android:text="Login"
-        android:textSize="@dimen/_17ssp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signupbutton"
-        app:layout_constraintVertical_bias="0.6" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

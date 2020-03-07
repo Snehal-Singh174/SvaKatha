@@ -34,7 +34,6 @@ public class LoginScreen_Signup extends AppCompatActivity {
     EditText pass;
     EditText confirmpass;
     Button signupButton;
-    TextView register;
     String userId;
     private EditText fname_edittext;
     private EditText lname_edittext;
@@ -55,16 +54,8 @@ public class LoginScreen_Signup extends AppCompatActivity {
         pass = (EditText)findViewById(R.id.pass);
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
-        register = (TextView)findViewById(R.id.register);
         fname_edittext=(EditText)findViewById(R.id.firstname);
         lname_edittext=(EditText)findViewById(R.id.lastname);
-        register.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent1 = new Intent(LoginScreen_Signup.this,Login.class);
-                startActivity(intent1);
-            }
-        });
         //Getting Firebase Auth Object
         firebaseAuth=FirebaseAuth.getInstance();
 
