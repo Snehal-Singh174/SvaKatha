@@ -41,14 +41,14 @@ public class SplashScreen extends AppCompatActivity {
                 .delay(2000)
                 .duration(1000)
                 .playOn(logo);
-        YoYo.with(Techniques.ZoomOut)
+        /*YoYo.with(Techniques.ZoomOut)
                 .delay(3000)
                 .duration(1000)
                 .playOn(logo);
         YoYo.with(Techniques.ZoomIn)
                 .delay(4000)
                 .duration(1000)
-                .playOn(logo);
+                .playOn(logo);*/
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
