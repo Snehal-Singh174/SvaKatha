@@ -2,18 +2,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/shop"
+        android:icon="@drawable/shop_icon"
         android:checkable="true"
         android:title="Shop" />
     <item
         android:id="@+id/community"
         android:checkable="true"
+        android:icon="@drawable/selectstyle_icon"
         android:title="Select Style"/>
     <item
         android:id="@+id/today_pick"
         android:checkable="true"
+        android:icon="@drawable/todayspick_icon"
         android:title="My Closet" />
     <item
         android:id="@+id/profile"
         android:checkable="true"
+        android:icon="@drawable/profile_icon"
         android:title="Profile"/>
 </menu>
