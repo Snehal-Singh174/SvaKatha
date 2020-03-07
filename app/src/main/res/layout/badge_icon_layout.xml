@@ -31,7 +31,7 @@
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:text="1"
-                android:textColor="#ffffff"
+                android:textColor="#000"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 

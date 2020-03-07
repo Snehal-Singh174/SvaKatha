@@ -22,7 +22,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".Shoppingpage" />
         <activity android:name=".UserDataModel" />
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".MainActivity"
+            android:label="Shopping Cart"/>
         <activity android:name=".view.CartActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
@@ -38,8 +39,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginScreen_Signup"
-            android:label="Sign-Up"
-            />
+            android:label="Sign-Up" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
