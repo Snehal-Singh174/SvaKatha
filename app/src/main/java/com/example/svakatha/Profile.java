@@ -1,6 +1,7 @@
 package com.example.svakatha;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -22,6 +23,11 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -68,6 +74,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     TextView navProfileName;
     ProgressBar progressBar_drawer1;
     TextView navProgressStatus;
+    FirebaseDatabase firebaseDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,14 +85,18 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
-        navUsername =  headerView.findViewById(R.id.name);
-        navProfileName =  headerView.findViewById(R.id.photo_drawer);
-        progressBar_drawer1 =headerView.findViewById(R.id.progressBar_drawer);
-        navProgressStatus=headerView.findViewById(R.id.progres_text);
-        name =  findViewById(R.id.name);
+        navUsername = headerView.findViewById(R.id.name);
+        navProfileName = headerView.findViewById(R.id.photo_drawer);
+        progressBar_drawer1 = headerView.findViewById(R.id.progressBar_drawer);
+        navProgressStatus = headerView.findViewById(R.id.progres_text);
+        name = findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         auth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
+        auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+
+        DatabaseReference databaseReference =firebaseDatabase.getReference(auth.getUid());
 
         spinner1 = findViewById(R.id.spinner1);
         adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
@@ -123,19 +134,19 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         SpannableString content = new SpannableString("Shop your Design");
         content.setSpan(new
 
-                UnderlineSpan(), 0,content.length(),0);
+                UnderlineSpan(), 0, content.length(), 0);
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-        mAppBarConfiguration =new AppBarConfiguration.Builder(
-                R.id.pick,R.id.shop,R.id.report,
-                R.id.style_suggestion,R.id.community,R.id.closet)
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.pick, R.id.shop, R.id.report,
+                R.id.style_suggestion, R.id.community, R.id.closet)
                 .setDrawerLayout(drawer)
                 .build();
 
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this,navController,mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView,navController);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
 
         updateProfileText();
 
@@ -145,20 +156,18 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
-                String bodyShapeData;
-                bodyShapeData = spinner1.getSelectedItem().toString();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-
+                String bodyShapeData;
+                bodyShapeData = spinner1.getSelectedItem().toString();
+                ((TextView) selectedItemView).setTextColor(Color.WHITE);
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("BodyShape", bodyShapeData);
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("hi","Ho Gaya");
-                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
                         updateProgressBar();
                     }
                 });
@@ -182,15 +191,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-
+                ((TextView) selectedItemView).setTextColor(Color.WHITE);
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("Occupation", Occupation);
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("hi","Ho Gaya");
-                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
                         updateProgressBar();
                     }
                 });
@@ -214,13 +221,12 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
+                ((TextView) selectedItemView).setTextColor(Color.WHITE);
                 Map<String, Object> user = new HashMap<>();
                 user.put("Size", Size);
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("hi","Ho Gaya");
-                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
                         updateProgressBar();
                     }
                 });
@@ -244,15 +250,13 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-
+                ((TextView) selectedItemView).setTextColor(Color.WHITE);
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("PriceRange", PriceRange);
                 documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("hi","Ho Gaya");
-                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
                         updateProgressBar();
                     }
                 });
@@ -266,41 +270,19 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         });
 
-        /*addButton.setOnClickListener(new View.OnClickListener()
-
-        {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick (View v){
-                bodyShapeData = spinner1.getSelectedItem().toString();
-                String Occupation;
-                Occupation = spinner2.getSelectedItem().toString();
-                String Size;
-                Size = spinner3.getSelectedItem().toString();
-                String PriceRange;
-                PriceRange = spinner4.getSelectedItem().toString();
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String currentID = auth.getCurrentUser().getUid();
-                DocumentReference documentReference = db.collection("users").document(currentID);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-                Map<String, Object> user = new HashMap<>();
-                user.put("BodyShape", bodyShapeData);
-                user.put("Occupation", Occupation);
-                user.put("Size", Size);
-                user.put("PriceRange", PriceRange);
-                documentReference.update(user);
-                //documentReference.set(user, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
-                //  @Override
-                // public void onSuccess(Void aVoid) {
-                //   Toast.makeText(Profile.this, "Database Me Aapka Details Save HO GAYA", Toast.LENGTH_SHORT).show();
-                // }
-                //});
-                updateProgressBar();
             }
-        });*/
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
     }
-
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -345,37 +327,20 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     startActivity(intent);
                     break;
                 case R.id.community:
-                    Intent intent1 = new Intent(Profile.this,Swipecard.class);
+                    Intent intent1 = new Intent(Profile.this, Swipecard.class);
                     startActivity(intent1);
                     break;
                 case R.id.today_pick:
-                    Intent intent2 = new Intent(Profile.this,MyCloset.class);
+                    Intent intent2 = new Intent(Profile.this, MyCloset.class);
                     startActivity(intent2);
                     break;
                 case R.id.profile:
-                    Intent intent3 = new Intent(Profile.this,Profile.class);
+                    Intent intent3 = new Intent(Profile.this, Profile.class);
                     startActivity(intent3);
             }
             return true;
         }
     };
-
-    //Navigation Menu Selector
-//    private NavigationView.OnNavigationItemSelectedListener slideListener = new NavigationView.OnNavigationItemSelectedListener() {
-//        @Override
-//        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//            Fragment selfrag = null;
-//            int id = item.getItemId();
-//            if(id == R.id.pick){
-//                Toast.makeText(Profile.this, "Today's Suggestion selected", Toast.LENGTH_SHORT).show();
-//            }
-//            else{
-//                Toast.makeText(Profile.this, "Nothing Selected", Toast.LENGTH_SHORT).show();
-//            }
-//            drawer.closeDrawer(GravityCompat.START);
-//            return true;
-//        }
-//    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -419,7 +384,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             }
                             progressBar.setProgress(progressStatus);
                             progressBar_drawer1.setProgress(progressStatus);
-                            navProgressStatus.setText("Profile Completed "+progressStatus+"%");
+                            navProgressStatus.setText("Profile Completed " + progressStatus + "%");
                             spinner1.setSelection(adapter1.getPosition(BodyShape));
                             spinner2.setSelection(adapter2.getPosition(Occupation));
                             spinner3.setSelection(adapter3.getPosition(Size));
@@ -438,6 +403,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
+                        String BodyShape = documentSnapshot.getString("BodyShape");
+                        String Occupation = documentSnapshot.getString("Occupation");
+                        String PriceRange = documentSnapshot.getString("PriceRange");
+                        String Size = documentSnapshot.getString("Size");
                         String firstname = documentSnapshot.getString("FirstName");
                         String lastname = documentSnapshot.getString("LastName");
                         String firstletter = String.valueOf(firstname.charAt(0));
@@ -447,6 +416,11 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         name.setText(firstname);
                         navUsername.setText(firstname);
                         navProfileName.setText(finalProfileText);
+                        //navProgressStatus.setText("Profile Completed " + progressStatus + "%");
+                        spinner1.setSelection(adapter1.getPosition(BodyShape));
+                        spinner2.setSelection(adapter2.getPosition(Occupation));
+                        spinner3.setSelection(adapter3.getPosition(Size));
+                        spinner4.setSelection(adapter4.getPosition(PriceRange));
 
 
                     }
@@ -454,43 +428,4 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     }
 
 
-    /*@Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        //bodyShapeData=spinner1.getItemAtPosition(position).toString();
-        String bodyShapeData;
-        bodyShapeData = spinner1.getSelectedItem().toString();
-        String Occupation;
-        //Occupation=spinner2.getItemAtPosition(position).toString();
-        Occupation = spinner2.getSelectedItem().toString();
-        String Size;
-        //Size=spinner3.getItemAtPosition(position).toString();
-        Size = spinner3.getSelectedItem().toString();
-        String PriceRange;
-        //PriceRange=spinner4.getItemAtPosition(position).toString();
-        PriceRange = spinner4.getSelectedItem().toString();
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String currentID = auth.getCurrentUser().getUid();
-        DocumentReference documentReference = db.collection("users").document(currentID);
-
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("BodyShape", bodyShapeData);
-        user.put("Occupation", Occupation);
-        user.put("Size", Size);
-        user.put("PriceRange", PriceRange);
-        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.d("hi","Ho Gaya");
-                Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        updateProgressBar();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }*/
 }
