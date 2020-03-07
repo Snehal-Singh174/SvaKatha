@@ -254,16 +254,6 @@ tools:context=".Profile">
         android:fontFamily="@font/segoe"
         android:textColor="@color/colorPrimary" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Update"
-        android:textSize="@dimen/_14ssp"
-        android:textAllCaps="false"
-        android:layout_marginStart="@dimen/_125sdp"
-        android:layout_marginTop="@dimen/_400sdp"
-        />
 
 
 </FrameLayout>

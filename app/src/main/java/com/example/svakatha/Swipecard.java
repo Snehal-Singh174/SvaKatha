@@ -120,7 +120,7 @@ public class Swipecard extends AppCompatActivity {
                                                         Log.e("UP", "Delete" + startMoveX);
                                                         removeParentView(containerView, index);
                                                         if(index == 8){
-                                                                Toast.makeText(context, "Reachec End", Toast.LENGTH_SHORT).show();
+                                                                Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
                                                                 index=0;
                                                         }else {
                                                                 index = index + 1;

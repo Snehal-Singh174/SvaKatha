@@ -38,7 +38,7 @@ public class Swipecard1 extends Fragment {
         super.onCreate(savedInstanceState);
         getActivity().requestWindowFeature(Window.FEATURE_NO_TITLE);
         getActivity().setContentView(R.layout.activity_swipecard);
-
+//jhiuhgiu
         context =getActivity().getApplicationContext();
 
         parentView = (RelativeLayout) getActivity().findViewById(R.id.main_layoutview);

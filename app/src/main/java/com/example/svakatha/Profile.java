@@ -8,6 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -32,11 +33,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -64,7 +67,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     TextView navUsername;
     TextView navProfileName;
     ProgressBar progressBar_drawer1;
-
+    TextView navProgressStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,10 +81,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         navUsername =  headerView.findViewById(R.id.name);
         navProfileName =  headerView.findViewById(R.id.photo_drawer);
         progressBar_drawer1 =headerView.findViewById(R.id.progressBar_drawer);
-
+        navProgressStatus=headerView.findViewById(R.id.progres_text);
         name =  findViewById(R.id.name);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        addButton =findViewById(R.id.button2);
         auth = FirebaseAuth.getInstance();
         progressBar = findViewById(R.id.progressBar);
 
@@ -139,7 +141,132 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         updateProgressBar();
 
-        addButton.setOnClickListener(new View.OnClickListener()
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                String bodyShapeData;
+                bodyShapeData = spinner1.getSelectedItem().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String currentID = auth.getCurrentUser().getUid();
+                DocumentReference documentReference = db.collection("users").document(currentID);
+
+
+                Map<String, Object> user = new HashMap<>();
+                user.put("BodyShape", bodyShapeData);
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("hi","Ho Gaya");
+                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
+                        updateProgressBar();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                String Occupation;
+                //Occupation=spinner2.getItemAtPosition(position).toString();
+                Occupation = spinner2.getSelectedItem().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String currentID = auth.getCurrentUser().getUid();
+                DocumentReference documentReference = db.collection("users").document(currentID);
+
+
+                Map<String, Object> user = new HashMap<>();
+                user.put("Occupation", Occupation);
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("hi","Ho Gaya");
+                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
+                        updateProgressBar();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spinner3.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                String Size;
+                //Size=spinner3.getItemAtPosition(position).toString();
+                Size = spinner3.getSelectedItem().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String currentID = auth.getCurrentUser().getUid();
+                DocumentReference documentReference = db.collection("users").document(currentID);
+                Map<String, Object> user = new HashMap<>();
+                user.put("Size", Size);
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("hi","Ho Gaya");
+                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
+                        updateProgressBar();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                // your code here
+                String PriceRange;
+                //PriceRange=spinner4.getItemAtPosition(position).toString();
+                PriceRange = spinner4.getSelectedItem().toString();
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                String currentID = auth.getCurrentUser().getUid();
+                DocumentReference documentReference = db.collection("users").document(currentID);
+
+
+                Map<String, Object> user = new HashMap<>();
+                user.put("PriceRange", PriceRange);
+                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d("hi","Ho Gaya");
+                        Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
+                        updateProgressBar();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
+
+        /*addButton.setOnClickListener(new View.OnClickListener()
 
         {
             @Override
@@ -170,7 +297,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 //});
                 updateProgressBar();
             }
-        });
+        });*/
 
     }
 
@@ -292,7 +419,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             }
                             progressBar.setProgress(progressStatus);
                             progressBar_drawer1.setProgress(progressStatus);
-
+                            navProgressStatus.setText("Profile Completed "+progressStatus+"%");
                             spinner1.setSelection(adapter1.getPosition(BodyShape));
                             spinner2.setSelection(adapter2.getPosition(Occupation));
                             spinner3.setSelection(adapter3.getPosition(Size));
@@ -321,7 +448,49 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         navUsername.setText(firstname);
                         navProfileName.setText(finalProfileText);
 
+
                     }
                 });
     }
+
+
+    /*@Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        //bodyShapeData=spinner1.getItemAtPosition(position).toString();
+        String bodyShapeData;
+        bodyShapeData = spinner1.getSelectedItem().toString();
+        String Occupation;
+        //Occupation=spinner2.getItemAtPosition(position).toString();
+        Occupation = spinner2.getSelectedItem().toString();
+        String Size;
+        //Size=spinner3.getItemAtPosition(position).toString();
+        Size = spinner3.getSelectedItem().toString();
+        String PriceRange;
+        //PriceRange=spinner4.getItemAtPosition(position).toString();
+        PriceRange = spinner4.getSelectedItem().toString();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String currentID = auth.getCurrentUser().getUid();
+        DocumentReference documentReference = db.collection("users").document(currentID);
+
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("BodyShape", bodyShapeData);
+        user.put("Occupation", Occupation);
+        user.put("Size", Size);
+        user.put("PriceRange", PriceRange);
+        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.d("hi","Ho Gaya");
+                Toast.makeText(Profile.this, "Ho Gaya", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        updateProgressBar();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }*/
 }
