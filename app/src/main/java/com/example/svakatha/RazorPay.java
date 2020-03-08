@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
@@ -85,7 +84,7 @@ public class RazorPay extends Activity implements PaymentResultListener {
              * Amount is always passed in currency subunits
              * Eg: "500" = INR 5.00
              */
-            options.put("amount", "500");
+            options.put("amount", "2000");
 
             checkout.open(activity, options);
         } catch(Exception e) {

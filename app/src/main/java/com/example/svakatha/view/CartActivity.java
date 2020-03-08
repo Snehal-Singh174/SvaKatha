@@ -3,6 +3,7 @@ package com.example.svakatha.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,12 +17,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.svakatha.R;
-
 
 import com.example.svakatha.Adapter.CartAdapter;
 import com.example.svakatha.MainActivity;
 import com.example.svakatha.Model.ProductImage;
+import com.example.svakatha.R;
+import com.example.svakatha.RazorPay;
 
 import java.util.ArrayList;
 
@@ -117,6 +118,10 @@ public class CartActivity extends AppCompatActivity {
         proceedToBook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this, RazorPay.class);
+                startActivity(intent);
+
+
                 Toast.makeText(CartActivity.this, "order placed", Toast.LENGTH_SHORT).show();
                 //bookMyOrder();
             }
