@@ -122,7 +122,7 @@
         android:layout_width="@dimen/_46sdp"
         android:layout_height="@dimen/_46sdp"
         android:layout_marginStart="@dimen/_120sdp"
-        android:layout_marginTop="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_110sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/separator" />
 
@@ -140,8 +140,8 @@
         android:id="@+id/bottom_wear_2"
         android:layout_width="@dimen/_55sdp"
         android:layout_height="@dimen/_90sdp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="@dimen/_120sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_110sdp"
         android:visibility="visible"
         app:layout_constraintStart_toEndOf="@+id/top_wear_2"
         app:layout_constraintTop_toBottomOf="@+id/separator" />
@@ -154,9 +154,7 @@
         android:visibility="visible"
         android:layout_marginEnd="@dimen/_5sdp"
         app:layout_constraintTop_toBottomOf="@+id/separator"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"
-        tools:layout_editor_absoluteX="262dp" />
-
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"/>
     <ImageView
         android:id="@+id/bottom_wear_3"
         android:layout_width="@dimen/_55sdp"
@@ -176,16 +174,14 @@
         android:visibility="visible"
         android:layout_marginEnd="@dimen/_5sdp"
         app:layout_constraintTop_toBottomOf="@+id/top_wear_3"
-        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"
-        tools:layout_editor_absoluteX="265dp" />
-
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"/>
     <TextView
         android:id="@+id/closet_occupation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_32sdp"
         android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginEnd="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
         android:background="@drawable/dropdown_background"
         android:gravity="center_vertical"
         android:text="Occasion"
@@ -193,19 +189,17 @@
         android:paddingLeft="@dimen/_8sdp"
         android:textColor="#000"
         android:textSize="@dimen/_14ssp"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_wear_2"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"/>
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
         android:layout_marginStart="@dimen/_190sdp"
         android:layout_marginEnd="@dimen/_19sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
         android:background="@drawable/spinnerbackground"
         android:textAlignment="center"
         android:fontFamily="@font/segoe"
         android:textColor="@color/colorPrimary"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_wear_2"/>
-
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
