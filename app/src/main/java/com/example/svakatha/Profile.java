@@ -30,7 +30,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.SetOptions;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -49,6 +52,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class Profile extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -75,6 +80,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     ProgressBar progressBar_drawer1;
     TextView navProgressStatus;
     FirebaseDatabase firebaseDatabase;
+    boolean Status1=true;
+    boolean Status2=true;
+    boolean Status3=true;
+    boolean Status4=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +105,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
 
-        DatabaseReference databaseReference =firebaseDatabase.getReference(auth.getUid());
+        DatabaseReference databaseReference = firebaseDatabase.getReference(auth.getCurrentUser().getUid());
 
         spinner1 = findViewById(R.id.spinner1);
         adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
@@ -149,37 +158,55 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         NavigationUI.setupWithNavController(navigationView, navController);
 
         updateProfileText();
-
         updateProgressBar();
-
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                String currentID = auth.getCurrentUser().getUid();
-                DocumentReference documentReference = db.collection("users").document(currentID);
-                String bodyShapeData;
-                bodyShapeData = spinner1.getSelectedItem().toString();
-                ((TextView) selectedItemView).setTextColor(Color.WHITE);
-
-                Map<String, Object> user = new HashMap<>();
-                user.put("BodyShape", bodyShapeData);
-                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        String currentID = auth.getCurrentUser().getUid();
+        db.collection("users").document(currentID)
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
-                    public void onSuccess(Void aVoid) {
-                        updateProgressBar();
+                    public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
+                        if (documentSnapshot.exists()) {
+                            String BodyShape = documentSnapshot.getString("BodyShape");
+                            String Occupation = documentSnapshot.getString("Occupation");
+                            String PriceRange = documentSnapshot.getString("PriceRange");
+                            String Size = documentSnapshot.getString("Size");
+                            spinner1.setSelection(adapter1.getPosition(BodyShape));
+                            spinner2.setSelection(adapter2.getPosition(Occupation));
+                            spinner3.setSelection(adapter3.getPosition(Size));
+                            spinner4.setSelection(adapter4.getPosition(PriceRange));
+                        }
                     }
                 });
 
-            }
+        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                    // your code here
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    String currentID = auth.getCurrentUser().getUid();
+                    DocumentReference documentReference = db.collection("users").document(currentID);
+                    String bodyShapeData;
+                    bodyShapeData = spinner1.getSelectedItem().toString();
+                    ((TextView) selectedItemView).setTextColor(Color.WHITE);
+                    Map<String, Object> user = new HashMap<>();
+                    user.put("BodyShape", bodyShapeData);
+                        if(!Status1){
+                        documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                updateProgressBar();
+                            }
+                        });
+                    }
+                    Status1=false;
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+                @Override
+                public void onNothingSelected(AdapterView<?> parentView) {
+                    // your code here
+                }
 
-        });
+            });
 
         spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -192,15 +219,18 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
                 ((TextView) selectedItemView).setTextColor(Color.WHITE);
-
                 Map<String, Object> user = new HashMap<>();
                 user.put("Occupation", Occupation);
-                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        updateProgressBar();
-                    }
-                });
+                if(!Status2)
+                {
+                    documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                          updateProgressBar();
+                        }
+                    });
+                }
+                Status2=false;
 
             }
 
@@ -216,20 +246,25 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 // your code here
                 String Size;
-                //Size=spinner3.getItemAtPosition(position).toString();
+                //PriceRange=spinner4.getItemAtPosition(position).toString();
                 Size = spinner3.getSelectedItem().toString();
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
                 ((TextView) selectedItemView).setTextColor(Color.WHITE);
+
                 Map<String, Object> user = new HashMap<>();
                 user.put("Size", Size);
-                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        updateProgressBar();
-                    }
-                });
+                if(!Status3)
+                {
+                    documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            updateProgressBar();
+                        }
+                    });
+                }
+                Status3=false;
 
             }
 
@@ -254,21 +289,24 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("PriceRange", PriceRange);
-                documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        updateProgressBar();
-                    }
-                });
-
+                if(!Status4)
+                {
+                    documentReference.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            updateProgressBar();
+                        }
+                    });
+                }
+                Status4=false;
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parentView) {
                 // your code here
             }
 
         });
+
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -281,6 +319,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             }
         });
+
 
     }
 
@@ -421,8 +460,6 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         spinner2.setSelection(adapter2.getPosition(Occupation));
                         spinner3.setSelection(adapter3.getPosition(Size));
                         spinner4.setSelection(adapter4.getPosition(PriceRange));
-
-
                     }
                 });
     }
