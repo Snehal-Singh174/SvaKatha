@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">SvaKatha</string>
+    <string name="SvaKatha_signup"><b>Sva-Katha</b></string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+    <string name="profile"><u><b>Mr.Dipansh</b></u></string>
+    <string name="prof"><u><b>Profession</b></u></string>
+    <string name="eightynine"><b>89</b>\nConnection</string>
+
+    <!-- Navigation Drawer Menu Items-->
+    <string name="menu_suggestion"><u>Today\'s Suggestion</u></string>
+    <string name="menu_shopyourdesign"><u>Shop Your Design</u></string>
+    <string name="menu_analysisreport"><u>Your Analysis Report</u></string>
+    <string name="menu_stylingsuggestion"><u>Styling Suggestion</u></string>
+    <string name="menu_mycommunity"><u>My Community</u></string>
+    <string name="menu_mycloset"><u>My Closet</u></string>
+
+    <string-array name="body">
+        <item value="-1">Null</item>
+        <item>Hourglass</item>
+        <item>Professor</item>
+        <item>Artist</item>
+    </string-array>
+    <string-array name="occupation">
+        <item value="-1">Null</item>
+        <item>Student</item>
+        <item>Business Casual</item>
+        <item>Artist</item>
+    </string-array>
+    <string-array name="size">
+        <item value="-1">Null</item>
+        <item>S</item>
+        <item>M</item>
+        <item>XL</item>
+        <item>XXL</item>
+    </string-array>
+    <string-array name="price">
+        <item value="-1">Null</item>
+        <item>Below 5000</item>
+        <item>5000-9000</item>
+        <item>Above 9000</item>
+    </string-array>
+
+    <string-array name="closet">
+        <item value="-1">Null</item>
+        <item>Business Casual</item>
+        <item>Function</item>
+        <item>Sports</item>
+    </string-array>
+
+    <string name="closet_title"><u>My Closet</u></string>
+    <string name="image_picker_error" />
+    <string name="dialog_select_gallery" />
+    <string name="dialog_select_prompt" />
+    <string name="dialog_select_camera" />
+</resources>

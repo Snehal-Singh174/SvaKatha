@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/pick"
+            android:title="Today's Suggestions" />
+        <item
+            android:id="@+id/shop"
+            android:title="Shop Your Design" />
+        <item
+            android:id="@+id/report"
+            android:title="Your Analysis Report" />
+        <item
+            android:id="@+id/style_suggestion"
+            android:title="Styling Suggesstion" />
+        <item
+            android:id="@+id/community"
+            android:title="My Community" />
+        <item
+            android:id="@+id/closet"
+            android:title="My Closet" />
+    </group>
+
+</menu>
