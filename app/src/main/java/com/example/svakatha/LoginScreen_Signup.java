@@ -49,27 +49,18 @@ public class LoginScreen_Signup extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        logintext = (TextView)findViewById(R.id.login);
+        logintext = (TextView)findViewById(R.id.logintext);
         editTextMail = (EditText)findViewById(R.id.email);
         pass = (EditText)findViewById(R.id.pass);
         confirmpass = (EditText)findViewById(R.id.confirmpass);
         signupButton=(Button)findViewById(R.id.signupbutton);
         fname_edittext=(EditText)findViewById(R.id.firstname);
         lname_edittext=(EditText)findViewById(R.id.lastname);
-
-
         //Getting Firebase Auth Object
         firebaseAuth=FirebaseAuth.getInstance();
 
         progressDialog = new ProgressDialog(this);
 
-        logintext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginScreen_Signup.this,Login.class);
-                startActivity(intent);
-            }
-        });
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
