@@ -1,5 +1,6 @@
 package com.example.svakatha;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -49,5 +50,15 @@ public class MyCloset extends AppCompatActivity {
         adapter1 = ArrayAdapter.createFromResource(this, R.array.closet, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter1);
+        upload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent activity2Intent = new Intent(getApplicationContext(), MainActivity1.class);
+                startActivity(activity2Intent);
+
+
+            }
+        });
     }
 }

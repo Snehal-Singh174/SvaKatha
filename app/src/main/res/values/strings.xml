@@ -61,4 +61,8 @@
     </string-array>
 
     <string name="closet_title"><u>My Closet</u></string>
+    <string name="image_picker_error" />
+    <string name="dialog_select_gallery" />
+    <string name="dialog_select_prompt" />
+    <string name="dialog_select_camera" />
 </resources>
