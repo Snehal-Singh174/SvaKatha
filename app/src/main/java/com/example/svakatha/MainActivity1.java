@@ -18,6 +18,7 @@ package com.example.svakatha;
 //package com.google.sample.cloudvision;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -28,12 +29,19 @@ import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +59,11 @@ import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 //import com.google.sample.cloudvision;
 
 import java.io.ByteArrayOutputStream;
@@ -60,7 +73,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.UUID;
 
 
 public class MainActivity1 extends AppCompatActivity {
@@ -80,13 +93,21 @@ public class MainActivity1 extends AppCompatActivity {
     private TextView mImageDetails;
     private ImageView mMainImage;
 
+    private StorageReference mStorageRef;
+    private FirebaseAuth mAuth;
+    CoordinatorLayout layout;
+    ProgressBar progressBar;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-
+        progressBar=findViewById(R.id.progressbar_analysis);
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity1.this);
@@ -161,16 +182,36 @@ public class MainActivity1 extends AppCompatActivity {
     }
 
     public void uploadImage(Uri uri) {
+//        ProgressDialog progressDialog=new ProgressDialog(getApplicationContext());
+//        progressDialog.setTitle("Uploading");
+//        progressDialog.show();
         if (uri != null) {
             try {
                 // scale the image to save on bandwidth
-                Bitmap bitmap =
-                        scaleBitmapDown(
-                                MediaStore.Images.Media.getBitmap(getContentResolver(), uri),
-                                MAX_DIMENSION);
-
+                Bitmap bitmap = scaleBitmapDown(
+                                MediaStore.Images.Media.getBitmap(getContentResolver(), uri), MAX_DIMENSION);
                 callCloudVision(bitmap);
                 mMainImage.setImageBitmap(bitmap);
+                // Database Part
+                String currentID=mAuth.getCurrentUser().getUid();
+
+                mStorageRef=FirebaseStorage.getInstance().getReference();//.child("images").child(UUID.randomUUID().toString());
+                StorageReference filePath=mStorageRef.child("images").child(UUID.randomUUID().toString());
+                filePath.putFile(uri)
+                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(MainActivity1.this, mAuth.getCurrentUser().getPhoneNumber(), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
+                            }
+                        })
+                        .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onProgress(@NonNull UploadTask.TaskSnapshot taskSnapshot) {
+                                double progress=(100.0*taskSnapshot.getBytesTransferred())/taskSnapshot.getTotalByteCount();
+                                progressBar.setProgress((int)progress);
+                            }
+                        });
 
             } catch (IOException e) {
                 Log.d(TAG, "Image picking failed because " + e.getMessage());
@@ -180,6 +221,10 @@ public class MainActivity1 extends AppCompatActivity {
             Log.d(TAG, "Image picker gave us a null image.");
             Toast.makeText(this, R.string.image_picker_error, Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void uploadImageToFireStore() {
+
     }
 
     private Vision.Images.Annotate prepareAnnotationRequest(Bitmap bitmap) throws IOException {
@@ -278,6 +323,7 @@ public class MainActivity1 extends AppCompatActivity {
             MainActivity1 activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
                 TextView imageDetail = activity.findViewById(R.id.image_details);
+
                 imageDetail.setText(result);
             }
         }
