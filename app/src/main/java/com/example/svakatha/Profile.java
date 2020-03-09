@@ -370,7 +370,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                     startActivity(intent1);
                     break;
                 case R.id.today_pick:
-                    Intent intent2 = new Intent(Profile.this, MainActivity1.class);
+                    Intent intent2 = new Intent(Profile.this, MyCloset.class);
                     startActivity(intent2);
                     break;
                 case R.id.profile:

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
@@ -28,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.Ca
     public static int cart_count = 0;
     ProductAdapter productAdapter;
     RecyclerView productRecyclerView;
-    boolean Status=true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.Ca
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        addProduct();
 
+        addProduct();
         productAdapter = new ProductAdapter(arrayList, this, this);
         productRecyclerView = findViewById(R.id.product_recycler_view);
 
@@ -118,9 +116,8 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.Ca
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i("hi","onDestroy");
-        arrayList.clear();
+    protected void onStart() {
+        super.onStart();
+        invalidateOptionsMenu();
     }
 }
