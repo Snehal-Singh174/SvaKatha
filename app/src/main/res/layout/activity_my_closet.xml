@@ -7,14 +7,7 @@
     tools:context=".MyCloset"
     tools:visibility="visible">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main"
-        android:layout_marginTop="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/closet_title"/>
+    <include layout="@layout/content_main" />
 
     <TextView
         android:id="@+id/closet_title"
@@ -30,6 +23,60 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/bottom_wear"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_165sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_80sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/closet_title" />
+
+    <ImageView
+        android:id="@+id/top_wear"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/closet_title" />
+
+    <ImageView
+        android:id="@+id/other_wear"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear" />
+
+    <ImageView
+        android:id="@+id/foot_wear"
+        android:layout_width="@dimen/_80sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear"
+        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/other_wear" />
+
+    <Button
+        android:id="@+id/upload_button"
+        android:layout_width="@dimen/_109sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/editprofilbutton"
+        android:fontFamily="@font/segoe"
+        android:text="Upload your design"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/_9ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_wear" />
 
     <TextView
         android:id="@+id/separator"
@@ -37,82 +84,99 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
         android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         android:background="#707070"
-        app:layout_constraintBottom_toTopOf="@+id/closet_occupation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab"
-        app:layout_constraintVertical_bias="0.076" />
-
-    <HorizontalScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="406dp"
-        android:layout_height="232dp"
-        android:layout_gravity="center"
-        app:layout_constraintBottom_toTopOf="@+id/closet_occupation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fab">
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        app:layout_constraintTop_toBottomOf="@+id/upload_button"/>
 
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="140dp"
-                android:layout_height="206dp"
-                android:padding="15dp"
-                />
+    <ImageView
+        android:id="@+id/top_wear_1"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="@dimen/_46sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="140dp"
-                android:layout_height="206dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                 />
+    <ImageView
+        android:id="@+id/foot_wear_1"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear_1" />
 
-            <ImageView
-                android:id="@+id/imageView4"
-                android:layout_width="137dp"
-                android:layout_height="208dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                 />
+    <ImageView
+        android:id="@+id/bottom_wear_1"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:layout_constraintStart_toEndOf="@+id/top_wear_1"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="140dp"
-                android:layout_height="206dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                 />
+    <ImageView
+        android:id="@+id/top_wear_2"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="@dimen/_46sdp"
+        android:layout_marginStart="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_110sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="140dp"
-                android:layout_height="206dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                 />
+    <ImageView
+        android:id="@+id/foot_wear_2"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_120sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear_2" />
 
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="140dp"
-                android:layout_height="206dp"
-                android:layout_gravity="center"
-                android:padding="15dp"
-                />
+    <ImageView
+        android:id="@+id/bottom_wear_2"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_110sdp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/top_wear_2"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-        </LinearLayout>
+    <ImageView
+        android:id="@+id/top_wear_3"
+        android:layout_width="@dimen/_46sdp"
+        android:layout_height="@dimen/_46sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@+id/separator"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"/>
+    <ImageView
+        android:id="@+id/bottom_wear_3"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_90sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/separator" />
 
-    </HorizontalScrollView>
-
+    <ImageView
+        android:id="@+id/foot_wear_3"
+        android:layout_width="@dimen/_44sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:visibility="visible"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@+id/top_wear_3"
+        app:layout_constraintEnd_toStartOf="@+id/bottom_wear_3"/>
     <TextView
         android:id="@+id/closet_occupation"
         android:layout_width="match_parent"
@@ -144,18 +208,19 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="66dp"
-        android:layout_height="54dp"
-        android:layout_gravity="center"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="66dp"
+        android:layout_marginTop="89dp"
+        android:layout_marginEnd="31dp"
         android:layout_marginBottom="141dp"
         android:src="@android:drawable/ic_menu_camera"
         app:layout_constraintBottom_toTopOf="@+id/closet_occupation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.521"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/include"
-        app:layout_constraintVertical_bias="0.413"
-        app:backgroundTint="@android:color/background_light"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/bottom_wear_2"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_wear_3"
+        app:layout_constraintVertical_bias="0.753" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

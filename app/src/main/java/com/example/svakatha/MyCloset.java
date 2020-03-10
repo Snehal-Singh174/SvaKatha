@@ -16,8 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MyCloset extends AppCompatActivity {
 
     TextView closettitle,occupation,separator;
-    //ImageView topwear,bottomwear,footwear,otherwear,topwear1,bottomwear1,footwear1,topwear2,
-    //bottomwear2,footwear2,topwear3,bottomwear3,footwear3;
+    ImageView topwear,bottomwear,footwear,otherwear,topwear1,bottomwear1,footwear1,topwear2,
+    bottomwear2,footwear2,topwear3,bottomwear3,footwear3;
     Button upload;
     Spinner spinner;
     ArrayAdapter<CharSequence> adapter1;
@@ -30,6 +30,20 @@ public class MyCloset extends AppCompatActivity {
 
         closettitle = (TextView)findViewById(R.id.closet_title);
         occupation = (TextView)findViewById(R.id.closet_occupation);
+        topwear = (ImageView)findViewById(R.id.top_wear);
+        otherwear = (ImageView)findViewById(R.id.other_wear);
+        footwear = (ImageView)findViewById(R.id.foot_wear);
+        bottomwear = (ImageView)findViewById(R.id.bottom_wear);
+        topwear1 = (ImageView)findViewById(R.id.top_wear_1);
+        footwear1 = (ImageView)findViewById(R.id.foot_wear_1);
+        bottomwear1 = (ImageView)findViewById(R.id.bottom_wear_1);
+        topwear2 = (ImageView)findViewById(R.id.top_wear_2);
+        footwear2 = (ImageView)findViewById(R.id.foot_wear_2);
+        bottomwear2 = (ImageView)findViewById(R.id.bottom_wear_2);
+        topwear3 = (ImageView)findViewById(R.id.top_wear_3);
+        footwear3 = (ImageView)findViewById(R.id.foot_wear_3);
+        bottomwear3 = (ImageView)findViewById(R.id.bottom_wear_3);
+        upload = (Button)findViewById(R.id.upload_button);
         separator = (TextView)findViewById(R.id.separator);
 
         spinner = findViewById(R.id.spinner2);

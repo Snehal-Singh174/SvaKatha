@@ -58,8 +58,8 @@ public class Shoppingpage extends Activity implements View.OnClickListener{
         imageView2.setOnClickListener(this);
         imageView3.setOnClickListener(this);
         imageView4.setOnClickListener(this);
-        imageView5.setOnClickListener(this);
-        imageView2.setOnClickListener(this);
+
+        imageView5.setOnClickListener(this);imageView2.setOnClickListener(this);
         imageView6.setOnClickListener(this);
         imageView7.setOnClickListener(this);
         button.setOnClickListener(this);
