@@ -28,6 +28,9 @@ import android.provider.MediaStore;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
@@ -51,6 +54,11 @@ import com.google.api.services.vision.v1.model.BatchAnnotateImagesResponse;
 import com.google.api.services.vision.v1.model.EntityAnnotation;
 import com.google.api.services.vision.v1.model.Feature;
 import com.google.api.services.vision.v1.model.Image;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 //import com.google.sample.cloudvision;
 
 import java.io.ByteArrayOutputStream;
@@ -58,9 +66,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-
+import java.util.Map;
+import java.util.UUID;
 
 
 public class MainActivity1 extends AppCompatActivity {
@@ -80,12 +90,20 @@ public class MainActivity1 extends AppCompatActivity {
     private TextView mImageDetails;
     private ImageView mMainImage;
 
+    private FirebaseAuth mAuth;
+    private StorageReference mStorageRef;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_closet);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+
+        //Initializing Firebase Instance
+        mAuth = FirebaseAuth.getInstance();
+        mStorageRef = FirebaseStorage.getInstance().getReference();
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> {
@@ -161,6 +179,7 @@ public class MainActivity1 extends AppCompatActivity {
     }
 
     public void uploadImage(Uri uri) {
+        String DownloadURL;
         if (uri != null) {
             try {
                 // scale the image to save on bandwidth
@@ -171,6 +190,39 @@ public class MainActivity1 extends AppCompatActivity {
 
                 callCloudVision(bitmap);
                 mMainImage.setImageBitmap(bitmap);
+                mAuth=FirebaseAuth.getInstance();
+                String closetDocName=UUID.randomUUID().toString();
+                StorageReference filePath=mStorageRef.child("UserClosetImages").child(closetDocName);
+               filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                   @Override
+                   public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                       Log.i("Status","Uploaded");
+                       filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                           @Override
+                           public void onSuccess(Uri uri) {
+                               Log.i("Status",uri.toString());
+                             //  Map<String ,String> data=new HashMap<>();
+                              // data.put("downloadUrl",uri.toString());
+                               ClosetModel closetModel=new ClosetModel();
+                               closetModel.setDonwloadUrl(uri.toString());
+                               String currentUser=mAuth.getCurrentUser().getUid();
+                               db.collection("users").document(currentUser)
+                                       .collection("ClosetDetails").document(closetDocName)
+                                       .set(closetModel).addOnFailureListener(new OnFailureListener() {
+                                   @Override
+                                   public void onFailure(@NonNull Exception e) {
+                                       Log.d("Statu",e.toString());
+                                       System.out.println(e.toString());
+                                   }
+                               });
+                           }
+                       });
+                   }
+               });
+
+
+
+
 
             } catch (IOException e) {
                 Log.d(TAG, "Image picking failed because " + e.getMessage());
