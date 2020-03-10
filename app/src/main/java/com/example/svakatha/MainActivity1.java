@@ -20,6 +20,7 @@ package com.example.svakatha;
 import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -87,8 +88,16 @@ public class MainActivity1 extends AppCompatActivity {
     public static final int CAMERA_PERMISSIONS_REQUEST = 2;
     public static final int CAMERA_IMAGE_REQUEST = 3;
 
-    private TextView mImageDetails;
+    //private TextView mImageDetails;
     private ImageView mMainImage;
+    public ImageView image2;
+    public ImageView image3;
+    public ImageView image4;
+    public ImageView image5;
+    public ImageView image6;
+    public ImageView image7;
+//testing
+    public int i = 0;
 
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
@@ -99,6 +108,12 @@ public class MainActivity1 extends AppCompatActivity {
         setContentView(R.layout.activity_my_closet);
         //Toolbar toolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
+        image2 = findViewById(R.id.imageView2);
+        image3 = findViewById(R.id.imageView3);
+        image4 = findViewById(R.id.imageView4);
+        image5 = findViewById(R.id.imageView5);
+        image6 = findViewById(R.id.imageView6);
+        image7 = findViewById(R.id.imageView7);
 
         //Initializing Firebase Instance
         mAuth = FirebaseAuth.getInstance();
@@ -115,8 +130,9 @@ public class MainActivity1 extends AppCompatActivity {
             builder.create().show();
         });
 
-        mImageDetails = findViewById(R.id.image_details);
+        //mImageDetails = findViewById(R.id.image_details);
         mMainImage = findViewById(R.id.main_image);
+
     }
 
     public void startGalleryChooser() {
@@ -190,38 +206,42 @@ public class MainActivity1 extends AppCompatActivity {
 
                 callCloudVision(bitmap);
                 mMainImage.setImageBitmap(bitmap);
-                mAuth=FirebaseAuth.getInstance();
-                String closetDocName=UUID.randomUUID().toString();
-                StorageReference filePath=mStorageRef.child("UserClosetImages").child(closetDocName);
-               filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                   @Override
-                   public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                       Log.i("Status","Uploaded");
-                       filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                           @Override
-                           public void onSuccess(Uri uri) {
-                               Log.i("Status",uri.toString());
-                             //  Map<String ,String> data=new HashMap<>();
-                              // data.put("downloadUrl",uri.toString());
-                               ClosetModel closetModel=new ClosetModel();
-                               closetModel.setDonwloadUrl(uri.toString());
-                               String currentUser=mAuth.getCurrentUser().getUid();
-                               db.collection("users").document(currentUser)
-                                       .collection("ClosetDetails").document(closetDocName)
-                                       .set(closetModel).addOnFailureListener(new OnFailureListener() {
-                                   @Override
-                                   public void onFailure(@NonNull Exception e) {
-                                       Log.d("Statu",e.toString());
-                                       System.out.println(e.toString());
-                                   }
-                               });
-                           }
-                       });
-                   }
-               });
+                i++;
+              //testing
+                if (i == 7)
+                {   i = 1;
+                    image2.setImageBitmap(bitmap);
+                    image3.setImageDrawable(null);
+                    image4.setImageDrawable(null);
+                    image5.setImageDrawable(null);
+                    image6.setImageDrawable(null);
+                    image7.setImageDrawable(null);
 
+                }else if( i == 1)
+                {
+                    image2.setImageBitmap(bitmap);
 
+                }else if (i == 2)
+                {
+                    image3.setImageBitmap(bitmap);
 
+                }else if (i == 3)
+                {
+                    image4.setImageBitmap(bitmap);
+
+                }else if (i == 4)
+                {
+                    image5.setImageBitmap(bitmap);
+
+                }else if (i == 5)
+                {
+                    image6.setImageBitmap(bitmap);
+
+                }else if (i == 6)
+                {
+                    image7.setImageBitmap(bitmap);
+
+                }
 
 
             } catch (IOException e) {
@@ -329,8 +349,8 @@ public class MainActivity1 extends AppCompatActivity {
         protected void onPostExecute(String result) {
             MainActivity1 activity = mActivityWeakReference.get();
             if (activity != null && !activity.isFinishing()) {
-                TextView imageDetail = activity.findViewById(R.id.image_details);
-                imageDetail.setText(result);
+                //TextView imageDetail = activity.findViewById(R.id.image_details);
+                //imageDetail.setText(result);
             }
         }
     }
