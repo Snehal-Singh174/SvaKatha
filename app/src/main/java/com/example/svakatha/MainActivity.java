@@ -123,4 +123,5 @@ public class MainActivity extends AppCompatActivity implements ProductAdapter.Ca
         Log.i("hi","onDestroy");
         arrayList.clear();
     }
+
 }
