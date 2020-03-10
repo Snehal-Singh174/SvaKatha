@@ -22,15 +22,18 @@
         android:theme="@style/AppTheme">
         <activity android:name=".MyCloset"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".MainActivity1"></activity>
+        <activity android:name=".MainActivity1"
+            android:launchMode="singleTask"></activity>
         <activity android:name=".Shoppingpage" />
         <activity android:name=".UserDataModel" />
         <activity android:name=".MainActivity"
+            android:launchMode="singleTask"
             android:label="Shopping Cart"/>
         <activity android:name=".view.CartActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Swipecard"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".RazorPay" />
         <activity
@@ -39,6 +42,7 @@
         <activity
             android:name=".Profile"
             android:label="@string/title_activity_profile"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginScreen_Signup"
