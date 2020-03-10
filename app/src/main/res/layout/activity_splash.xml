@@ -15,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52"
+        app:layout_constraintVertical_bias="0.50"
         app:srcCompat="@drawable/svakatha_logo" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:fontFamily="@font/segoe"
         android:letterSpacing="0.2"
         android:text="Let's Design Together"
-        android:textSize="22dp"
+        android:textSize="@dimen/_16ssp"
         android:layout_marginTop="@dimen/_10sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -39,7 +39,7 @@
         android:layout_marginBottom="60dp"
         android:fontFamily="@font/segoe_semibold"
         android:text="Your Personal Fashion Assistance"
-        android:textSize="21dp"
+        android:textSize="@dimen/_16ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
