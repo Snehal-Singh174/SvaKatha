@@ -208,7 +208,16 @@ public class MainActivity1 extends AppCompatActivity {
                 mMainImage.setImageBitmap(bitmap);
                 i++;
               //testing
-                if( i == 1)
+                if (i == 7)
+                {   i = 1;
+                    image2.setImageBitmap(bitmap);
+                    image3.setImageDrawable(null);
+                    image4.setImageDrawable(null);
+                    image5.setImageDrawable(null);
+                    image6.setImageDrawable(null);
+                    image7.setImageDrawable(null);
+
+                }else if( i == 1)
                 {
                     image2.setImageBitmap(bitmap);
 
