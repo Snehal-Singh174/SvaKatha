@@ -242,6 +242,35 @@ public class MainActivity1 extends AppCompatActivity {
                     image7.setImageBitmap(bitmap);
 
                 }
+                mAuth=FirebaseAuth.getInstance();
+                String closetDocName=UUID.randomUUID().toString();
+                StorageReference filePath=mStorageRef.child("UserClosetImages").child(closetDocName);
+                filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        Log.i("Status","Uploaded");
+                        filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                Log.i("Status",uri.toString());
+                                //  Map<String ,String> data=new HashMap<>();
+                                // data.put("downloadUrl",uri.toString());
+                                ClosetModel closetModel=new ClosetModel();
+                                closetModel.setDonwloadUrl(uri.toString());
+                                String currentUser=mAuth.getCurrentUser().getUid();
+                                db.collection("users").document(currentUser)
+                                        .collection("ClosetDetails").document(closetDocName)
+                                        .set(closetModel).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d("Statu",e.toString());
+                                        System.out.println(e.toString());
+                                    }
+                                });
+                            }
+                        });
+                    }
+                });
 
 
             } catch (IOException e) {
