@@ -39,7 +39,7 @@ public class Swipecard extends AppCompatActivity {
         public RelativeLayout parentView;
         private Context context;
         ArrayList<UserDataModel> userDataModelArrayList;
-        private static int index = 0;
+        private static int index=0;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth=FirebaseAuth.getInstance();
         Map<String,String> data=new HashMap<>();
@@ -71,7 +71,7 @@ public class Swipecard extends AppCompatActivity {
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 containerView.setLayoutParams(layoutParams);
-                addParentView(containerView, index);
+                addParentView(containerView,index);
 
                 parentView.setOnTouchListener(new View.OnTouchListener()
                 {
@@ -100,16 +100,18 @@ public class Swipecard extends AppCompatActivity {
                                                         parentView.setX(originalX);
                                                         parentView.setY(originalY);
 
-                                                } else if (deltaY > 0) {
+                                                } else if (deltaY >0) {
 
                                                         Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
                                                         Log.e("DOWN", "Saved" + startMoveY);
                                                         removeParentView(containerView, index);
-                                                        saveUserChoiceToDb(index);
+                                                        if(index < 8){
+                                                        saveUserChoiceToDb(index);}
                                                         if(index==8)
                                                         {
                                                                 Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=0;
+                                                                index=8;
+                                                                addParentView(containerView, index);
                                                         }else {
                                                                 index = index + 1;
                                                                 addParentView(containerView, index);
@@ -121,7 +123,8 @@ public class Swipecard extends AppCompatActivity {
                                                         removeParentView(containerView, index);
                                                         if(index == 8){
                                                                 Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=0;
+                                                                index=8;
+                                                                addParentView(containerView, index);
                                                         }else {
                                                                 index = index + 1;
                                                                 addParentView(containerView, index);
