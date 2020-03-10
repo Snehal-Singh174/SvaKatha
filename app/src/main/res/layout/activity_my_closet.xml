@@ -143,19 +143,21 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
-        android:layout_width="66dp"
-        android:layout_height="54dp"
+        android:layout_width="97dp"
+        android:layout_height="80dp"
         android:layout_gravity="center"
         android:layout_margin="@dimen/fab_margin"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="141dp"
-        android:src="@android:drawable/ic_menu_camera"
+        android:src="@drawable/cam3"
+        app:backgroundTint="@android:color/background_light"
         app:layout_constraintBottom_toTopOf="@+id/closet_occupation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/include"
         app:layout_constraintVertical_bias="0.413"
-        app:backgroundTint="@android:color/background_light"/>
+        app:maxImageSize="40dp"
+        app:fabCustomSize="80dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
