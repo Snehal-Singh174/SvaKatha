@@ -202,6 +202,8 @@ public class Swipecard extends AppCompatActivity {
                 settingURL(model8,8);
                 userDataModelArrayList.add(model8);
 
+
+
                 UserDataModel model9 = new UserDataModel();
                 model9.setName("Cloth 9 ");
                 model9.setImageCode("9");

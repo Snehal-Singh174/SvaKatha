@@ -16,25 +16,13 @@ import org.json.JSONObject;
 public class RazorPay extends Activity implements PaymentResultListener {
 
     private static final String TAG = RazorPay.class.getSimpleName();
-    Button pay;
-
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_razor_pay);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         Checkout.preload(getApplicationContext());
 
 
-        pay=findViewById(R.id.payButton);
-        pay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                startPayment();
-
-
-            }
-        });
+        startPayment();
     }
 
 
