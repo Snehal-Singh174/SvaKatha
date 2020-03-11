@@ -143,25 +143,25 @@ public class MainActivity1 extends AppCompatActivity {
                             query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                    List<DocumentChange> innerdocList = queryDocumentSnapshots.getDocumentChanges();
+                                    List<DocumentSnapshot> innerdocList = queryDocumentSnapshots.getDocuments();
                                     int innercount = innerdocList.size();
                                     if (innercount == 1) {
-                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
                                     }
                                     if (innercount == 2) {
-                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
-                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
                                     }
                                     if (innercount == 3) {
-                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
-                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
-                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                        Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
                                     }
                                     if (innercount == 4) {
-                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
-                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
-                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
-                                        Picasso.get().load(innerdocList.get(3).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image5);
+                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                        Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                        Picasso.get().load(innerdocList.get(3).getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image5);
                                     }
                                 }
                             });
