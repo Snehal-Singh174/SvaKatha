@@ -143,6 +143,7 @@ public class LoginScreen_Signup extends AppCompatActivity {
                             user.put("Size","");
                             user.put("PriceRange","");
                             user.put("Occupation","");
+                            user.put("closetChoiceDocName","");
                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

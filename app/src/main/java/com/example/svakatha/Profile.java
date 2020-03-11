@@ -251,7 +251,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-                ((TextView) selectedItemView).setTextColor(Color.WHITE);
+//                ((TextView) selectedItemView).setTextColor(Color.WHITE);
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("Size", Size);
@@ -285,7 +285,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 String currentID = auth.getCurrentUser().getUid();
                 DocumentReference documentReference = db.collection("users").document(currentID);
-                ((TextView) selectedItemView).setTextColor(Color.WHITE);
+             //   ((TextView) selectedItemView).setTextColor(Color.WHITE);
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("PriceRange", PriceRange);
