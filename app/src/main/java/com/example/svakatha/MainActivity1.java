@@ -32,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AlertDialog;
 
@@ -56,6 +57,7 @@ import com.google.api.services.vision.v1.model.Image;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ServerValue;
+import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -102,12 +104,13 @@ public class MainActivity1 extends AppCompatActivity {
     public ImageView image5;
     public ImageView image6;
     public ImageView image7;
-//testing
+    //testing
     public int i = 0;
 
     private FirebaseAuth mAuth;
     private StorageReference mStorageRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,101 +126,114 @@ public class MainActivity1 extends AppCompatActivity {
 
         //Initializing Firebase Instance
         mAuth = FirebaseAuth.getInstance();
-        String currentUser=mAuth.getCurrentUser().getUid();
+        String currentUser = mAuth.getCurrentUser().getUid();
         mStorageRef = FirebaseStorage.getInstance().getReference();
-//        db.collection("users").document(currentUser)
-//                .collection("ClosetDetails").get()
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        List<DocumentSnapshot> docList=queryDocumentSnapshots.getDocuments();
-//                        Picasso.get().load(docList.get(0).getString("downloadUrl")).into(image2);
-//                        Picasso.get().load(docList.get(1).getString("downloadUrl")).into(image3);
-//                        Picasso.get().load(docList.get(2).getString("downloadUrl")).into(image4);
-//                        Picasso.get().load(docList.get(3).getString("downloadUrl")).into(image5);
-//                    }
-//                });
         db.collection("users").document(currentUser)
                 .collection("ClosetDetails").get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        List<DocumentSnapshot> docList=queryDocumentSnapshots.getDocuments();
-                        Toast.makeText(MainActivity1.this, "Success", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity1.this,String.valueOf(queryDocumentSnapshots.size()), Toast.LENGTH_SHORT).show();
-                        Toast.makeText(MainActivity1.this, Boolean.toString(queryDocumentSnapshots.isEmpty()), Toast.LENGTH_SHORT).show();
-                        int count=queryDocumentSnapshots.size();
-                        if(queryDocumentSnapshots.isEmpty() && (count==0)){
-                            Toast.makeText(MainActivity1.this, "No Closet Image Exist", Toast.LENGTH_SHORT).show();
+                        if(queryDocumentSnapshots.isEmpty()){
+                            Log.i("Hello","Empty Collection");
                         }
-                        else if(count<=4){
-                            Toast.makeText(MainActivity1.this, "In abc", Toast.LENGTH_SHORT).show();
-
-                            Query query=db.collection("users").document(currentUser)
+                        else {
+                            Query query = db.collection("users").document(currentUser)
                                     .collection("ClosetDetails")
                                     .orderBy("Time", Query.Direction.DESCENDING);
                             query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
-                                    List<DocumentSnapshot> innerdocList=queryDocumentSnapshots.getDocuments();
-                                    int innercount=innerdocList.size();
-                                    if(innercount==1){
-                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);}
-                                        if(innercount==2){
-                                            Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
-                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);}
-                                        if(innercount==3){
-                                            Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
-                                            Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);
-                                        Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).into(image4);}
-                                        if(innercount==4){
-                                            Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
-                                            Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);
-                                            Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).into(image4);
-                                            Picasso.get().load(innerdocList.get(3).getString("downloadUrl")).into(image5);}
+                                    List<DocumentChange> innerdocList = queryDocumentSnapshots.getDocumentChanges();
+                                    int innercount = innerdocList.size();
+                                    if (innercount == 1) {
+                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                    }
+                                    if (innercount == 2) {
+                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                    }
+                                    if (innercount == 3) {
+                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                    }
+                                    if (innercount == 4) {
+                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                        Picasso.get().load(innerdocList.get(3).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image5);
+                                    }
                                 }
                             });
-                        }else {
-                            Toast.makeText(MainActivity1.this, "Not Enough Doc", Toast.LENGTH_SHORT).show();
-                            Picasso.get().load(docList.get(0).getString("downloadUrl")).into(image2);
-                            Picasso.get().load(docList.get(1).getString("downloadUrl")).into(image3);
-                            Picasso.get().load(docList.get(2).getString("downloadUrl")).into(image4);
-                            Picasso.get().load(docList.get(3).getString("downloadUrl")).into(image5);
+
                         }
                     }
-                })
-//                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                        List<DocumentSnapshot> docList=queryDocumentSnapshots.getDocuments();
-//                        int count=docList.size();
-//                        if(!queryDocumentSnapshots.isEmpty() && (count>4)){
-//                            Toast.makeText(MainActivity1.this, "No ClosetDetails Exists", Toast.LENGTH_SHORT).show();
-//                        }else {
-//                            Query query=db.collection("users").document(currentUser)
+                });
+
+
+
+
+
+
+
+
+
+
+                        //                        List<DocumentSnapshot> docList = queryDocumentSnapshots.getDocuments();
+//                        Toast.makeText(MainActivity1.this, "Success", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity1.this, String.valueOf(queryDocumentSnapshots.size()), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(MainActivity1.this, Boolean.toString(queryDocumentSnapshots.isEmpty()), Toast.LENGTH_SHORT).show();
+//                        int count = queryDocumentSnapshots.size();
+//                        if (queryDocumentSnapshots.isEmpty() && (count == 0)) {
+//                            Toast.makeText(MainActivity1.this, "No Closet Image Exist", Toast.LENGTH_SHORT).show();
+//                        } else if (count <= 4) {
+//                            Toast.makeText(MainActivity1.this, "In abc", Toast.LENGTH_SHORT).show();
+//
+//                            Query query = db.collection("users").document(currentUser)
 //                                    .collection("ClosetDetails")
 //                                    .orderBy("Time", Query.Direction.DESCENDING);
 //                            query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
 //                                @Override
 //                                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-//                                        Picasso.get().load(docList.get(0).getString("downloadUrl")).into(image2);
-//                                        Picasso.get().load(docList.get(1).getString("downloadUrl")).into(image3);
-//                                        Picasso.get().load(docList.get(2).getString("downloadUrl")).into(image4);
-//                                        Picasso.get().load(docList.get(3).getString("downloadUrl")).into(image5);
+//
+//                                    List<DocumentSnapshot> innerdocList = queryDocumentSnapshots.getDocuments();
+//                                    int innercount = innerdocList.size();
+//                                    if (innercount == 1) {
+//                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
+//                                    }
+//                                    if (innercount == 2) {
+//                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
+//                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);
+//                                    }
+//                                    if (innercount == 3) {
+//                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
+//                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);
+//                                        Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).into(image4);
+//                                    }
+//                                    if (innercount == 4) {
+//                                        Picasso.get().load(innerdocList.get(0).getString("downloadUrl")).into(image2);
+//                                        Picasso.get().load(innerdocList.get(1).getString("downloadUrl")).into(image3);
+//                                        Picasso.get().load(innerdocList.get(2).getString("downloadUrl")).into(image4);
+//                                        Picasso.get().load(innerdocList.get(3).getString("downloadUrl")).into(image5);
+//                                    }
 //                                }
 //                            });
+//                        } else {
+//                            Toast.makeText(MainActivity1.this, "Not Enough Doc", Toast.LENGTH_SHORT).show();
+//                            Picasso.get().load(docList.get(0).getString("downloadUrl")).into(image2);
+//                            Picasso.get().load(docList.get(1).getString("downloadUrl")).into(image3);
+//                            Picasso.get().load(docList.get(2).getString("downloadUrl")).into(image4);
+//                            Picasso.get().load(docList.get(3).getString("downloadUrl")).into(image5);
 //                        }
 //                    }
-             //   })
-            .addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(MainActivity1.this, "Failed", Toast.LENGTH_SHORT).show();
-                Log.i("Status",e.toString());
-            }
-        });
-
+//                })
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(MainActivity1.this, "Failed", Toast.LENGTH_SHORT).show();
+//                        Log.i("Status", e.toString());
+//                    }
+//                });
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
@@ -307,69 +323,103 @@ public class MainActivity1 extends AppCompatActivity {
                 callCloudVision(bitmap);
                 mMainImage.setImageBitmap(bitmap);
                 i++;
-              //testing
-                if (i == 7)
-                {   i = 1;
+                //testing
+                if (i == 7) {
+                    i = 1;
                     image2.setImageBitmap(bitmap);
                     image3.setImageDrawable(null);
                     image4.setImageDrawable(null);
                     image5.setImageDrawable(null);
                     image6.setImageDrawable(null);
                     image7.setImageDrawable(null);
-                }else if( i == 1)
-                {
+                } else if (i == 1) {
                     image2.setImageBitmap(bitmap);
 
-                }else if (i == 2)
-                {
+                } else if (i == 2) {
                     image3.setImageBitmap(bitmap);
 
-                }else if (i == 3)
-                {
+                } else if (i == 3) {
                     image4.setImageBitmap(bitmap);
 
-                }else if (i == 4)
-                {
+                } else if (i == 4) {
                     image5.setImageBitmap(bitmap);
 
-                }else if (i == 5)
-                {
+                } else if (i == 5) {
                     image6.setImageBitmap(bitmap);
 
-                }else if (i == 6)
-                {
+                } else if (i == 6) {
                     image7.setImageBitmap(bitmap);
 
                 }
-                mAuth=FirebaseAuth.getInstance();
-                String currentUser=mAuth.getCurrentUser().getUid();
-                StorageReference filePath=mStorageRef.child("UserClosetImages").child(currentUser).child(UUID.randomUUID().toString());
+                mAuth = FirebaseAuth.getInstance();
+                String currentUser = mAuth.getCurrentUser().getUid();
+                StorageReference filePath = mStorageRef.child("UserClosetImages").child(currentUser).child(UUID.randomUUID().toString());
                 filePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        Log.i("Status","Uploaded");
+                        Log.i("Status", "Uploaded");
                         filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
-                                Log.i("Status",uri.toString());
-                                Map<String ,String> data=new HashMap<>();
-                                 data.put("downloadUrl",uri.toString());
-                                 Map<String,Object> data_time=new HashMap<>();
-                                 data_time.put("Time",new Timestamp(new Date()));
+                                Log.i("Status", uri.toString());
+                                Map<String, String> data = new HashMap<>();
+                                data.put("downloadUrl", uri.toString());
+                                Map<String, Object> data_time = new HashMap<>();
+                                data_time.put("Time", new Timestamp(new Date()));
 //                                ClosetModel closetModel=new ClosetModel();
 //                                closetModel.setDonwloadUrl(uri.toString());
-                                String currentUser=mAuth.getCurrentUser().getUid();
+                                String currentUser = mAuth.getCurrentUser().getUid();
                                 db.collection("users").document(currentUser)
                                         .get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                     @Override
                                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                                        String docName=documentSnapshot.getString("closetChoiceDocName");
+                                        String docName = documentSnapshot.getString("closetChoiceDocName");
                                         db.collection("users").document(currentUser)
                                                 .collection("ClosetDetails").document(docName)
-                                                .set(data,SetOptions.merge());
+                                                .set(data, SetOptions.merge());
                                         db.collection("users").document(currentUser)
                                                 .collection("ClosetDetails").document(docName)
-                                                .set(data_time,SetOptions.merge());
+                                                .set(data_time, SetOptions.merge())
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Query query = db.collection("users").document(currentUser)
+                                                                .collection("ClosetDetails")
+                                                                .orderBy("Time", Query.Direction.DESCENDING);
+                                                        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                                if (queryDocumentSnapshots.isEmpty()) {
+                                                                    Log.i("Hello",String.valueOf(queryDocumentSnapshots.getDocuments().size()));
+                                                                    Toast.makeText(MainActivity1.this, "No Closet Exixst", Toast.LENGTH_SHORT).show();
+                                                                } else {
+                                                                    Log.i("Hello",String.valueOf(queryDocumentSnapshots.getDocuments().size()));
+                                                                    List<DocumentChange> innerdocList = queryDocumentSnapshots.getDocumentChanges();
+                                                                    int innercount = innerdocList.size();
+                                                                    if (innercount == 1) {
+                                                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                                                    }
+                                                                    if (innercount == 2) {
+                                                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                                                    }
+                                                                    if (innercount == 3) {
+                                                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                                                    }
+                                                                    if (innercount == 4) {
+                                                                        Picasso.get().load(innerdocList.get(0).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image2);
+                                                                        Picasso.get().load(innerdocList.get(1).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image3);
+                                                                        Picasso.get().load(innerdocList.get(2).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image4);
+                                                                        Picasso.get().load(innerdocList.get(3).getDocument().getString("downloadUrl")).placeholder(R.drawable.progress_image).into(image5);
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    }
+                                                });
+
                                     }
                                 });
                             }
@@ -459,10 +509,10 @@ public class MainActivity1 extends AppCompatActivity {
         private final WeakReference<MainActivity1> mActivityWeakReference;
         private Vision.Images.Annotate mRequest;
         String userDocName;
-        private FirebaseAuth mAuth=FirebaseAuth.getInstance();
+        private FirebaseAuth mAuth = FirebaseAuth.getInstance();
         private StorageReference mStorageRef;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
-        String closetDocName=UUID.randomUUID().toString();
+        String closetDocName = UUID.randomUUID().toString();
 
         LableDetectionTask(MainActivity1 activity, Vision.Images.Annotate annotate) {
             mActivityWeakReference = new WeakReference<>(activity);
@@ -490,17 +540,17 @@ public class MainActivity1 extends AppCompatActivity {
             if (activity != null && !activity.isFinishing()) {
                 //TextView imageDetail = activity.findViewById(R.id.image_details);
                 //imageDetail.setText(result);
-                String currentUSer=mAuth.getCurrentUser().getUid();
-              //  db.collection("users").document(currentUSer).update("closetChoiceDocName",FieldValue.delete());
-                Map<String,String >data=new HashMap<>();
-                data.put("AnalysisText",result);
+                String currentUSer = mAuth.getCurrentUser().getUid();
+                //  db.collection("users").document(currentUSer).update("closetChoiceDocName",FieldValue.delete());
+                Map<String, String> data = new HashMap<>();
+                data.put("AnalysisText", result);
                 db.collection("users").document(currentUSer)
                         .collection("ClosetDetails").document(closetDocName)
-                        .set(data,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        .set(data, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Map<String,String>data=new HashMap<>();
-                        data.put("closetChoiceDocName",closetDocName);
+                        Map<String, String> data = new HashMap<>();
+                        data.put("closetChoiceDocName", closetDocName);
                         db.collection("users").document(currentUSer).set(data, SetOptions.merge());
                     }
                 });
