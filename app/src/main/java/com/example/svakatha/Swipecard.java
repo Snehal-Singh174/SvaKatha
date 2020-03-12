@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,13 +30,8 @@ import java.util.Map;
 
 public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
-        private float originalX = 0;
-        private float originalY = 0;
-        private float startMoveX = 0;
-        private float startMoveY = 0;
         int windowwidth;
         int screenCenter;
-        public RelativeLayout parentView;
         private Context context;
         ArrayList<UserDataModel> userDataModelArrayList;
         private static int index=0;
@@ -43,7 +39,7 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
         FirebaseAuth auth=FirebaseAuth.getInstance();
         Map<String,String> data=new HashMap<>();
         String imageCode;
-        private View containerView;
+        public ImageButton imgb1,imgb2;
 
         @SuppressWarnings("deprecation")
         @SuppressLint({"NewApi", "ClickableViewAccessibility"})
@@ -51,11 +47,13 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 requestWindowFeature(Window.FEATURE_NO_TITLE);
-                setContentView(R.layout.activity_swipecard);
+                setContentView(R.layout.custom_layout);
+
+                imgb1 = findViewById(R.id.imgbut1);
+                imgb2 = findViewById(R.id.imgbut2);
 
                 context = Swipecard.this;
 
-                parentView = (RelativeLayout) findViewById(R.id.main_layoutview);
 
                 windowwidth = getWindowManager().getDefaultDisplay().getWidth();
 
@@ -66,89 +64,54 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
                 getArrayData();
 
-                final LayoutInflater inflate = (LayoutInflater) Swipecard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                containerView = inflate.inflate(R.layout.custom_layout, null);
-                //RelativeLayout relativeLayoutContainer = (RelativeLayout) containerView.findViewById(R.id.relative_container);
-
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                containerView.setLayoutParams(layoutParams);
-
-
-                parentView.setOnTouchListener(new View.OnTouchListener()
-                {
-                        @SuppressLint("ClickableViewAccessibility")
-                        public boolean onTouch(View view, MotionEvent event)
-                        {
-                                float X = event.getRawX();
-                                float Y = event.getRawY();
-                                float deltaX = X - startMoveX;
-                                float deltaY = Y - startMoveY;
-                                switch (event.getAction() & MotionEvent.ACTION_MASK)
-                                {
-                                        case MotionEvent.ACTION_DOWN:
-                                        {
-                                                startMoveX = X;
-                                                startMoveY = Y;
-                                        }
-                                        break;
-
-                                        case MotionEvent.ACTION_UP:
-                                        {
-                                                startMoveX = X;
-                                                startMoveY = Y;
-
-                                                if (Math.abs(deltaY) < 250) {
-                                                        parentView.setX(originalX);
-                                                        parentView.setY(originalY);
-
-                                                } else if (deltaY >0) {
-
-                                                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-                                                        Log.e("DOWN", "Saved" + startMoveY);
-                                                        removeParentView(containerView, index);
-                                                        if(index < 8){
-                                                                saveUserChoiceToDb(index);}
-                                                        if(index==8)
-                                                        {
-                                                                Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=8;
-                                                                addParentView(containerView, index);
-                                                        }else {
-                                                                index = index + 1;
-                                                                addParentView(containerView, index);
-                                                        }
-
-                                                } else {
-                                                        Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
-                                                        Log.e("UP", "Delete" + startMoveX);
-                                                        removeParentView(containerView, index);
-                                                        if(index == 8){
-                                                                Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=8;
-                                                                addParentView(containerView, index);
-                                                        }else {
-                                                                index = index + 1;
-                                                                addParentView(containerView, index);
-                                                        }
-                                                }
-                                        }
-                                        break;
+                imgb1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+                                removeParentView(index);
+                                if (index < 8) {
+                                        saveUserChoiceToDb(index);
+                                }
+                                if (index == 8) {
+                                        Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                                        index = 8;
+                                        addParentView(index);
+                                } else {
+                                        index = index + 1;
+                                        addParentView(index);
                                 }
 
-                                return true;
+
                         }
                 });
-        }
 
-        private void addParentView(View containerView,int index) {
-                ImageView userIMG = (ImageView) containerView.findViewById(R.id.userIMG);
+                imgb2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                                removeParentView( index);
+                                if (index == 8) {
+                                        Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                                        index = 8;
+                                        addParentView(index);
+                                } else {
+                                        index = index + 1;
+                                        addParentView(index);
+                                }
+
+
+                        }
+                });
+
+        }
+        private void addParentView(int index) {
+                ImageView userIMG = (ImageView)findViewById(R.id.userIMG);
                 Picasso.get().load(userDataModelArrayList.get(index).getUrl()).into(userIMG);
-                parentView.addView(containerView);
+
         }
 
-        private void removeParentView(View containerView,int index)
+        private void removeParentView(int index)
         {
-                parentView.removeView(containerView);
         }
 
         /**
@@ -258,7 +221,7 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
         @Override
         public void onFirstUrlSet() {
-                addParentView(containerView,index);
+                addParentView(index);
         }
 }
 
