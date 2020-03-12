@@ -39,7 +39,7 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
         FirebaseAuth auth=FirebaseAuth.getInstance();
         Map<String,String> data=new HashMap<>();
         String imageCode;
-        public ImageButton imgb1,imgb2;
+        public ImageButton imgb1,imgb2,imgb3;
 
         @SuppressWarnings("deprecation")
         @SuppressLint({"NewApi", "ClickableViewAccessibility"})
@@ -51,6 +51,7 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
                 imgb1 = findViewById(R.id.imgbut1);
                 imgb2 = findViewById(R.id.imgbut2);
+                imgb3 = findViewById(R.id.imgbut3);
 
                 context = Swipecard.this;
 
@@ -101,6 +102,27 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
 
                         }
+                });
+
+                imgb3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, "Neutral", Toast.LENGTH_SHORT).show();
+                        removeParentView(index);
+                        if (index < 8) {
+                            saveUserChoiceToDb1(index);
+                        }
+                        if (index == 8) {
+                            Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                            index = 8;
+                            addParentView(index);
+                        } else {
+                            index = index + 1;
+                            addParentView(index);
+                        }
+
+
+                    }
                 });
 
         }
@@ -218,8 +240,20 @@ public class Swipecard extends AppCompatActivity implements SetUrlListener {
                 //db.collection("users").document(uId).set(choiceModel, SetOptions.merge() );
         }
 
+    public void saveUserChoiceToDb1(int index){
+        String uId=auth.getCurrentUser().getUid();
+        imageCode=userDataModelArrayList.get(index).getImageCode();
+        // Log.i("hi",imageCode);
+        ChoiceModel choiceModel=new ChoiceModel();
+        choiceModel.setChoice(imageCode);
+        //data.put("userchoice",imageCode);
+        //db.collection("users").document(uId).set(data, SetOptions.merge() );
+        db.collection("users").document(uId).collection("NeutralChoices").document().set(choiceModel);
+        //db.collection("users").document(uId).set(choiceModel, SetOptions.merge() );
+    }
 
-        @Override
+
+    @Override
         public void onFirstUrlSet() {
                 addParentView(index);
         }
