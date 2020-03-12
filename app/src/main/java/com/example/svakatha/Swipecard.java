@@ -1,11 +1,7 @@
 package com.example.svakatha;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,18 +13,21 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.svakatha.listeners.SetUrlListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Swipecard extends AppCompatActivity {
+public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
         private float originalX = 0;
         private float originalY = 0;
@@ -44,6 +43,8 @@ public class Swipecard extends AppCompatActivity {
         FirebaseAuth auth=FirebaseAuth.getInstance();
         Map<String,String> data=new HashMap<>();
         String imageCode;
+        private View containerView;
+
         @SuppressWarnings("deprecation")
         @SuppressLint({"NewApi", "ClickableViewAccessibility"})
         @Override
@@ -66,12 +67,12 @@ public class Swipecard extends AppCompatActivity {
                 getArrayData();
 
                 final LayoutInflater inflate = (LayoutInflater) Swipecard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View containerView = inflate.inflate(R.layout.custom_layout, null);
+                containerView = inflate.inflate(R.layout.custom_layout, null);
                 //RelativeLayout relativeLayoutContainer = (RelativeLayout) containerView.findViewById(R.id.relative_container);
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                 containerView.setLayoutParams(layoutParams);
-                addParentView(containerView,index);
+
 
                 parentView.setOnTouchListener(new View.OnTouchListener()
                 {
@@ -106,7 +107,7 @@ public class Swipecard extends AppCompatActivity {
                                                         Log.e("DOWN", "Saved" + startMoveY);
                                                         removeParentView(containerView, index);
                                                         if(index < 8){
-                                                        saveUserChoiceToDb(index);}
+                                                                saveUserChoiceToDb(index);}
                                                         if(index==8)
                                                         {
                                                                 Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
@@ -150,6 +151,9 @@ public class Swipecard extends AppCompatActivity {
                 parentView.removeView(containerView);
         }
 
+        /**
+         * function to populate userDataModelArrayList
+         */
         private void getArrayData() {
 
                 final UserDataModel model = new UserDataModel();
@@ -222,6 +226,11 @@ public class Swipecard extends AppCompatActivity {
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         String durl=documentSnapshot.getString("url"+i);
                                         model.setUrl(durl);
+
+                                        if(i==1){
+                                                onFirstUrlSet();
+                                        }
+
                                         // Log.i("Hi",durl);
                                 }
                         })
@@ -247,6 +256,10 @@ public class Swipecard extends AppCompatActivity {
         }
 
 
+        @Override
+        public void onFirstUrlSet() {
+                addParentView(containerView,index);
+        }
 }
 
 
