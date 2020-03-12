@@ -1,60 +1,60 @@
 package com.example.svakatha;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.svakatha.listeners.SetUrlListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Swipecard extends AppCompatActivity {
+public class Swipecard extends AppCompatActivity implements SetUrlListener {
 
-        private float originalX = 0;
-        private float originalY = 0;
-        private float startMoveX = 0;
-        private float startMoveY = 0;
         int windowwidth;
         int screenCenter;
-        public RelativeLayout parentView;
         private Context context;
         ArrayList<UserDataModel> userDataModelArrayList;
-        private static int index = 0;
+        private static int index=0;
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         FirebaseAuth auth=FirebaseAuth.getInstance();
         Map<String,String> data=new HashMap<>();
         String imageCode;
+        public ImageButton imgb1,imgb2,imgb3;
+
         @SuppressWarnings("deprecation")
         @SuppressLint({"NewApi", "ClickableViewAccessibility"})
         @Override
         protected void onCreate(Bundle savedInstanceState) {
                 super.onCreate(savedInstanceState);
                 requestWindowFeature(Window.FEATURE_NO_TITLE);
-                setContentView(R.layout.activity_swipecard);
+                setContentView(R.layout.custom_layout);
+
+                imgb1 = findViewById(R.id.imgbut1);
+                imgb2 = findViewById(R.id.imgbut2);
+                imgb3 = findViewById(R.id.imgbut3);
 
                 context = Swipecard.this;
 
-                parentView = (RelativeLayout) findViewById(R.id.main_layoutview);
 
                 windowwidth = getWindowManager().getDefaultDisplay().getWidth();
 
@@ -65,88 +65,80 @@ public class Swipecard extends AppCompatActivity {
 
                 getArrayData();
 
-                final LayoutInflater inflate = (LayoutInflater) Swipecard.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                final View containerView = inflate.inflate(R.layout.custom_layout, null);
-                //RelativeLayout relativeLayoutContainer = (RelativeLayout) containerView.findViewById(R.id.relative_container);
-
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                containerView.setLayoutParams(layoutParams);
-                addParentView(containerView, index);
-
-                parentView.setOnTouchListener(new View.OnTouchListener()
-                {
-                        @SuppressLint("ClickableViewAccessibility")
-                        public boolean onTouch(View view, MotionEvent event)
-                        {
-                                float X = event.getRawX();
-                                float Y = event.getRawY();
-                                float deltaX = X - startMoveX;
-                                float deltaY = Y - startMoveY;
-                                switch (event.getAction() & MotionEvent.ACTION_MASK)
-                                {
-                                        case MotionEvent.ACTION_DOWN:
-                                        {
-                                                startMoveX = X;
-                                                startMoveY = Y;
-                                        }
-                                        break;
-
-                                        case MotionEvent.ACTION_UP:
-                                        {
-                                                startMoveX = X;
-                                                startMoveY = Y;
-
-                                                if (Math.abs(deltaY) < 250) {
-                                                        parentView.setX(originalX);
-                                                        parentView.setY(originalY);
-
-                                                } else if (deltaY > 0) {
-
-                                                        Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
-                                                        Log.e("DOWN", "Saved" + startMoveY);
-                                                        removeParentView(containerView, index);
-                                                        saveUserChoiceToDb(index);
-                                                        if(index==8)
-                                                        {
-                                                                Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=0;
-                                                        }else {
-                                                                index = index + 1;
-                                                                addParentView(containerView, index);
-                                                        }
-
-                                                } else {
-                                                        Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
-                                                        Log.e("UP", "Delete" + startMoveX);
-                                                        removeParentView(containerView, index);
-                                                        if(index == 8){
-                                                                Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
-                                                                index=0;
-                                                        }else {
-                                                                index = index + 1;
-                                                                addParentView(containerView, index);
-                                                        }
-                                                }
-                                        }
-                                        break;
+                imgb1.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Toast.makeText(context, "Saved", Toast.LENGTH_SHORT).show();
+                                removeParentView(index);
+                                if (index < 8) {
+                                        saveUserChoiceToDb(index);
+                                }
+                                if (index == 8) {
+                                        Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                                        index = 8;
+                                        addParentView(index);
+                                } else {
+                                        index = index + 1;
+                                        addParentView(index);
                                 }
 
-                                return true;
+
                         }
                 });
-        }
 
-        private void addParentView(View containerView,int index) {
-                ImageView userIMG = (ImageView) containerView.findViewById(R.id.userIMG);
+                imgb2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                                Toast.makeText(context, "Delete", Toast.LENGTH_SHORT).show();
+                                removeParentView( index);
+                                if (index == 8) {
+                                        Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                                        index = 8;
+                                        addParentView(index);
+                                } else {
+                                        index = index + 1;
+                                        addParentView(index);
+                                }
+
+
+                        }
+                });
+
+                imgb3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(context, "Neutral", Toast.LENGTH_SHORT).show();
+                        removeParentView(index);
+                        if (index < 8) {
+                            saveUserChoiceToDb1(index);
+                        }
+                        if (index == 8) {
+                            Toast.makeText(context, "Reached End", Toast.LENGTH_SHORT).show();
+                            index = 8;
+                            addParentView(index);
+                        } else {
+                            index = index + 1;
+                            addParentView(index);
+                        }
+
+
+                    }
+                });
+
+        }
+        private void addParentView(int index) {
+                ImageView userIMG = (ImageView)findViewById(R.id.userIMG);
                 Picasso.get().load(userDataModelArrayList.get(index).getUrl()).into(userIMG);
-                parentView.addView(containerView);
+
         }
 
-        private void removeParentView(View containerView,int index)
+        private void removeParentView(int index)
         {
-                parentView.removeView(containerView);
         }
 
+        /**
+         * function to populate userDataModelArrayList
+         */
         private void getArrayData() {
 
                 final UserDataModel model = new UserDataModel();
@@ -219,6 +211,11 @@ public class Swipecard extends AppCompatActivity {
                                 public void onSuccess(DocumentSnapshot documentSnapshot) {
                                         String durl=documentSnapshot.getString("url"+i);
                                         model.setUrl(durl);
+
+                                        if(i==1){
+                                                onFirstUrlSet();
+                                        }
+
                                         // Log.i("Hi",durl);
                                 }
                         })
@@ -243,7 +240,23 @@ public class Swipecard extends AppCompatActivity {
                 //db.collection("users").document(uId).set(choiceModel, SetOptions.merge() );
         }
 
+    public void saveUserChoiceToDb1(int index){
+        String uId=auth.getCurrentUser().getUid();
+        imageCode=userDataModelArrayList.get(index).getImageCode();
+        // Log.i("hi",imageCode);
+        ChoiceModel choiceModel=new ChoiceModel();
+        choiceModel.setChoice(imageCode);
+        //data.put("userchoice",imageCode);
+        //db.collection("users").document(uId).set(data, SetOptions.merge() );
+        db.collection("users").document(uId).collection("NeutralChoices").document().set(choiceModel);
+        //db.collection("users").document(uId).set(choiceModel, SetOptions.merge() );
+    }
 
+
+    @Override
+        public void onFirstUrlSet() {
+                addParentView(index);
+        }
 }
 
 

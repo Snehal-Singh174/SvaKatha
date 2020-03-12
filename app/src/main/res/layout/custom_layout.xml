@@ -1,49 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_centerVertical="true"
-    android:layout_centerHorizontal="true"
-    android:layout_centerInParent="true"
-    app:cardUseCompatPadding="true">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="@dimen/_300sdp"
-                android:layout_height="@dimen/_40sdp"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/_8sdp"
-                android:background="@color/cardview_light_background"
-                app:srcCompat="@drawable/garbage" />
-
-            <ImageView
-                android:id="@+id/userIMG"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_400sdp"
-                android:layout_marginLeft="@dimen/_20sdp"
-                android:layout_marginTop="@dimen/_5sdp"
-                android:layout_marginRight="@dimen/_20sdp"
-                android:backgroundTint="#D8D8D8"
-                android:background="@drawable/image1"
-                android:scaleType="centerCrop" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="@dimen/_300sdp"
-                android:layout_height="@dimen/_60sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/cardview_light_background"
-                app:srcCompat="@drawable/hanger" />
-
-        </LinearLayout>
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/border"
+    android:foregroundTint="#FFFFFF"
+    android:padding="@dimen/_8sdp"
+    tools:context=".Swipecard">
 
 
-</androidx.cardview.widget.CardView>
+    <ImageView
+        android:id="@+id/userIMG"
+        android:layout_width="305dp"
+        android:layout_height="545dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="112dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.475" />
+
+    <ImageButton
+        android:id="@+id/imgbut1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="234dp"
+        android:layout_marginBottom="44dp"
+        android:background="#D3D6DD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:srcCompat="@drawable/uparrow" />
+
+    <ImageButton
+        android:id="@+id/imgbut2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="80dp"
+        android:background="#D3D6DD"
+        android:layout_marginBottom="44dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/downarrow"
+        tools:ignore="UnknownId" />
+
+    <ImageButton
+        android:id="@+id/imgbut3"
+        android:layout_width="42dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="36dp"
+        android:background="#D3D6DD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imgbut2"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toEndOf="@+id/imgbut1"
+        app:srcCompat="@drawable/neutral" />
+</androidx.constraintlayout.widget.ConstraintLayout>
