@@ -65,4 +65,8 @@
     <string name="dialog_select_gallery" />
     <string name="dialog_select_prompt" />
     <string name="dialog_select_camera" />
+
+    <string name="facebook_app_id">1024957477886854</string>
+    <string name="fb_login_protocol_scheme">fb1024957477886854</string>
+
 </resources>
