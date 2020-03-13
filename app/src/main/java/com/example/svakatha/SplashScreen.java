@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class SplashScreen extends AppCompatActivity {
     TextView splash2;
     TextView splash3;
     ImageView logo;
+    Animation animation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,25 +32,9 @@ public class SplashScreen extends AppCompatActivity {
         splash3 = (TextView)findViewById(R.id.splash3);
         logo = (ImageView)findViewById(R.id.logo);
 
-        YoYo.with(Techniques.ZoomIn)
-                .duration(1000)
+        YoYo.with(Techniques.RotateIn)
+                .duration(2000)
                 .playOn(logo);
-        YoYo.with(Techniques.ZoomOut)
-                .delay(1000)
-                .duration(1000)
-                .playOn(logo);
-        YoYo.with(Techniques.ZoomIn)
-                .delay(2000)
-                .duration(1000)
-                .playOn(logo);
-        /*YoYo.with(Techniques.ZoomOut)
-                .delay(3000)
-                .duration(1000)
-                .playOn(logo);
-        YoYo.with(Techniques.ZoomIn)
-                .delay(4000)
-                .duration(1000)
-                .playOn(logo);*/
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -56,7 +42,8 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 Intent i = new Intent(SplashScreen.this, Login.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
             }
-        },3000);
+        },2500);
     }
 }
