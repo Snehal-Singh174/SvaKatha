@@ -7,6 +7,69 @@
     android:background="#000"
     tools:context=".SplashScreen">
 
+    <!--<LinearLayout
+        android:id="@+id/logo_layout"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageView
+            android:id="@+id/logo_s"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/s"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/logo_v"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/v"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/logo_a"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/a"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/logo_k"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/k"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/logo_a1"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/a"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/logo_t"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/t"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/logo_h"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/h"
+            android:layout_weight="1"/>
+        <ImageView
+            android:id="@+id/logo_a2"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_42sdp"
+            android:src="@drawable/a"
+            android:layout_weight="1"/>
+
+    </LinearLayout>-->
+
     <ImageView
         android:id="@+id/logo_first"
         android:layout_width="@dimen/_120sdp"
