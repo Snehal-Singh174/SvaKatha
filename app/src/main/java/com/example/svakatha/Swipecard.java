@@ -23,8 +23,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.SetOptions;
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -143,7 +141,7 @@ public class Swipecard extends AppCompatActivity {
 
         private void addParentView(View containerView,int index) {
                 ImageView userIMG = (ImageView) containerView.findViewById(R.id.userIMG);
-                Picasso.get().load(userDataModelArrayList.get(index).getUrl()).memoryPolicy(MemoryPolicy.NO_CACHE).into(userIMG);
+                Picasso.get().load(userDataModelArrayList.get(index).getUrl()).into(userIMG);
                 parentView.addView(containerView);
         }
 

@@ -132,13 +132,7 @@ tools:context=".Profile">
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_centerHorizontal="true"/>
 
-        <include layout="@layout/sample_spinner"
-            android:layout_below="@+id/connection"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"/>
-
-    <!--<TextView
+    <TextView
         android:id="@+id/bodyshape"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_32sdp"
@@ -152,20 +146,7 @@ tools:context=".Profile">
         android:paddingLeft="@dimen/_8sdp"
         android:textColor="#000"
         android:textSize="@dimen/_14ssp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            android:layout_marginStart="@dimen/_120sdp"
-            android:layout_marginTop="@dimen/_253sdp"
-            android:layout_marginEnd="@dimen/_19sdp"
-            android:background="@drawable/spinnerbackground"
-            android:text="enter"
-            android:id="@+id/button_1"
-            android:textAlignment="center"
-            android:fontFamily="@font/segoe"
-            android:textColor="@color/colorPrimary"/>
-   <Spinner
+    <Spinner
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_25sdp"
@@ -255,23 +236,9 @@ tools:context=".Profile">
         android:background="@drawable/spinnerbackground"
         android:textAlignment="center"
         android:fontFamily="@font/segoe"
-        android:textColor="@color/colorPrimary" />-->
-
-      <!--<Button
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_below="@+id/pricerange"
-          android:layout_centerHorizontal="true"
-          android:text="enter"
-          android:id="@+id/button_1" />-->
-     <include layout="@layout/spinner_value_layout"></include>
-
+        android:textColor="@color/colorPrimary" />
 
     </RelativeLayout>
-
-
-
-
 
 <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_nav"
