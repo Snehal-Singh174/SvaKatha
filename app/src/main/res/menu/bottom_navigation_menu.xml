@@ -4,7 +4,7 @@
         android:id="@+id/shop"
         android:icon="@drawable/shop_icon"
         android:checkable="true"
-        android:title="Shop"/>
+        android:title="Shop" />
     <item
         android:id="@+id/community"
         android:checkable="true"
