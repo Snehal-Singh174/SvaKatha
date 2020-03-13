@@ -64,7 +64,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
-    Button addButton,enter,button_occupation,button_size,button_pricerange;
+    private Button addButton,enter,button_occupation,button_size,button_pricerange;
 
     Spinner spinner1;
     Spinner spinner2;
@@ -101,10 +101,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_profile);
         profile_textView = (TextView) findViewById(R.id.profilephoto);
         navigationView = findViewById(R.id.nav_view);
-        enter =(Button)findViewById(R.id.button1);
-        button_occupation=(Button)findViewById(R.id.button2);
-        button_size=(Button)findViewById(R.id.button3);
-        button_pricerange=(Button)findViewById(R.id.button4);
+        enter =(Button)findViewById(R.id.button_bodyshape);
+        button_occupation=(Button)findViewById(R.id.button_occupation);
+        button_size=(Button)findViewById(R.id.button_size);
+        button_pricerange=(Button)findViewById(R.id.button_prizerange);
 
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
@@ -359,54 +359,53 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinearLayout linearLayout = findViewById(R.id.bodyshape_spinner);
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.bodyshape_spinner);
                 linearLayout.setVisibility(View.VISIBLE);
-                        imagebtn1.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Hourglass");
-                                linearLayout.setVisibility(View.GONE);
+                imagebtn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Hourglass");
+                        linearLayout.setVisibility(View.GONE);
 
-                            }
-                        });
-                        imagebtn2.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Pear");
-                                linearLayout.setVisibility(View.GONE);
-                            }
-                        });
-                        imagebtn3.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Inverted Triangle");
-                                linearLayout.setVisibility(View.GONE);
-                            }
-                        });
-                        imagebtn4.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Oval");
-                                linearLayout.setVisibility(View.GONE);
-                            }
-                        });
-                        imagebtn5.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Triangle");
-                                linearLayout.setVisibility(View.GONE);
-                            }
-                        });
-                        imagebtn6.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                enter.setText("Athletic");
-                                linearLayout.setVisibility(View.GONE);
-                            }
-                        });
-
-                }
-            });
+                    }
+                });
+                imagebtn2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Pear");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                imagebtn3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Inverted Triangle");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                imagebtn4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Oval");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                imagebtn5.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Triangle");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                imagebtn6.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Athletic");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
         //Occupation button on click listener
         button_occupation.setOnClickListener(new View.OnClickListener() {
             @Override
