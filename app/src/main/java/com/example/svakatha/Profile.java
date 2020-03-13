@@ -1,5 +1,6 @@
 package com.example.svakatha;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -41,12 +42,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -59,7 +64,8 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
     private AppBarConfiguration mAppBarConfiguration;
     private FirebaseAuth auth;
-    private Button addButton;
+    Button addButton,enter,button_occupation,button_size,button_pricerange;
+
     Spinner spinner1;
     Spinner spinner2;
     Spinner spinner3;
@@ -84,14 +90,22 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
     boolean Status2=true;
     boolean Status3=true;
     boolean Status4=true;
+    ImageButton imagebtn1,imagebtn2,imagebtn3,imagebtn4,imagebtn5,imagebtn6;
+    ImageButton occupation_1,occupation_2,occupation_3;
+    ImageButton size_1,size_2,size_3,size_4;
+    ImageButton pricerange_1,pricerange_2,pricerange_3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profile_textView = (TextView) findViewById(R.id.profilephoto);
-
         navigationView = findViewById(R.id.nav_view);
+        enter =(Button)findViewById(R.id.button1);
+        button_occupation=(Button)findViewById(R.id.button2);
+        button_size=(Button)findViewById(R.id.button3);
+        button_pricerange=(Button)findViewById(R.id.button4);
+
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
         navUsername = headerView.findViewById(R.id.name);
@@ -104,10 +118,32 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         progressBar = findViewById(R.id.progressBar);
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //BodyShape items
+        imagebtn1 = (ImageButton)findViewById(R.id.image_btn1);
+        imagebtn2 = (ImageButton)findViewById(R.id.image_btn2);
+        imagebtn3 = (ImageButton)findViewById(R.id.image_btn3);
+        imagebtn4 = (ImageButton)findViewById(R.id.image_btn4);
+        imagebtn5 = (ImageButton)findViewById(R.id.image_btn5);
+        imagebtn6 = (ImageButton)findViewById(R.id.image_btn6);
+        //Occupation items
+        occupation_1 =(ImageButton) findViewById(R.id.occupation_student);
+        occupation_2 =(ImageButton)findViewById(R.id.occupation_business);
+        occupation_3 =(ImageButton)findViewById(R.id.occupation_artist);
+        //Size Items
+        size_1=(ImageButton)findViewById(R.id.s_1);
+        size_2=(ImageButton)findViewById(R.id.s_2);
+        size_3=(ImageButton)findViewById(R.id.s_3);
+        size_4=(ImageButton)findViewById(R.id.s_4);
+        //Price Range items
+        pricerange_1=(ImageButton)findViewById(R.id.image_prize1);
+        pricerange_2=(ImageButton)findViewById(R.id.image_prize2);
+        pricerange_3=(ImageButton)findViewById(R.id.image_prize3);
+
+
 
         DatabaseReference databaseReference = firebaseDatabase.getReference(auth.getCurrentUser().getUid());
 
-        spinner1 = findViewById(R.id.spinner1);
+        /*spinner1 = findViewById(R.id.spinner1);
         adapter1 = ArrayAdapter.createFromResource(this, R.array.body, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
@@ -126,7 +162,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         spinner4 = findViewById(R.id.spinner4);
         adapter4 = ArrayAdapter.createFromResource(this, R.array.price, android.R.layout.simple_spinner_item);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner4.setAdapter(adapter4);
+        spinner4.setAdapter(adapter4);*/
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -170,15 +206,15 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             String Occupation = documentSnapshot.getString("Occupation");
                             String PriceRange = documentSnapshot.getString("PriceRange");
                             String Size = documentSnapshot.getString("Size");
-                            spinner1.setSelection(adapter1.getPosition(BodyShape));
+                            /*spinner1.setSelection(adapter1.getPosition(BodyShape));
                             spinner2.setSelection(adapter2.getPosition(Occupation));
                             spinner3.setSelection(adapter3.getPosition(Size));
-                            spinner4.setSelection(adapter4.getPosition(PriceRange));
+                            spinner4.setSelection(adapter4.getPosition(PriceRange));*/
                         }
                     }
                 });
 
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        /*spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                     // your code here
@@ -305,7 +341,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 // your code here
             }
 
-        });
+        });*/
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -319,7 +355,152 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             }
         });
+        //Body Shape button on click listener
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = findViewById(R.id.bodyshape_spinner);
+                linearLayout.setVisibility(View.VISIBLE);
+                        imagebtn1.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Hourglass");
+                                linearLayout.setVisibility(View.GONE);
 
+                            }
+                        });
+                        imagebtn2.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Pear");
+                                linearLayout.setVisibility(View.GONE);
+                            }
+                        });
+                        imagebtn3.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Inverted Triangle");
+                                linearLayout.setVisibility(View.GONE);
+                            }
+                        });
+                        imagebtn4.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Oval");
+                                linearLayout.setVisibility(View.GONE);
+                            }
+                        });
+                        imagebtn5.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Triangle");
+                                linearLayout.setVisibility(View.GONE);
+                            }
+                        });
+                        imagebtn6.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                enter.setText("Athletic");
+                                linearLayout.setVisibility(View.GONE);
+                            }
+                        });
+
+                }
+            });
+        //Occupation button on click listener
+        button_occupation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = findViewById(R.id.occupation_spinner);
+                linearLayout.setVisibility(View.VISIBLE);
+                occupation_1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_occupation.setText("Student");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                occupation_2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_occupation.setText("Business");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                occupation_3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_occupation.setText("Artist");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+        //Size button on click listener
+        button_size.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = findViewById(R.id.size_spinner);
+                linearLayout.setVisibility(View.VISIBLE);
+                size_1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_size.setText("S");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                size_2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_size.setText("L");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                size_3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_size.setText("XL");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                size_4.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_size.setText("XXL");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
+        //Price Range button on click listener
+        button_pricerange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = findViewById(R.id.pricerange_spinner);
+                linearLayout.setVisibility(View.VISIBLE);
+                pricerange_1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_pricerange.setText("Below 5000");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                pricerange_2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_pricerange.setText("5000-9000");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+                pricerange_3.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        button_pricerange.setText("Above 9000");
+                        linearLayout.setVisibility(View.GONE);
+                    }
+                });
+            }
+        });
 
     }
 
@@ -424,10 +605,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                             progressBar.setProgress(progressStatus);
                             progressBar_drawer1.setProgress(progressStatus);
                             navProgressStatus.setText("Profile Completed " + progressStatus + "%");
-                            spinner1.setSelection(adapter1.getPosition(BodyShape));
+                            /*spinner1.setSelection(adapter1.getPosition(BodyShape));
                             spinner2.setSelection(adapter2.getPosition(Occupation));
                             spinner3.setSelection(adapter3.getPosition(Size));
-                            spinner4.setSelection(adapter4.getPosition(PriceRange));
+                            spinner4.setSelection(adapter4.getPosition(PriceRange));*/
                         }
                     }
                 });
@@ -456,10 +637,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                         navUsername.setText(firstname);
                         navProfileName.setText(finalProfileText);
                         //navProgressStatus.setText("Profile Completed " + progressStatus + "%");
-                        spinner1.setSelection(adapter1.getPosition(BodyShape));
+                        /*spinner1.setSelection(adapter1.getPosition(BodyShape));
                         spinner2.setSelection(adapter2.getPosition(Occupation));
                         spinner3.setSelection(adapter3.getPosition(Size));
-                        spinner4.setSelection(adapter4.getPosition(PriceRange));
+                        spinner4.setSelection(adapter4.getPosition(PriceRange));*/
                     }
                 });
     }
