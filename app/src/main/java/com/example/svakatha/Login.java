@@ -106,6 +106,8 @@ public class Login extends AppCompatActivity {
                             startActivity(new Intent(getApplicationContext(),Profile.class));
 
                         }else{
+                            nemail1.setError("Invalid EmailID");
+                            npassword1.setError("Invalid Password");
                             Toast.makeText(Login.this,"Error! " + task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                         }
                     }
