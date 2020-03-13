@@ -46,6 +46,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -90,6 +91,16 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         profile_textView = (TextView) findViewById(R.id.profilephoto);
+<<<<<<< Updated upstream
+=======
+        navigationView = findViewById(R.id.nav_view);
+        View inflatedView = getLayoutInflater().inflate(R.layout.sample_spinner, null);
+        //Button  button =  inflatedView.findViewById(R.id.button_bodyshape);
+        enter =(Button)inflatedView.findViewById(R.id.button_bodyshape);
+        button_occupation=(Button)inflatedView.findViewById(R.id.button_occupation);
+        button_size=(Button)inflatedView.findViewById(R.id.button_size);
+        button_pricerange=(Button)inflatedView.findViewById(R.id.button_prizerange);
+>>>>>>> Stashed changes
 
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -104,6 +115,9 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         progressBar = findViewById(R.id.progressBar);
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
+
+
+
 
         DatabaseReference databaseReference = firebaseDatabase.getReference(auth.getCurrentUser().getUid());
 
@@ -305,6 +319,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
                 // your code here
             }
 
+<<<<<<< Updated upstream
         });
 
 
@@ -319,6 +334,21 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
             }
         });
+=======
+        });
+
+        //Body Shape button on click listener
+        enter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinearLayout linearLayout = (LinearLayout) findViewById(R.id.bodyshape_spinner);
+                linearLayout.setVisibility(View.VISIBLE);
+                imagebtn1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        enter.setText("Hourglass");
+                        linearLayout.setVisibility(View.GONE);
+>>>>>>> Stashed changes
 
 
     }

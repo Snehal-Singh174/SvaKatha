@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    android:id="@+id/sample_spinner"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<ScrollView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="@dimen/_200sdp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/bodyShape_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp">
+<TextView
+    android:id="@+id/bodyshape1"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_32sdp"
+    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginEnd="@dimen/_15sdp"
+    android:background="@drawable/dropdown_background"
+    android:layout_centerHorizontal="true"
+    android:text="Body Shape"
+    android:gravity="center_vertical"
+    android:fontFamily="@font/segoe"
+    android:paddingLeft="@dimen/_8sdp"
+    android:textColor="#000"
+    android:textSize="@dimen/_14ssp"/>
+
+<Button
+    android:layout_width="@dimen/_120sdp"
+    android:layout_height="@dimen/_25sdp"
+    android:layout_alignEnd="@+id/bodyshape1"
+    android:background="@drawable/spinnerbackground"
+    android:text="Null"
+    android:textAllCaps="false"
+    android:layout_centerVertical="true"
+    android:id="@+id/button_bodyshape"
+    android:textAlignment="center"
+    android:fontFamily="@font/segoe"
+    android:textColor="@color/colorPrimary"/>
+
+    </RelativeLayout>
+    <include layout="@layout/spinner_value_layout"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+            <TextView
+                android:id="@+id/occupation1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/dropdown_background"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_vertical"
+                android:text="Occupation"
+                android:fontFamily="@font/segoe"
+                android:paddingLeft="@dimen/_8sdp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14ssp"/>
+
+            <Button
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignEnd="@+id/occupation1"
+                android:background="@drawable/spinnerbackground"
+                android:text="Null"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:id="@+id/button_occupation"
+                android:textAlignment="center"
+                android:fontFamily="@font/segoe"
+                android:textColor="@color/colorPrimary"/>
+        </RelativeLayout>
+    <include layout="@layout/occupation_layout"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+            <TextView
+                android:id="@+id/size1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/dropdown_background"
+                android:layout_centerHorizontal="true"
+                android:text="Size"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/segoe"
+                android:paddingLeft="@dimen/_8sdp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14ssp"/>
+
+            <Button
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignEnd="@+id/size1"
+                android:background="@drawable/spinnerbackground"
+                android:text="Null"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:id="@+id/button_size"
+                android:textAlignment="center"
+                android:fontFamily="@font/segoe"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+    <include layout="@layout/size_layout"/>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp">
+            <TextView
+                android:id="@+id/pricerange1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:background="@drawable/dropdown_background"
+                android:layout_centerHorizontal="true"
+                android:text="Price Range"
+                android:gravity="center_vertical"
+                android:fontFamily="@font/segoe"
+                android:paddingLeft="@dimen/_8sdp"
+                android:textColor="#000"
+                android:textSize="@dimen/_14ssp"/>
+
+            <Button
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@drawable/spinnerbackground"
+                android:text="Null"
+                android:textAllCaps="false"
+                android:layout_centerVertical="true"
+                android:layout_alignEnd="@+id/pricerange1"
+                android:id="@+id/button_prizerange"
+                android:textAlignment="center"
+                android:fontFamily="@font/segoe"
+                android:textColor="@color/colorPrimary"/>
+
+        </RelativeLayout>
+    <include layout="@layout/pricerange_layout"/>
+</LinearLayout>
+</ScrollView>
+</RelativeLayout>
