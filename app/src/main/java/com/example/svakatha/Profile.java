@@ -101,12 +101,10 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         setContentView(R.layout.activity_profile);
         profile_textView = (TextView) findViewById(R.id.profilephoto);
         navigationView = findViewById(R.id.nav_view);
-
-        View inflatedView = getLayoutInflater().inflate(R.layout.sample_spinner, null);
-        enter =(Button)inflatedView.findViewById(R.id.button_bodyshape);
-        button_occupation=(Button)inflatedView.findViewById(R.id.button_occupation);
-        button_size=(Button)inflatedView.findViewById(R.id.button_size);
-        button_pricerange=(Button)inflatedView.findViewById(R.id.button_prizerange);
+        enter =(Button)findViewById(R.id.button_bodyshape);
+        button_occupation=(Button)findViewById(R.id.button_occupation);
+        button_size=(Button)findViewById(R.id.button_size);
+        button_pricerange=(Button)findViewById(R.id.button_prizerange);
 
         navigationView.setNavigationItemSelectedListener(this);
         headerView = navigationView.getHeaderView(0);
@@ -128,7 +126,7 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
         imagebtn5 = (ImageButton)findViewById(R.id.image_btn5);
         imagebtn6 = (ImageButton)findViewById(R.id.image_btn6);
         //Occupation items
-        occupation_1 =(ImageButton)findViewById(R.id.occupation_student);
+        occupation_1 =(ImageButton) findViewById(R.id.occupation_student);
         occupation_2 =(ImageButton)findViewById(R.id.occupation_business);
         occupation_3 =(ImageButton)findViewById(R.id.occupation_artist);
         //Size Items
@@ -345,6 +343,18 @@ public class Profile extends AppCompatActivity implements NavigationView.OnNavig
 
         });*/
 
+
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
         //Body Shape button on click listener
         enter.setOnClickListener(new View.OnClickListener() {
             @Override
